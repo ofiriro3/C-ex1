@@ -4,7 +4,11 @@ using System.Text;
 
 namespace B17_Ex01_2
 {
-    class Class1
+    class Program
     {
+        public static void Main()
+        {
+
+        }
     }
 }

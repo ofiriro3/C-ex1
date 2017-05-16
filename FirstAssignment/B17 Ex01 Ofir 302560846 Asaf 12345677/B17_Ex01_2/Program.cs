@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace B17_Ex01_4
+namespace B17_Ex01_2
 {
     class Program
     {
@@ -12,3 +12,4 @@ namespace B17_Ex01_4
         }
     }
 }
+
