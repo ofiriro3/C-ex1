@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Ex01 = B17_Ex01_1.Program;
 
 namespace B17_Ex01_5

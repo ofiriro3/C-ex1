@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7684E36B-AA06-4C9A-B95C-C6893E7094D7}</ProjectGuid>
+    <ProjectGuid>{C87B7774-EC8E-4B31-81E2-EC7E8D426A45}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Project1</RootNamespace>
-    <AssemblyName>Project1</AssemblyName>
+    <RootNamespace>B17_Ex01_1</RootNamespace>
+    <AssemblyName>B17_Ex01_1</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
