@@ -31,7 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <ProjectReference Include="..\B17_Ex01_3\B17_Ex01_3.csproj">
+      <Project>{f1aa762c-ff98-4dda-9a5d-2e040bd3ea6c}</Project>
+      <Name>B17_Ex01_3</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

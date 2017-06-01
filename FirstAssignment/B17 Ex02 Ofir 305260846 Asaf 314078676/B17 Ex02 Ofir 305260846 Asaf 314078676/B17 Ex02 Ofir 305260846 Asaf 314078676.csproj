@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{17BE6650-6FF7-4658-8655-147583862B3F}</ProjectGuid>
+    <ProjectGuid>{535F8791-C010-4F2A-9494-7497A59F2DAE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>B17_Ex01_5</RootNamespace>
-    <AssemblyName>B17_Ex01_5</AssemblyName>
+    <RootNamespace>B17_Ex02_Ofir_305260846_Asaf_314078676</RootNamespace>
+    <AssemblyName>B17 Ex02 Ofir 305260846 Asaf 314078676</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -34,10 +34,9 @@
     <Compile Include="Program.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\B17_Ex01_1\B17_Ex01_1.csproj">
-      <Project>{c87b7774-ec8e-4b31-81e2-ec7e8d426a45}</Project>
-      <Name>B17_Ex01_1</Name>
-    </ProjectReference>
+    <Reference Include="Ex02.ConsoleUtils">
+      <HintPath>C:\temp\Ex02.ConsoleUtils.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

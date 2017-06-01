@@ -14,18 +14,20 @@ namespace B17_Ex01_4
             bool inputIsNumber = StringIsNumber(userInput);
             bool inputIsLegalString = IsLegalString(userInput);
             string palindromResponse = (InputIsPalindrome) ? "Input is a palindrome" : "Input isn't a palindrome";
-           
+             
             response.AppendLine(palindromResponse);
             if(inputIsNumber)
             {
                 double averageDigits = AverageDigitsOfNumberInStringFormat(userInput);
-                response.AppendLine("Average of digits: " + averageDigits);
+                string inputIsNumberResponse = string.Format("Average of digits: {0}", averageDigits);
+                response.AppendLine(inputIsNumberResponse);
             }
 
             else if(inputIsLegalString)
             {
                 int numberOfCamelCaseChars = NumberOfCamelCaseCharsOfLegalString(userInput);
-                response.AppendLine("Number of camel case chars: " + numberOfCamelCaseChars);
+                string inputIsLegalStringResponse = string.Format("Number of camel case chars: {0}", numberOfCamelCaseChars);
+                response.AppendLine(inputIsLegalStringResponse);
             }
 
             Console.WriteLine(response.ToString());
@@ -49,13 +51,13 @@ namespace B17_Ex01_4
             return userInput;
         }
 
-        public static bool IsPalindrome(string i_inputString)
+        public static bool IsPalindrome(string io_inputString)
         {
             bool isPalindrome = true;
 
-            for (int i = 0; i < i_inputString.Length / 2; i++)
+            for (int i = 0; i < io_inputString.Length / 2; i++)
             {
-                if(i_inputString[i] != i_inputString[i_inputString.Length - i - 1])
+                if(io_inputString[i] != io_inputString[io_inputString.Length - i - 1])
                 {
                     isPalindrome = false;
                     break;
@@ -65,19 +67,19 @@ namespace B17_Ex01_4
             return isPalindrome;
         }
 
-        public static bool StringIsNumber(string i_inputString)
+        public static bool StringIsNumber(string io_inputString)
         {
-            return int.TryParse(i_inputString, out int resultFromTryParseFunction);
+            return int.TryParse(io_inputString, out int resultFromTryParseFunction);
         }
 
-		public static bool IsLegalString(string i_inputString)
+		public static bool IsLegalString(string io_inputString)
 		{
 			bool isLegalString = true;
 
-            for (int i = 0; i < i_inputString.Length; i++)
+            for (int i = 0; i < io_inputString.Length; i++)
 			{
-                bool isSmallEnglishLetter = (i_inputString[i] >= 'a' && i_inputString[i] <= 'z');
-                bool isCapitalEnglishLetter = (i_inputString[i] >= 'A' && i_inputString[i] <= 'Z');
+                bool isSmallEnglishLetter = (io_inputString[i] >= 'a' && io_inputString[i] <= 'z');
+                bool isCapitalEnglishLetter = (io_inputString[i] >= 'A' && io_inputString[i] <= 'Z');
                 if (!isSmallEnglishLetter && !isCapitalEnglishLetter)
 				{
 					isLegalString = false;
@@ -88,12 +90,12 @@ namespace B17_Ex01_4
 			return isLegalString;
 		}
 
-        public static double AverageDigitsOfNumberInStringFormat(string i_inputNumberInStringFormat)
+        public static double AverageDigitsOfNumberInStringFormat(string io_inputNumberInStringFormat)
         {
             double sumOfDigits = 0;
-            double lengthOfNumber = i_inputNumberInStringFormat.Length;
+            double lengthOfNumber = io_inputNumberInStringFormat.Length;
 
-            int.TryParse(i_inputNumberInStringFormat, out int number);
+            int.TryParse(io_inputNumberInStringFormat, out int number);
             while(number > 0)
             {
                 sumOfDigits += number % 10;
@@ -104,13 +106,13 @@ namespace B17_Ex01_4
 
         }
 
-        public static int NumberOfCamelCaseCharsOfLegalString(string i_inputString)
+        public static int NumberOfCamelCaseCharsOfLegalString(string io_inputString)
         {
             int numberOfCamelCaseCharsOfLegalString = 0;
 
-            for (int i = 0; i < i_inputString.Length; i++)
+            for (int i = 0; i < io_inputString.Length; i++)
             {
-                if(i_inputString[i] >= 'A' && i_inputString[i] <= 'Z')
+                if(io_inputString[i] >= 'A' && io_inputString[i] <= 'Z')
                 {
                     numberOfCamelCaseCharsOfLegalString++;
                 }

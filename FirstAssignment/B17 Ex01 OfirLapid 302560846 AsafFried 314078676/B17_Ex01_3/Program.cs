@@ -22,7 +22,7 @@ namespace B17_Ex01_3
             int hourglassHeight = 0;
             bool validHourglassHeight = false;
 
-            while(!validHourglassHeight)
+            while(!validHourglassHeight || hourglassHeight < 0)
             {
                 Console.WriteLine("Please enter hourglass height (number)");
                 string userInput = Console.ReadLine();
@@ -55,11 +55,11 @@ namespace B17_Ex01_3
 		public static string BuildLevel(int i_levelIndex, int i_lineLength)
 		{
             StringBuilder level = new StringBuilder();
+            int upperBound = i_lineLength - ((i_lineLength - (i_levelIndex * 2 + 1)) / 2);
+            int lowerBound = (i_lineLength - (i_levelIndex * 2 + 1)) / 2;
 
-			for (int j = i_lineLength; j > 0; j--)
+            for (int j = i_lineLength; j > 0; j--)
 			{
-				int upperBound = i_lineLength - ((i_lineLength - (i_levelIndex * 2 + 1)) / 2);
-				int lowerBound = (i_lineLength - (i_levelIndex * 2 + 1)) / 2;
 				if (j > lowerBound && j <= upperBound)
 				{
 					level.Append("*");
