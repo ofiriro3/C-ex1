@@ -30,11 +30,11 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         {
             get
             {
-                return m_eGuessResult;
+                return m_GuessResult;
             }
             set
             {
-                m_eGuessResult = value;
+                m_GuessResult = value;
             }
         }
 
@@ -46,7 +46,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             InitResultFromGuess();
         }
 
-        public void InitResultFromGuess()
+        private void InitResultFromGuess()
         {
             m_GuessResults = new eGuessResult[m_lengthOfGuess];
 
