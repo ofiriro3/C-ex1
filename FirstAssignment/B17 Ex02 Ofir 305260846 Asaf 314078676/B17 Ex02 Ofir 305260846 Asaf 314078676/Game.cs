@@ -5,30 +5,30 @@ using Board = B17_Ex02_Ofir_305260846_Asaf_314078676.Board;
 
 namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
-    class Game
+    public class Game
     {
-        private List<Turn> m_TurnArray;
+        private int m_NumberOfTotalGuesses;
+        private Turn [] m_TurnArray;
         private int m_NumOfLeftGuesses;
-        private eGameResult m_GameResult;
-        private eGuessLetter m_ComputerAnswer;
+        private eGameResult  m_GameResult;
+        private eGuessLetter [] m_ComputerAnswer;
         public enum eGuessLetter
         {
-            A = 'A',
-            B = 'B',
-            C = 'C',
-            D = 'D',
-            E = 'E',
-            F = 'F',
-            G = 'G',
-            H = 'H',
-            NotValidLetter
+            A ,
+            B ,
+            C ,
+            D ,
+            E ,
+            F ,
+            G ,
+            H
         }
 
         static class eGuessLetterMethods
         {
             public static eGuessLetter convertCharToEGuessLetter(char i_letter)
             {
-                eGuessLetter theConvertedLetter = eGuessLetter.NotValidLetter;
+                eGuessLetter theConvertedLetter = eGuessLetter.A;
                 switch(i_letter)
                 {
                     case 'A': theConvertedLetter = eGuessLetter.A;
@@ -68,37 +68,70 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         public enum eGameResult
         {
             Win,
-            Loss
+            Loss,
+            Abort
         }
 
-
-        public Game(int i_NumOfGuesses)
+        public Game()
         {
-            m_NumOfLeftGuesses = i_NumOfGuesses;
-            m_TurnArray = new List<Turn>(i_NumOfGuesses);
+            Board.WriteLine("Please enter valid guess numbers");
+            int numberOfGuesses;
+            int.TryParse(Board.ReadLine(), out numberOfGuesses);
+            m_NumberOfTotalGuesses = numberOfGuesses;
+            m_NumOfLeftGuesses = numberOfGuesses;
+            m_TurnArray = new Turn [numberOfGuesses];
+            m_ComputerAnswer = getVerifyInputFromUser(GenerateRandomSolution(4));
+        }
 
+        public eGameResult GameResult
+        {
+            get
+            {
+                return m_GameResult;
+            }
+            set
+            {
+                m_GameResult = value;
+            }
         }
 
         public void Run()
         {
-            bool stillPlaying = true;
 
-            while (stillPlaying)
-            {
-                eGuessLetter[] currentGueesInStringFormat = getVerifyInputFromUser();
+           while(m_NumOfLeftGuesses > 0)
+           {
+                string verifiedInputString = VerifyInputFromUser();
+                if(verifiedInputString.Equals("Q"))
+                {
+                    m_GameResult = eGameResult.Abort;
+                    break;
+                }
+                eGuessLetter[] currentGuess = getVerifyInputFromUser(verifiedInputString);
+               
+               Turn currentTurn = new Turn(m_ComputerAnswer, currentGuess);
+               int cellToAddCurrentTurn = m_NumberOfTotalGuesses - m_NumOfLeftGuesses;
+               m_TurnArray[cellToAddCurrentTurn] =currentTurn;
+               Board.PrintBoard(m_TurnArray);
+               if (currentTurn.IsCorrect())
+               {
+                   m_GameResult = eGameResult.Win;
+                    break;
+               }
 
-           
-            }
+                m_NumOfLeftGuesses--;
+           }
+            m_GameResult = eGameResult.Loss;
 
         }
 
-        private eGuessLetter[] getVerifyInputFromUser()
+        private eGuessLetter[] getVerifyInputFromUser(string io_VerifiedInputString)
         {
-            string verifiedInputString = VerifyInputFromUser();
             eGuessLetter[] guessArray = new eGuessLetter[4];
-            for(int i = 0; i < verifiedInputString.Length; i++)
+            io_VerifiedInputString.Replace(" ", string.Empty);
+
+            for(int i = 0; i < io_VerifiedInputString.Length; i++)
             {
-                char currentLetter = verifiedInputString[i];
+                char currentLetter = io_VerifiedInputString[i];
                 guessArray[i] = eGuessLetterMethods.convertCharToEGuessLetter(currentLetter);
             }
 
@@ -109,13 +142,15 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         private string VerifyInputFromUser()
         {
-            string inputFromUser = Board.ReadInput();
+            string inputFromUser = Board.ReadGuess();
             
-            while (!checkValidInputFormat(inputFromUser) || !checkValidInputContext(inputFromUser))
-            {
-                inputFromUser = Board.ReadInput();
-            }
-
+           
+                while (!inputFromUser.Equals("Q") && 
+                    (!checkValidInputFormat(inputFromUser) || !checkValidInputContext(inputFromUser)))
+                {
+                    inputFromUser = Board.ReadGuess();
+                }
+            
             return inputFromUser;
         }
 
@@ -128,7 +163,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 if ((currentLetter < 'A' || currentLetter > 'Z') && (currentLetter != '\b'))
                 {
                     validContext = false;
-                    Console.WriteLine("Wrong format please choose only letter");
+                    Board.WriteLine("Wrong format please choose only letter");
                     break;
                 }  
             }
@@ -160,5 +195,20 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             return validFormat;
         }
+        public string GenerateRandomSolution(int i_lengthOfSolution)
+        {
+            StringBuilder solution = new StringBuilder();
+            int amountOfEnumOptions = Enum.GetNames(typeof(eGuessLetter)).Length;
+
+            for (int i = 0; i < i_lengthOfSolution; i++)
+            {
+                Random random = new Random(amountOfEnumOptions);
+                char currentChar = (char)('A' + (int)(random.NextDouble()));
+                solution.Append(currentChar);
+            }
+
+            return solution.ToString();
+        }
     }
+ 
 }

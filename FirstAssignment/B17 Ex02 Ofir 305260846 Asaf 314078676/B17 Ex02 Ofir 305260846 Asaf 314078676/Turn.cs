@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using eGuessLetter = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessLetter;
+using eGuessResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessResult;
 
 namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
-    class Turn
+    public class Turn
     {
         private eGuessLetter[] m_Solution;
         private eGuessLetter[] m_GuessLetters;
@@ -13,6 +15,15 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private int m_numOfBullseyes;
         private int m_numOfHits;
         private int m_numOfWrongGuesses;
+
+    
+        public Turn(eGuessLetter[] i_Solution, eGuessLetter[] i_guessLetters)
+        {
+            m_Solution = i_Solution;
+            m_GuessLetters = i_guessLetters;
+            m_lengthOfGuess = m_GuessLetters.Length;
+            InitResultFromGuess();
+        }
 
         public eGuessLetter[] GuessLetters
         {
@@ -38,7 +49,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             }
         }
 
-        public m_lengthOfGuess LengthOfGuess
+        public int LengthOfGuess
         {
             get
             {
@@ -50,14 +61,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             }
         }
 
-        public Turn(eGuessLetter[] i_Solution, eGuessLetter[] i_guessLetters)
-        {
-            m_Solution = i_Solution;
-            m_GuessLetters = i_guessLetters;
-            m_lengthOfGuess = m_GuessLetters.Length;
-            InitResultFromGuess();
-        }
-
         private void InitResultFromGuess()
         {
             m_GuessResults = new eGuessResult[m_lengthOfGuess];
@@ -66,7 +69,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             {
                 for (int j = 0; j < m_Solution.Length; j++)
                 {
-                    if (m_GuessLetters[i].equals(m_Solution[j]))
+                    if (m_GuessLetters[i].Equals(m_Solution[j]))
                     {
                         if (i == j)
                         {
@@ -99,7 +102,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         public bool IsCorrect()
         {
-            return m_numOfBullseyes = m_lengthOfGuess;
+            return m_numOfBullseyes == m_lengthOfGuess;
         }
     }
 }

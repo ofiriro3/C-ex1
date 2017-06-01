@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using eGuessLetter = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessLetter;
+using eGuessResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessResult;
+
 
 namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
     public static class Board
     {
-        public static string ReadLine()
+        public static string ReadGuess()
         {
             Console.WriteLine("Please type your next guess <A B C D> or 'Q' to quit");
             string userInput = Console.ReadLine();
@@ -14,45 +17,28 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return userInput;
         }
 
-        public static void PrintBoard(Turn[] i_turns)
+        public static string ReadLine()
         {
-            int pinsColumnLength = Turn.LengthOfGuess * 2 + 1;
-            int resultColumnLength = Turn.LengthOfGuess * 2 - 1;
-            StringBuilder lineSeparator = new StringBuilder();
-            StringBuilder lineHeader = new StringBuilder();
-            StringBuilder lineDefault = new StringBuilder();
+            string userInput = Console.ReadLine();
 
-            lineHeader.Append("|Pins:");
-            lineHeader.Append(' ', pinsColumnLength - 5);
-            lineHeader.Append("|Result:|");
-
-            lineSeparator.Append('|');
-            lineSeparator.Append('=', pinsColumnLength);
-            lineSeparator.Append('|');
-            lineSeparator.Append('=', resultColumnLength);
-            lineSeparator.Append('|');
-
-            Console.WriteLine(lineHeader.toString());
-            Console.WriteLine(lineSeparator.toString());
-            Console.WriteLine(BuildDefaultLine(Turn.LengthOfGuess));
-            Console.WriteLine(lineSeparator.toString());
-
-            for (int i = 0; i < i_turns.Length; i++)
-            {
-                Console.WriteLine(BuildTurnLine(Turn[i]));
-                Console.WriteLine(lineSeparator.toString());
-            }
-
+            return userInput;
         }
 
-        private static string BuildTurnLine(Turn turn)
+        public static string ReadNewGameSelect()
         {
-            eGuessLetter[] guessLetters = turn.GuessLetters;
-            eGuessResult[] guessResults = turn.GuessResult;
+            Console.WriteLine("Would you like to start a new game? <Y/N>");
+            string userInput = Console.ReadLine();
+
+            return userInput;
+        }
+        private static string BuildTurnLine(Turn i_Turn)
+        {
+            eGuessLetter[] guessLetters = i_Turn.GuessLetters;
+            eGuessResult[] guessResults = i_Turn.GuessResults;
             StringBuilder turnLine = new StringBuilder();
 
             turnLine.Append('|');
-            for (int i = 0; i < Turn.LengthOfGuess; i++)
+            for (int i = 0; i < i_Turn.LengthOfGuess; i++)
             {
                 turnLine.Append(' ');
                 turnLine.Append(guessLetters[i]);
@@ -60,9 +46,9 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             turnLine.Append(' ');
             turnLine.Append('|');
-            for (int i = 0; i < Turn.LengthOfGuess; i++)
+            for (int i = 0; i < i_Turn.LengthOfGuess; i++)
             {
-                if (guessResults[i] = eGuessResult.WrongGuess)
+                if (guessResults[i] == eGuessResult.WrongGuess)
                 {
                     turnLine.Append(' ');
                 }
@@ -72,14 +58,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     turnLine.Append(guessResults[i]);
                 }
 
-                if (i < turnLine.LengthOfGuess - 1)
+                if (i < i_Turn.LengthOfGuess - 1)
                 {
                     turnLine.Append(' ');
                 }
             }
             turnLine.Append('|');
 
-            return turnLine.toString;
+            return turnLine.ToString();
         }
 
         private static string BuildDefaultLine(int length)
@@ -103,7 +89,46 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             defaultLine.Append('|');
 
-            return defaultLine.toString();
+            return defaultLine.ToString();
+        }
+
+        public static void PrintBoard(Turn [] i_Turns)
+        {
+
+
+            int pinsColumnLength = i_Turns[0].LengthOfGuess * 2 + 1;
+            int resultColumnLength = i_Turns[0].LengthOfGuess * 2 - 1;
+            StringBuilder lineSeparator = new StringBuilder();
+            StringBuilder lineHeader = new StringBuilder();
+            StringBuilder lineDefault = new StringBuilder();
+
+            Console.WriteLine("Current board status:");
+            lineHeader.Append("|Pins:");
+            lineHeader.Append(' ', pinsColumnLength - 5);
+            lineHeader.Append("|Result:|");
+
+            lineSeparator.Append('|');
+            lineSeparator.Append('=', pinsColumnLength);
+            lineSeparator.Append('|');
+            lineSeparator.Append('=', resultColumnLength);
+            lineSeparator.Append('|');
+
+            Console.WriteLine(lineHeader.ToString());
+            Console.WriteLine(lineSeparator.ToString());
+            Console.WriteLine(BuildDefaultLine(i_Turns[0].LengthOfGuess));
+            Console.WriteLine(lineSeparator.ToString());
+
+            for (int i = 0; i < i_Turns.Length; i++)
+            {
+                Console.WriteLine(BuildTurnLine(i_Turns[i]));
+                Console.WriteLine(lineSeparator.ToString());
+            }
+
+        }
+
+        public static void WriteLine(string i_Message)
+        {
+            Console.WriteLine(i_Message);
         }
     }
 }
