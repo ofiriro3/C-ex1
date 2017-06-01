@@ -26,15 +26,27 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             }
         }
 
-        public eGuessResult[] GuessResult
+        public eGuessResult[] GuessResults
         {
             get
             {
-                return m_GuessResult;
+                return m_GuessResults;
             }
             set
             {
-                m_GuessResult = value;
+                m_GuessResults = value;
+            }
+        }
+
+        public m_lengthOfGuess LengthOfGuess
+        {
+            get
+            {
+                return m_lengthOfGuess;
+            }
+            set
+            {
+                m_lengthOfGuess = value;
             }
         }
 
@@ -50,22 +62,22 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         {
             m_GuessResults = new eGuessResult[m_lengthOfGuess];
 
-            for(int i = 0; i < m_lengthOfGuess; i++)
+            for (int i = 0; i < m_lengthOfGuess; i++)
             {
-                for(int j = 0; j < m_Solution.Length; j++)
+                for (int j = 0; j < m_Solution.Length; j++)
                 {
-                  if(m_GuessLetters[i].equals(m_Solution[j]))
-                  {
-                      if(i == j)
-                      {
-                        m_numOfBullseyes++;
-                      }
+                    if (m_GuessLetters[i].equals(m_Solution[j]))
+                    {
+                        if (i == j)
+                        {
+                            m_numOfBullseyes++;
+                        }
 
-                      else
-                      {
-                        m_numOfHits++;   
-                      }
-                  }  
+                        else
+                        {
+                            m_numOfHits++;
+                        }
+                    }
                 }
             }
             m_numOfWrongGuesses = m_lengthOfGuess - m_numOfBullseyes - m_numOfHits;
@@ -85,8 +97,12 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             }
         }
 
-        public bool IsCorrect(){
+        public bool IsCorrect()
+        {
             return m_numOfBullseyes = m_lengthOfGuess;
         }
     }
 }
+
+
+
