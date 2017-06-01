@@ -14,5 +14,5 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             Console.WriteLine("305260846");
             Console.ReadLine();
         }
-    }
+    } 
 }
