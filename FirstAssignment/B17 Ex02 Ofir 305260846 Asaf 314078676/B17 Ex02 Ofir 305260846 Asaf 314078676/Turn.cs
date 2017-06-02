@@ -17,10 +17,10 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private int m_numOfWrongGuesses;
 
     
-        public Turn(eGuessLetter[] i_Solution, eGuessLetter[] i_guessLetters)
+        public Turn(eGuessLetter[] i_Solution, eGuessLetter[] i_GuessLetters)
         {
             m_Solution = i_Solution;
-            m_GuessLetters = i_guessLetters;
+            m_GuessLetters = i_GuessLetters;
             m_lengthOfGuess = m_GuessLetters.Length;
             InitResultFromGuess();
         }
@@ -64,25 +64,36 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private void InitResultFromGuess()
         {
             m_GuessResults = new eGuessResult[m_lengthOfGuess];
+            eGuessLetter[] copyOfGuessLetters = new eGuessLetter[m_lengthOfGuess];
+            m_GuessLetters.CopyTo(copyOfGuessLetters, 0);
+
+            for(int i = 0; i < m_lengthOfGuess; i++)
+            {
+                if(copyOfGuessLetters[i].Equals(m_Solution[i]))
+                {
+                   m_numOfBullseyes++;
+                   copyOfGuessLetters[i] == null; 
+                }
+            }
+
 
             for (int i = 0; i < m_lengthOfGuess; i++)
             {
-                for (int j = 0; j < m_Solution.Length; j++)
+                for (int j = 0; j < m_lengthOfGuess; j++)
                 {
-                    if (m_GuessLetters[i].Equals(m_Solution[j]))
+                    if(copyOfGuessLetters[j] == null)
                     {
-                        if (i == j)
-                        {
-                            m_numOfBullseyes++;
-                        }
-
-                        else
-                        {
-                            m_numOfHits++;
-                        }
+                        continue;
+                    }
+                    else if(m_Solution[i].Equals(copyOfGuessLetters[j]))
+                    {
+                        m_numOfHits++;
+                        copyOfGuessLetters[j] == null; 
+                        break;
                     }
                 }
             }
+
             m_numOfWrongGuesses = m_lengthOfGuess - m_numOfBullseyes - m_numOfHits;
             for (int i = 0; i < m_numOfBullseyes; i++)
             {
