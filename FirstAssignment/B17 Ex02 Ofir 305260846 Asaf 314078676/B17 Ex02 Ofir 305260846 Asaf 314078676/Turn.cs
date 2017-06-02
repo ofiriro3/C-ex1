@@ -64,15 +64,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private void InitResultFromGuess()
         {
             m_GuessResults = new eGuessResult[m_lengthOfGuess];
-            eGuessLetter[] copyOfGuessLetters = new eGuessLetter[m_lengthOfGuess];
-            m_GuessLetters.CopyTo(copyOfGuessLetters, 0);
+            List<int> invalidIndexes = new List<int>();
 
             for(int i = 0; i < m_lengthOfGuess; i++)
             {
-                if(copyOfGuessLetters[i].Equals(m_Solution[i]))
+                if(m_GuessLetters[i].Equals(m_Solution[i]))
                 {
                    m_numOfBullseyes++;
-                   copyOfGuessLetters[i] == null; 
+                    invalidIndexes.Add(i);
                 }
             }
 
@@ -81,14 +80,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             {
                 for (int j = 0; j < m_lengthOfGuess; j++)
                 {
-                    if(copyOfGuessLetters[j] == null)
+                    if(invalidIndexes.Contains(j))
                     {
                         continue;
                     }
-                    else if(m_Solution[i].Equals(copyOfGuessLetters[j]))
+                    else if(m_Solution[i].Equals(m_GuessLetters[j]))
                     {
                         m_numOfHits++;
-                        copyOfGuessLetters[j] == null; 
+                        invalidIndexes.Add(j); 
                         break;
                     }
                 }

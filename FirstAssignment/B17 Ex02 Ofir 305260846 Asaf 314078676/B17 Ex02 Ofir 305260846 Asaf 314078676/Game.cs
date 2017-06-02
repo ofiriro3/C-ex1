@@ -120,7 +120,8 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
                 m_NumOfLeftGuesses--;
            }
-            m_GameResult = eGameResult.Loss;
+
+            m_GameResult = (m_GameResult == eGameResult.Abort) ? eGameResult.Abort : eGameResult.Loss;
 
         }
 
@@ -202,11 +203,13 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             for (int i = 0; i < i_lengthOfSolution; i++)
             {
-                Random random = new Random(amountOfEnumOptions);
-                char currentChar = (char)('A' + (int)(random.NextDouble()));
+				Random random = new Random();
+                int randomNumber = random.Next(amountOfEnumOptions);
+                char currentChar = (char)('A' + randomNumber);
                 solution.Append(currentChar);
             }
 
+            Console.WriteLine(solution.ToString());
             return solution.ToString();
         }
     }

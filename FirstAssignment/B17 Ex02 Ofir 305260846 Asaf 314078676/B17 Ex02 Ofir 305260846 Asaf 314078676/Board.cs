@@ -31,6 +31,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             return userInput;
         }
+        
         private static string BuildTurnLine(Turn i_Turn)
         {
             eGuessLetter[] guessLetters = i_Turn.GuessLetters;
@@ -68,7 +69,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return turnLine.ToString();
         }
 
-        private static string BuildDefaultLine(int length)
+        private static string BuildDefaultLine(int length, char i_CharToAppear)
         {
             StringBuilder defaultLine = new StringBuilder();
             defaultLine.Append('|');
@@ -76,7 +77,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             for (int i = 0; i < length; i++)
             {
                 defaultLine.Append(' ');
-                defaultLine.Append('#');
+                defaultLine.Append(i_CharToAppear);
             }
 
             defaultLine.Append(' ');
@@ -115,12 +116,19 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             Console.WriteLine(lineHeader.ToString());
             Console.WriteLine(lineSeparator.ToString());
-            Console.WriteLine(BuildDefaultLine(i_Turns[0].LengthOfGuess));
+            Console.WriteLine(BuildDefaultLine(i_Turns[0].LengthOfGuess, '#'));
             Console.WriteLine(lineSeparator.ToString());
 
             for (int i = 0; i < i_Turns.Length; i++)
             {
-                Console.WriteLine(BuildTurnLine(i_Turns[i]));
+                if (i_Turns[i] == null)
+                {
+                    Console.WriteLine(BuildDefaultLine(i_Turns[0].LengthOfGuess, ' '));
+                }
+                else
+                {
+                    Console.WriteLine(BuildTurnLine(i_Turns[i]));
+                }
                 Console.WriteLine(lineSeparator.ToString());
             }
 
