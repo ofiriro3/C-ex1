@@ -8,19 +8,20 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
     public class Game
     {
         private int m_NumberOfTotalGuesses;
-        private Turn [] m_TurnArray;
+        private Turn[] m_TurnArray;
         private int m_NumOfLeftGuesses;
-        private eGameResult  m_GameResult;
-        private eGuessLetter [] m_ComputerAnswer;
+        private eGameResult m_GameResult;
+        private eGuessLetter[] m_ComputerAnswer;
+        private readonly int m_lengthOfGuess = 4;
         public enum eGuessLetter
         {
-            A ,
-            B ,
-            C ,
-            D ,
-            E ,
-            F ,
-            G ,
+            A,
+            B,
+            C,
+            D,
+            E,
+            F,
+            G,
             H
         }
 
@@ -29,10 +30,10 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             public static eGuessLetter convertCharToEGuessLetter(char i_letter)
             {
                 eGuessLetter theConvertedLetter = eGuessLetter.A;
-                switch(i_letter)
+                switch (i_letter)
                 {
                     case 'A': theConvertedLetter = eGuessLetter.A;
-                              break;
+                        break;
                     case 'B':
                         theConvertedLetter = eGuessLetter.B;
                         break;
@@ -74,13 +75,34 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         public Game()
         {
-            Board.WriteLine("Please enter valid guess numbers");
+
             int numberOfGuesses;
-            int.TryParse(Board.ReadLine(), out numberOfGuesses);
+            validGuessNumber(out numberOfGuesses);
             m_NumberOfTotalGuesses = numberOfGuesses;
             m_NumOfLeftGuesses = numberOfGuesses;
-            m_TurnArray = new Turn [numberOfGuesses];
-            m_ComputerAnswer = getVerifyInputFromUser(GenerateRandomSolution(4));
+            m_TurnArray = new Turn[numberOfGuesses];
+            m_ComputerAnswer = getVerifyInputFromUser(GenerateRandomSolution(m_lengthOfGuess));
+        }
+
+        private void validGuessNumber(out int o_NumberOfGuesses)
+        {
+            bool isValid = false;
+            o_NumberOfGuesses = 0;
+            Board.WriteLine("Please enter valid guess numbers");
+            while (!isValid)
+            {
+                bool isANumber = int.TryParse(Board.ReadLine(), out o_NumberOfGuesses);
+                if (isANumber)
+                {
+                    if (o_NumberOfGuesses >= 4 && o_NumberOfGuesses <= 10)
+                    {
+                        isValid = true;
+                        break;
+                    }
+                }
+                Board.WriteLine("This is not a valid input, please enter a number between 4-10");
+            }
+            Board.WriteLine(string.Format("{0} is a valid guess ", o_NumberOfGuesses));
         }
 
         public eGameResult GameResult
@@ -94,12 +116,16 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 m_GameResult = value;
             }
         }
-
+        public int GetNumOfGuessMade()
+        {
+            return (m_NumberOfTotalGuesses - m_NumOfLeftGuesses);
+        }
         public void Run()
         {
-
-           while(m_NumOfLeftGuesses > 0)
-           {
+            
+            while (m_NumOfLeftGuesses > 0)
+            {
+                Board.PrintBoard(m_TurnArray, m_lengthOfGuess);
                 string verifiedInputString = VerifyInputFromUser();
                 if(verifiedInputString.Equals("Q"))
                 {
@@ -110,8 +136,8 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                
                Turn currentTurn = new Turn(m_ComputerAnswer, currentGuess);
                int cellToAddCurrentTurn = m_NumberOfTotalGuesses - m_NumOfLeftGuesses;
-               m_TurnArray[cellToAddCurrentTurn] =currentTurn;
-               Board.PrintBoard(m_TurnArray);
+               m_TurnArray[cellToAddCurrentTurn] = currentTurn;
+               Board.PrintBoard(m_TurnArray , m_lengthOfGuess);
                if (currentTurn.IsCorrect())
                {
                    m_GameResult = eGameResult.Win;
@@ -125,14 +151,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         }
 
-        private eGuessLetter[] getVerifyInputFromUser(string io_VerifiedInputString)
+        private eGuessLetter[] getVerifyInputFromUser(string i_VerifiedInputString)
         {
-            eGuessLetter[] guessArray = new eGuessLetter[4];
-            io_VerifiedInputString.Replace(" ", string.Empty);
+            eGuessLetter[] guessArray = new eGuessLetter[m_lengthOfGuess];
+            string inputWithoutSpaces = i_VerifiedInputString.Replace(" ", string.Empty);
 
-            for(int i = 0; i < io_VerifiedInputString.Length; i++)
+            for(int i = 0; i < inputWithoutSpaces.Length; i++)
             {
-                char currentLetter = io_VerifiedInputString[i];
+                char currentLetter = inputWithoutSpaces[i];
                 guessArray[i] = eGuessLetterMethods.convertCharToEGuessLetter(currentLetter);
             }
 
@@ -147,7 +173,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             
            
                 while (!inputFromUser.Equals("Q") && 
-                    (!checkValidInputFormat(inputFromUser) || !checkValidInputContext(inputFromUser)))
+                    (! checkValidInputFormat(inputFromUser) || ! checkValidInputContext(inputFromUser)))
                 {
                     inputFromUser = Board.ReadGuess();
                 }
@@ -155,46 +181,50 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return inputFromUser;
         }
 
-        private bool checkValidInputContext(string i_inputFromUser)
-        {
-            bool validContext = true;
-
-            foreach (char currentLetter in i_inputFromUser)
-            {
-                if ((currentLetter < 'A' || currentLetter > 'Z') && (currentLetter != '\b'))
-                {
-                    validContext = false;
-                    Board.WriteLine("Wrong format please choose only letter");
-                    break;
-                }  
-            }
-
-            return validContext;
-        }
-
         private bool checkValidInputFormat(string i_inputFromUser)
         {
-
             bool validFormat = true;
-            if (i_inputFromUser.Length != 7)
+            string inputWithoutSpaces = i_inputFromUser.Replace(" ", string.Empty);
+            if ( inputWithoutSpaces.Length == 4)
             {
-                foreach (char currentLetter in i_inputFromUser)
+                foreach (char currentLetter in inputWithoutSpaces)
                 {
-                    if (currentLetter < 'A' || currentLetter > 'H')
+                    if ((currentLetter < 'A' || currentLetter > 'Z') && (currentLetter != '\b'))
                     {
                         validFormat = false;
-                        Console.WriteLine("Wrong context , please enter only letters between A and H");
+                        Board.WriteLine("Wrong format please choose Capitals letter");
                         break;
                     }
                 }
+
             }
             else
             {
+                Board.WriteLine(string.Format("Please enter only {0} letters", m_lengthOfGuess));
                 validFormat = false;
             }
 
-
             return validFormat;
+        }
+    
+        
+        
+
+        private bool checkValidInputContext(string i_inputFromUser)
+        {
+            string inputWithoutSpaces = i_inputFromUser.Replace(" ", string.Empty);
+            bool validContext = true;
+            foreach (char currentLetter in inputWithoutSpaces)
+            {
+                    if (currentLetter < 'A' || currentLetter > 'H')
+                    {
+                        validContext = false;
+                        Board.WriteLine("Wrong context , please enter only letters between A and H");
+                        break;
+                    }
+            }
+    
+            return validContext;
         }
         public string GenerateRandomSolution(int i_lengthOfSolution)
         {
@@ -206,10 +236,18 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 				Random random = new Random();
                 int randomNumber = random.Next(amountOfEnumOptions);
                 char currentChar = (char)('A' + randomNumber);
-                solution.Append(currentChar);
+                //checks if the string already contains the current letter
+                if (solution.ToString().Contains(char.ToString(currentChar))) 
+                {
+                    i--;
+                }
+                else
+                { 
+                    solution.Append(currentChar);
+                }
             }
 
-            Console.WriteLine(solution.ToString());
+            //Console.WriteLine(solution.ToString());
             return solution.ToString();
         }
     }

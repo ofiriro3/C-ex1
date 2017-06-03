@@ -31,7 +31,17 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             return userInput;
         }
-        
+
+        internal static void PrintWinningMessage(int i_NumOfGuessMade)
+        {
+            Console.WriteLine(string.Format("You guessed after {0} steps!", i_NumOfGuessMade));
+        }
+
+        public static void PrintLosingMessage()
+        {
+            Console.WriteLine("No more guess allowed. You Lost.");
+        }
+
         private static string BuildTurnLine(Turn i_Turn)
         {
             eGuessLetter[] guessLetters = i_Turn.GuessLetters;
@@ -93,12 +103,11 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return defaultLine.ToString();
         }
 
-        public static void PrintBoard(Turn [] i_Turns)
+        public static void PrintBoard(Turn [] i_Turns ,int io_LengthOfGuess)
         {
-
-
-            int pinsColumnLength = i_Turns[0].LengthOfGuess * 2 + 1;
-            int resultColumnLength = i_Turns[0].LengthOfGuess * 2 - 1;
+           
+            int pinsColumnLength = io_LengthOfGuess * 2 + 1;
+            int resultColumnLength = io_LengthOfGuess * 2 - 1;
             StringBuilder lineSeparator = new StringBuilder();
             StringBuilder lineHeader = new StringBuilder();
             StringBuilder lineDefault = new StringBuilder();
@@ -116,14 +125,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             Console.WriteLine(lineHeader.ToString());
             Console.WriteLine(lineSeparator.ToString());
-            Console.WriteLine(BuildDefaultLine(i_Turns[0].LengthOfGuess, '#'));
+            Console.WriteLine(BuildDefaultLine(io_LengthOfGuess, '#'));
             Console.WriteLine(lineSeparator.ToString());
 
             for (int i = 0; i < i_Turns.Length; i++)
             {
                 if (i_Turns[i] == null)
                 {
-                    Console.WriteLine(BuildDefaultLine(i_Turns[0].LengthOfGuess, ' '));
+                    Console.WriteLine(BuildDefaultLine(io_LengthOfGuess, ' '));
                 }
                 else
                 {
