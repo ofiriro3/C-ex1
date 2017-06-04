@@ -5,7 +5,6 @@ using eGuessLetter = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessLetter;
 using eGuessResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessResult;
 using eGameResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGameResult;
 
-
 namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
     class Program
@@ -26,10 +25,12 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     {
                         Board.PrintWinningMessage(game.GetNumOfGuessMade());
                     }
+
                     else
                     {
                        Board.PrintLosingMessage();
                     }
+
                     userInput = Board.ReadNewGameSelect();
                     while (!userInput.Equals("Y") && !userInput.Equals("N"))
                     {
