@@ -4,7 +4,6 @@ using System.Text;
 using eGuessLetter = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessLetter;
 using eGuessResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessResult;
 
-
 namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
     public static class Board
@@ -63,7 +62,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 {
                     turnLine.Append(' ');
                 }
-
                 else
                 {
                     turnLine.Append(guessResults[i]);
@@ -74,6 +72,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     turnLine.Append(' ');
                 }
             }
+
             turnLine.Append('|');
 
             return turnLine.ToString();
@@ -92,8 +91,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             defaultLine.Append(' ');
             defaultLine.Append('|');
-
-            for (int i = 0; i < length * 2 - 1; i++)
+            for (int i = 0; i < (length * 2) - 1; i++)
             {
                 defaultLine.Append(' ');
             }
@@ -103,11 +101,10 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return defaultLine.ToString();
         }
 
-        public static void PrintBoard(Turn [] i_Turns ,int io_LengthOfGuess)
+        public static void PrintBoard(Turn[] i_Turns, int io_LengthOfGuess)
         {
-           
-            int pinsColumnLength = io_LengthOfGuess * 2 + 1;
-            int resultColumnLength = io_LengthOfGuess * 2 - 1;
+            int pinsColumnLength = (io_LengthOfGuess * 2) + 1;
+            int resultColumnLength = (io_LengthOfGuess * 2) - 1;
             StringBuilder lineSeparator = new StringBuilder();
             StringBuilder lineHeader = new StringBuilder();
             StringBuilder lineDefault = new StringBuilder();
@@ -138,9 +135,9 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 {
                     Console.WriteLine(BuildTurnLine(i_Turns[i]));
                 }
+
                 Console.WriteLine(lineSeparator.ToString());
             }
-
         }
 
         public static void WriteLine(string i_Message)
@@ -149,4 +146,3 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         }
     }
 }
-

@@ -5,10 +5,9 @@ using eGuessLetter = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessLetter;
 using eGuessResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGuessResult;
 using eGameResult = B17_Ex02_Ofir_305260846_Asaf_314078676.Game.eGameResult;
 
-
 namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
@@ -30,6 +29,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     {
                        Board.PrintLosingMessage();
                     }
+
                     userInput = Board.ReadNewGameSelect();
                     while (!userInput.Equals("Y") && !userInput.Equals("N"))
                     {
@@ -41,13 +41,11 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                         break;
                     }
                 }
-                
-                
             }
+
             Board.WriteLine("Thank you very much for playing Bye Bye");
             Board.WriteLine("Please press any key to continue");
             Board.ReadLine();
         }
     }
 }
-

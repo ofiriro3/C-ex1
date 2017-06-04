@@ -15,8 +15,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private int m_numOfBullseyes;
         private int m_numOfHits;
         private int m_numOfWrongGuesses;
-
-    
+ 
         public Turn(eGuessLetter[] i_Solution, eGuessLetter[] i_GuessLetters)
         {
             m_Solution = i_Solution;
@@ -31,6 +30,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             {
                 return m_GuessLetters;
             }
+
             set
             {
                 m_GuessLetters = value;
@@ -43,6 +43,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             {
                 return m_GuessResults;
             }
+
             set
             {
                 m_GuessResults = value;
@@ -55,6 +56,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             {
                 return m_lengthOfGuess;
             }
+
             set
             {
                 m_lengthOfGuess = value;
@@ -74,7 +76,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     invalidIndexes.Add(i);
                 }
             }
-
 
             for (int i = 0; i < m_lengthOfGuess; i++)
             {
@@ -116,6 +117,3 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         }
     }
 }
-
-
-
