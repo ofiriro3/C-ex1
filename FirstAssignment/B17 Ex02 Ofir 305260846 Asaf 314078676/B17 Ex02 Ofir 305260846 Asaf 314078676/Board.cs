@@ -41,7 +41,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             Console.WriteLine("No more guess allowed. You Lost.");
         }
 
-        private static string BuildTurnLine(Turn i_Turn)
+        private static string buildTurnLine(Turn i_Turn)
         {
             eGuessLetter[] guessLetters = i_Turn.GuessLetters;
             eGuessResult[] guessResults = i_Turn.GuessResults;
@@ -79,7 +79,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return turnLine.ToString();
         }
 
-        private static string BuildDefaultLine(int i_Length, char i_CharToAppear)
+        private static string buildDefaultLine(int i_Length, char i_CharToAppear)
         {
             StringBuilder defaultLine = new StringBuilder();
             defaultLine.Append('|');
@@ -126,19 +126,19 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             Console.WriteLine(lineHeader.ToString());
             Console.WriteLine(lineSeparator.ToString());
-            Console.WriteLine(BuildDefaultLine(i_LengthOfGuess, '#'));
+            Console.WriteLine(buildDefaultLine(i_LengthOfGuess, '#'));
             Console.WriteLine(lineSeparator.ToString());
 
             for (int i = 0; i < i_NumberOfGuess; i++)
             {
                 if (i_Turns == null || i_Turns[i] == null)
                 {
-                    Console.WriteLine(BuildDefaultLine(i_LengthOfGuess, ' '));
+                    Console.WriteLine(buildDefaultLine(i_LengthOfGuess, ' '));
                 }
 
                 else
                 {
-                    Console.WriteLine(BuildTurnLine(i_Turns[i]));
+                    Console.WriteLine(buildTurnLine(i_Turns[i]));
                 }
 
                 Console.WriteLine(lineSeparator.ToString());
