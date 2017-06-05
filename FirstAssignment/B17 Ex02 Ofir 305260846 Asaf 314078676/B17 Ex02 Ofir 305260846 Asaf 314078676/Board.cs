@@ -91,11 +91,9 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             defaultLine.Append(' ');
             defaultLine.Append('|');
-<<<<<<< HEAD
-            for (int i = 0; i < (length * 2) - 1; i++)
-=======
-            for (int i = 0; i < i_Length * 2 - 1; i++)
->>>>>>> 75eb83beaaa3de5d3c80749bd76cc1061548da0b
+
+            for (int i = 0; i < (i_Length * 2) - 1; i++)
+
             {
                 defaultLine.Append(' ');
             }
@@ -107,13 +105,9 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         public static void PrintBoard(Turn[] i_Turns, int io_LengthOfGuess)
         {
-<<<<<<< HEAD
             int pinsColumnLength = (io_LengthOfGuess * 2) + 1;
             int resultColumnLength = (io_LengthOfGuess * 2) - 1;
-=======
-            int pinsColumnLength = io_LengthOfGuess * 2 + 1;
-            int resultColumnLength = io_LengthOfGuess * 2 - 1;
->>>>>>> 75eb83beaaa3de5d3c80749bd76cc1061548da0b
+
             StringBuilder lineSeparator = new StringBuilder();
             StringBuilder lineHeader = new StringBuilder();
             StringBuilder lineDefault = new StringBuilder();
@@ -140,7 +134,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 {
                     Console.WriteLine(BuildDefaultLine(io_LengthOfGuess, ' '));
                 }
-
                 else
                 {
                     Console.WriteLine(BuildTurnLine(i_Turns[i]));

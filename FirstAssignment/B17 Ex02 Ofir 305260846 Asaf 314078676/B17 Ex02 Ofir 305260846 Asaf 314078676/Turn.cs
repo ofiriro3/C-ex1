@@ -11,20 +11,11 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private eGuessLetter[] m_Solution;
         private eGuessLetter[] m_GuessLetters;
         private eGuessResult[] m_GuessResults;
-<<<<<<< HEAD
-        private int m_lengthOfGuess;
-        private int m_numOfBullseyes;
-        private int m_numOfHits;
-        private int m_numOfWrongGuesses;
- 
-=======
         private int m_LengthOfGuess;
         private int m_NumOfBullseyes;
         private int m_NumOfHits;
         private int m_NumOfWrongGuesses;
 
-    
->>>>>>> 75eb83beaaa3de5d3c80749bd76cc1061548da0b
         public Turn(eGuessLetter[] i_Solution, eGuessLetter[] i_GuessLetters)
         {
             m_Solution = i_Solution;
@@ -85,13 +76,8 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     invalidIndexes.Add(i);
                 }
             }
-
-<<<<<<< HEAD
-            for (int i = 0; i < m_lengthOfGuess; i++)
-=======
-
+            
             for (int i = 0; i < m_LengthOfGuess; i++)
->>>>>>> 75eb83beaaa3de5d3c80749bd76cc1061548da0b
             {
                 for (int j = 0; j < m_LengthOfGuess; j++)
                 {
