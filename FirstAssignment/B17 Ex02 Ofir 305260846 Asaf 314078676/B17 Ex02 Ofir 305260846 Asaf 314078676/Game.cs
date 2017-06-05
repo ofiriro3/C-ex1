@@ -129,9 +129,11 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         public void Run()
         {
+            Ex02.ConsoleUtils.Screen.Clear();
+            Board.PrintBoard(null, r_LengthOfGuess, m_NumberOfTotalGuesses);
+
             while (m_NumOfLeftGuesses > 0)
             {
-                Board.PrintBoard(m_TurnArray, r_LengthOfGuess);
                 string verifiedInputString = VerifyInputFromUser();
 
                 if(verifiedInputString.Equals("Q"))
@@ -145,7 +147,8 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                Turn currentTurn = new Turn(m_ComputerAnswer, currentGuess);
                int cellToAddCurrentTurn = m_NumberOfTotalGuesses - m_NumOfLeftGuesses;
                m_TurnArray[cellToAddCurrentTurn] = currentTurn;
-               Board.PrintBoard(m_TurnArray, r_LengthOfGuess);
+               Ex02.ConsoleUtils.Screen.Clear();
+               Board.PrintBoard(m_TurnArray, r_LengthOfGuess ,  m_NumberOfTotalGuesses);
                if (currentTurn.IsCorrect())
                {
                    m_GameResult = eGameResult.Win;
@@ -154,7 +157,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
                 m_NumOfLeftGuesses--;
            }
-
             m_GameResult = (m_GameResult == eGameResult.Abort) ? eGameResult.Abort : eGameResult.Loss;
         }
 

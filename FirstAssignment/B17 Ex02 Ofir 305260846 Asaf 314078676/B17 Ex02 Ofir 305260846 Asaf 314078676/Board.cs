@@ -103,10 +103,10 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             return defaultLine.ToString();
         }
 
-        public static void PrintBoard(Turn[] i_Turns, int io_LengthOfGuess)
+        public static void PrintBoard(Turn[] i_Turns, int i_LengthOfGuess, int i_NumberOfGuess)
         {
-            int pinsColumnLength = (io_LengthOfGuess * 2) + 1;
-            int resultColumnLength = (io_LengthOfGuess * 2) - 1;
+            int pinsColumnLength = (i_LengthOfGuess * 2) + 1;
+            int resultColumnLength = (i_LengthOfGuess * 2) - 1;
 
             StringBuilder lineSeparator = new StringBuilder();
             StringBuilder lineHeader = new StringBuilder();
@@ -125,14 +125,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             Console.WriteLine(lineHeader.ToString());
             Console.WriteLine(lineSeparator.ToString());
-            Console.WriteLine(BuildDefaultLine(io_LengthOfGuess, '#'));
+            Console.WriteLine(BuildDefaultLine(i_LengthOfGuess, '#'));
             Console.WriteLine(lineSeparator.ToString());
 
-            for (int i = 0; i < i_Turns.Length; i++)
+            for (int i = 0; i < i_NumberOfGuess; i++)
             {
-                if (i_Turns[i] == null)
+                if (i_Turns == null || i_Turns[i] == null)
                 {
-                    Console.WriteLine(BuildDefaultLine(io_LengthOfGuess, ' '));
+                    Console.WriteLine(BuildDefaultLine(i_LengthOfGuess, ' '));
                 }
                 else
                 {

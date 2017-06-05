@@ -1,0 +1,3 @@
+==========================Exercise Checking Report========================== 
+Exercise No...........: 2First Student Details.: 305260846 - Ofir Lapid Second Student Details: 314078676 - Asaf FriedDelivery Date.........: 5 - June - 2016Delivered In Delay....: NoDelay Reason..........: Visual Studio Version.: 2017Comments..............: 
+========================End Exercise Checking Report========================
