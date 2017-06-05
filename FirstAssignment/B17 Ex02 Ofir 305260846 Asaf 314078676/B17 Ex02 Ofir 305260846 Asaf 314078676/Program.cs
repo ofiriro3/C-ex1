@@ -16,6 +16,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             while (gameResult != eGameResult.Abort)
             {
+                Ex02.ConsoleUtils.Screen.Clear();
                 Game game = new Game();
                 game.Run();
                 gameResult = game.GameResult;

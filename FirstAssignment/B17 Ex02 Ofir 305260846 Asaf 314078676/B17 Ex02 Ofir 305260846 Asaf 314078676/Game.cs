@@ -7,7 +7,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 {
     public class Game
     {
-        private readonly int rm_LengthOfGuess = 4;
+        private readonly int r_LengthOfGuess = 4;
         private int m_NumberOfTotalGuesses;
         private Turn[] m_TurnArray;
         private int m_NumOfLeftGuesses;
@@ -83,7 +83,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             m_NumberOfTotalGuesses = numberOfGuesses;
             m_NumOfLeftGuesses = numberOfGuesses;
             m_TurnArray = new Turn[numberOfGuesses];
-            m_ComputerAnswer = getVerifyInputFromUser(GenerateRandomSolution(rm_LengthOfGuess));
+            m_ComputerAnswer = getVerifyInputFromUser(GenerateRandomSolution(r_LengthOfGuess));
         }
 
         private void validGuessNumber(out int o_NumberOfGuesses)
@@ -131,7 +131,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         {
             while (m_NumOfLeftGuesses > 0)
             {
-                Board.PrintBoard(m_TurnArray, rm_LengthOfGuess);
+                Board.PrintBoard(m_TurnArray, r_LengthOfGuess);
                 string verifiedInputString = VerifyInputFromUser();
 
                 if(verifiedInputString.Equals("Q"))
@@ -145,7 +145,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                Turn currentTurn = new Turn(m_ComputerAnswer, currentGuess);
                int cellToAddCurrentTurn = m_NumberOfTotalGuesses - m_NumOfLeftGuesses;
                m_TurnArray[cellToAddCurrentTurn] = currentTurn;
-               Board.PrintBoard(m_TurnArray, rm_LengthOfGuess);
+               Board.PrintBoard(m_TurnArray, r_LengthOfGuess);
                if (currentTurn.IsCorrect())
                {
                    m_GameResult = eGameResult.Win;
@@ -160,7 +160,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         private eGuessLetter[] getVerifyInputFromUser(string i_VerifiedInputString)
         {
-            eGuessLetter[] guessArray = new eGuessLetter[rm_LengthOfGuess];
+            eGuessLetter[] guessArray = new eGuessLetter[r_LengthOfGuess];
             string inputWithoutSpaces = i_VerifiedInputString.Replace(" ", string.Empty);
 
             for(int i = 0; i < inputWithoutSpaces.Length; i++)
@@ -203,7 +203,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
             }
             else
             {
-                Board.WriteLine(string.Format("Please enter only {0} letters", rm_LengthOfGuess));
+                Board.WriteLine(string.Format("Please enter only {0} letters", r_LengthOfGuess));
                 validFormat = false;
             }
 
