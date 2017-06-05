@@ -106,7 +106,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 Board.WriteLine("This is not a valid input, please enter a number between 4-10");
             }
 
-            Board.WriteLine(string.Format("{0} is a valid guess ", o_NumberOfGuesses));
+            Board.WriteLine(string.Format("{0} is a valid input ", o_NumberOfGuesses));
         }
 
         public eGameResult GameResult
@@ -124,14 +124,14 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
         public int GetNumOfGuessMade()
         {
-            return m_NumberOfTotalGuesses - m_NumOfLeftGuesses;
+            return m_NumberOfTotalGuesses - m_NumOfLeftGuesses + 1;
         }
 
         public void Run()
         {
             Ex02.ConsoleUtils.Screen.Clear();
             Board.PrintBoard(null, r_LengthOfGuess, m_NumberOfTotalGuesses);
-
+            m_GameResult = eGameResult.Loss;
             while (m_NumOfLeftGuesses > 0)
             {
                 string verifiedInputString = VerifyInputFromUser();
@@ -152,12 +152,11 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                if (currentTurn.IsCorrect())
                {
                    m_GameResult = eGameResult.Win;
-                    break;
+                   break;
                }
 
                 m_NumOfLeftGuesses--;
            }
-            m_GameResult = (m_GameResult == eGameResult.Abort) ? eGameResult.Abort : eGameResult.Loss;
         }
 
         private eGuessLetter[] getVerifyInputFromUser(string i_VerifiedInputString)
@@ -251,7 +250,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 }
             }
 
-            ////Console.WriteLine(solution.ToString());
             return solution.ToString();
         }
     }
