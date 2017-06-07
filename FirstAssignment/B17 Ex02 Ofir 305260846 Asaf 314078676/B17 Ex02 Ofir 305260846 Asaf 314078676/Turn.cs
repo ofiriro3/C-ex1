@@ -92,7 +92,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     {
                         continue;
                     }
-
                     else if(m_Solution[i].Equals(m_GuessLetters[j]))
                     {
                         m_NumOfHits++;

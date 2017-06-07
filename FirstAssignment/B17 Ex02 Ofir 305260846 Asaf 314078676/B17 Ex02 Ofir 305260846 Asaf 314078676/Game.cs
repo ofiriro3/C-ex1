@@ -13,6 +13,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         private int m_NumOfLeftGuesses;
         private eGameResult m_GameResult;
         private eGuessLetter[] m_ComputerAnswer;
+        private string m_ComputerAnswerStringFormat;
 
         public enum eGuessLetter
         {
@@ -73,7 +74,8 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         {
             Win,
             Loss,
-            Abort
+            Abort,
+            StillPlaying
         }
 
         public Game()
@@ -131,7 +133,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
         {
             Ex02.ConsoleUtils.Screen.Clear();
             Board.PrintBoard(null, r_LengthOfGuess, m_NumberOfTotalGuesses);
-            m_GameResult = eGameResult.Loss;
+            m_GameResult = eGameResult.StillPlaying;
             while (m_NumOfLeftGuesses > 0)
             {
                 string verifiedInputString = VerifyInputFromUser();
@@ -148,7 +150,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                int cellToAddCurrentTurn = m_NumberOfTotalGuesses - m_NumOfLeftGuesses;
                m_TurnArray[cellToAddCurrentTurn] = currentTurn;
                Ex02.ConsoleUtils.Screen.Clear();
-               Board.PrintBoard(m_TurnArray, r_LengthOfGuess ,  m_NumberOfTotalGuesses);
+               Board.PrintBoard(m_TurnArray, r_LengthOfGuess,  m_NumberOfTotalGuesses);
                if (currentTurn.IsCorrect())
                {
                    m_GameResult = eGameResult.Win;
@@ -157,6 +159,12 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
                 m_NumOfLeftGuesses--;
            }
+
+            if(m_NumOfLeftGuesses == 0)
+            {
+                m_GameResult = eGameResult.Loss;
+                Board.WriteLine(string.Format("The real soultion was {0} , sorry maybe next time.", m_ComputerAnswerStringFormat));
+            }
         }
 
         private eGuessLetter[] getVerifyInputFromUser(string i_VerifiedInputString)
@@ -235,7 +243,7 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
 
             for (int i = 0; i < i_lengthOfSolution; i++)
             {
-				Random random = new Random();
+                Random random = new Random();
                 int randomNumber = random.Next(amountOfEnumOptions);
                 char currentChar = (char)('A' + randomNumber);
 
@@ -249,6 +257,8 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                     solution.Append(currentChar);
                 }
             }
+
+            m_ComputerAnswerStringFormat = solution.ToString();
 
             return solution.ToString();
         }

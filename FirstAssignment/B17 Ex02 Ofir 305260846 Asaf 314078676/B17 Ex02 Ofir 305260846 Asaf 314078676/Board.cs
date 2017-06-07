@@ -62,7 +62,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 {
                     turnLine.Append(' ');
                 }
-
                 else
                 {
                     turnLine.Append(guessResults[i]);
@@ -135,7 +134,6 @@ namespace B17_Ex02_Ofir_305260846_Asaf_314078676
                 {
                     Console.WriteLine(buildDefaultLine(i_LengthOfGuess, ' '));
                 }
-
                 else
                 {
                     Console.WriteLine(buildTurnLine(i_Turns[i]));
