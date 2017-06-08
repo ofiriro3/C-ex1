@@ -120,51 +120,64 @@ or press Q to go back"));
             }
 
         }
-        public static List<float> getElectricalDetails()
+
+        private static void createRegularMotorCycle(Garage io_Garage, string carID)
+        {
+
+            // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
+            List<String> generalDetails = getGenralDeatailsVehicle(carID);
+            List<float> electricalDetails = getElectricalDetails(); ;
+            List<Wheel> wheelList = getWeelsDetails(2,33f);
+            SystemVehicleManger.createRegularMotorCycle(io_Garage, generalDetails, electricalDetails, wheelList);
+
+        }
+
+        private static List<float> getElectricalDetails()
         {
             List<float> electricDetails = new List<float>();
             Console.WriteLine("Please enter how much power left in your battery");
-            string powerLeft = Console.ReadLine();
-            bool validPower = false;
-            while(validPower)
-            {
-                float powerLeftNumber;
-                bool isANumber = float.TryParse(powerLeft, out powerLeftNumber);
-                if(powerLeftNumber <= 100 && powerLeftNumber >= 0)
-                {
-                    electricDetails.Add(powerLeftNumber);
-                    break;
-                }
-            }
+            float powerLeftInBattery = getValidNumberFromUser();
+            electricDetails.Add(powerLeftInBattery);
 
             return electricDetails;
         }
 
-        public static List<float> GetVeichelByFuelDetails()
+        private static List<float> GetVeichelByFuelDetails()
         {
             List<float> FuelDetailsList = new List<float>();
             Console.WriteLine("Please eneter how much fuel do you have in your tank");
-            
-            bool isNumber = false;
-            while (! isNumber)
-            {
-                string inputFuelFromUser = Console.ReadLine();
-                float fuelLeftInTank;
-                bool isANumber = float.TryParse(inputFuelFromUser, out fuelLeftInTank);
-            }
+            float fuelLeftInTank = getValidNumberFromUser();
+            FuelDetailsList.Add(fuelLeftInTank);
 
             return FuelDetailsList;
             
 
         }
-        private static List<String> getGenralDeatailsVehicle (string carID)
+
+        private static float getValidNumberFromUser()
         {
+            float fuelLeftInTank;
+            string inputFuelFromUser = Console.ReadLine();
+            bool isNumber = float.TryParse(inputFuelFromUser, out fuelLeftInTank); ;
+            while (!isNumber)
+            {
+                //TODO consider to throw an Exeception
+                Console.WriteLine("Please enter a number");
+                inputFuelFromUser = Console.ReadLine();
+                bool isANumber = float.TryParse(inputFuelFromUser, out fuelLeftInTank);
+            }
+
+            return fuelLeftInTank;
+        }
+
+        private static List<String> getGenralDeatailsVehicle (string carID)
+        { 
             List<String> details = new List<string>();
             details.Add(carID);
             Console.WriteLine("We would like you to write few necessary details for our mangment System");
             Console.WriteLine("Please enter the Vehicle module");
             string carModule = Console.ReadLine();
-            details.Add(carID);
+            details.Add(carModule);
             Console.WriteLine("Please enter the Vehicle License Plate");
             string vehicleLicense = Console.ReadLine();
             details.Add(vehicleLicense);
@@ -179,24 +192,21 @@ or press Q to go back"));
 
         }
 
-        private static List<String> getWeelsDetails()
+        private static List<Wheel> getWeelsDetails(int i_NumberOfWheels,float i_MaxTirePressure)
         {
-            List<String> details = new List<string>();
-            Console.WriteLine("We would like you to write few necessary details for our mangment System");
-            Console.WriteLine("Please enter the Vehicle module");
-            string carModule = Console.ReadLine();
-            details.Add(carID);
-            Console.WriteLine("Please enter the Vehicle License Plate");
-            string vehicleLicense = Console.ReadLine();
-            details.Add(vehicleLicense);
-            Console.WriteLine("Please enter the Name of the owner");
-            string owner = Console.ReadLine();
-            details.Add(owner);
-            Console.WriteLine("Please enter your Cellphone");
-            string CellPhonenumber = Console.ReadLine();
-            details.Add(CellPhonenumber);
+            List<Wheel> listOfWheels = new List<Wheel>();
+            
+            for(int i = 0;i < i_NumberOfWheels;i++)
+            {
+                Console.WriteLine(string.Format("Please enter the current tire pressure of the {1} Wheel", i));
+                float currentWheelPressure = getValidNumberFromUser();
+                Console.WriteLine(string.Format("Please enter the manufacturer name of the Wheel"));
+                string manufactor = Console.ReadLine();
+                Wheel currentWheelToCreate = new Wheel(manufactor, currentWheelPressure, i_MaxTirePressure);
+                listOfWheels.Add(currentWheelToCreate);
+            }
 
-            return details;
+            return listOfWheels;
 
         }
         private static void getValidInputFromUser(out int o_commandForTheComputerToexecute)

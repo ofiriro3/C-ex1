@@ -24,5 +24,21 @@ namespace Ex03.GarageLogic
 
             return isExist;
         }
+
+        public static void createRegularMotorCycle(Garage io_Garage, List<string> generalDetails, List<float> electricalDetails, List<Wheel> wheelList)
+        {
+
+            // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
+            string owner = generalDetails[0];
+            string carModule = generalDetails[1];
+            string vehicleLicense = generalDetails[2];
+            string cellphoneNumber = generalDetails[3];
+            float powerLeftInBattery = electricalDetails[0];
+            string motorcycleLicenceType = Console.ReadLine();
+            string l
+            Motorcycle motorcycleToAdd = new Motorcycle(carModule,vehicleLicense, motorcycleLicenceType, )
+
+            Garage.GarageVehicle motorCycleToAddToGarage  = new Garage.GarageVehicle()
+        }
     }
 }

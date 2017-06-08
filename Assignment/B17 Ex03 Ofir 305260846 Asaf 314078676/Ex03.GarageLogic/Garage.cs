@@ -69,6 +69,11 @@ Status in garage : {2}"
                 return returnString.ToString();
             }
         }
+        
+        public void addNewVehicleToGarage(GarageVehicle io_GarageVehicleToAdd)
+        {
+            m_Vehicles.Add(io_GarageVehicleToAdd);
+        }
 
         public List<string> GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(GarageVehicle.eVehicleStatus i_VehicleStatus)
         {
