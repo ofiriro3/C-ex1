@@ -34,5 +34,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="UserInterfaceForGarage.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ex03.GarageLogic\Ex03.GarageLogic.csproj">
+      <Project>{db574b2d-d8f8-4c14-a8dc-e123e3aa2c60}</Project>
+      <Name>Ex03.GarageLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
