@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    internal class Wheel
+    public class Wheel
     {
         private string m_Manufacturer;
         private float m_CurrentTirePressure;
@@ -12,7 +12,14 @@ namespace Ex03.GarageLogic
 
         public void Inflate(float i_PressureToAdd)
         {
-            // need to verify the pressure and throw exp in case the input doesnt fit the module.
+            if(i_PressureToAdd > r_MaxTirePressure - m_CurrentTirePressure || i_PressureToAdd < 0)
+            {
+                throw new ValueOutOfRangeException(0, r_MaxTirePressure - m_CurrentTirePressure, i_PressureToAdd);
+            }
+            else
+            {
+                m_CurrentTirePressure += i_PressureToAdd;
+            }
         }
     }
 }
