@@ -38,9 +38,12 @@ namespace Ex03.GarageLogic
 
         }
 
-        public void GetListOfLicensePlateNumbersOfVehiclesInGarage(GarageVehicle.eVehicleStatus i_VehicleStatus)
+        public void PrintListOfLicensePlateNumbersOfVehiclesInGarage(GarageVehicle.eVehicleStatus i_VehicleStatus)
         {
-            
+            foreach(GarageVehicle vehicle in m_Vehicles)
+            {
+                
+            }
         }
     }
 }

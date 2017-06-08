@@ -8,7 +8,8 @@ namespace Ex03.GarageLogic
     {
 
         private eLicenceType m_LicenceType;
-        private int m_EngineVolume; 
+        private int m_EngineVolume;
+		private const int m_NumOfWheels = 2;
         public enum eLicenceType
         {
             A,
