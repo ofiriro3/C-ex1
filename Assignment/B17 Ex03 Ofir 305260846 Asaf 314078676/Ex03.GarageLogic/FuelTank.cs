@@ -30,7 +30,6 @@ namespace Ex03.GarageLogic
             {
                 m_CurrentCampacity = expectedAmountOfFuel;
             }
-            // throw execption if exceeded
         }
     }
 }
