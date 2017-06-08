@@ -24,7 +24,6 @@ namespace Ex03.GarageLogic
             r_NumberOfWheels = i_NumberOfWheels;
         }
 
-
 		public string ModuleName
 		{
             get
@@ -40,5 +39,28 @@ namespace Ex03.GarageLogic
 				return m_LicensePlate;
 			}
 		}
+
+        public List<Wheel> Wheels
+		{
+			get
+			{
+				return m_Wheels;
+			}
+		}
+
+		public PowerSource PowerSource
+		{
+			get
+			{
+                return m_PowerSource;
+			}
+		}
+
+        public override string ToString(){
+			//TODO: Finish this 
+			return String.Format(
+@"Module Name : {0}
+License Plate : {1}", m_ModuleName, m_LicensePlate);
+        }
     }
 }

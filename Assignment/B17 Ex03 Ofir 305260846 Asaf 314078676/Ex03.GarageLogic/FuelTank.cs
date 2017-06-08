@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,13 +14,13 @@ namespace Ex03.GarageLogic
         {
             m_FuelType = i_FuelType;
         }
-        public void charge(float i_Liters,eFuel i_FuelType)
+        public void Charge(float i_Liters, eFuel i_FuelType)
         {
             float expectedAmountOfFuel = i_Liters + m_CurrentCampacity;
             
             if(i_FuelType.Equals(m_FuelType))
             {
-                throw new ArgumentException("You are trying to add wrong fuel to the car");
+                throw new ArgumentException("You are trying to add wrong fuel to the vehicle");
             }
             else if(m_CurrentCampacity < v_MinCampacity || r_MaxCampacity < expectedAmountOfFuel )
             {
