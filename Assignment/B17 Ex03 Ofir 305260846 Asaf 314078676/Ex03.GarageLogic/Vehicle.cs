@@ -8,19 +8,35 @@ namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
-        string m_ModuleName;
-        string m_LicensePlate;
-        float m_RemainingPower;
-        List<Wheel> m_Wheels;
-        PowerSource m_PowerSource;
+        protected string m_ModuleName;
+        protected string m_LicensePlate;
+        protected float m_RemainingPower;
+        protected List<Wheel> m_Wheels;
+        protected PowerSource m_PowerSource;
+
+		public Vehicle(string i_ModuleName, string i_LicensePlate, List<Wheel> i_Wheels, PowerSource i_PowerSource)
+        {
+			m_ModuleName = i_ModuleName;
+			m_LicensePlate = i_LicensePlate;
+			m_Wheels = i_Wheels;
+			m_PowerSource = i_PowerSource;
+        }
 
 
+		public string ModuleName
+		{
+            get
+            {
+                return m_ModuleName;  
+            }
+		}
 
-
-
-
-
-
-
+		public string LicensePlate
+		{
+			get
+			{
+				return m_LicensePlate;
+			}
+		}
     }
 }
