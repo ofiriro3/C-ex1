@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Battery : PowerSource
+    public class Battery : PowerSource
     {
-        private float m_LeftTime;
-
+        public Battery(float i_MaxCampacity, float i_CurrentCampacity)
+        : base(i_MaxCampacity, i_CurrentCampacity)
+        { }
+        
 
         // in the constructor to add the maxCampacity
         public void Charge(float i_NumberOfChargingHours)
@@ -20,7 +22,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                m_CurrentCampacity = totalHoursAfterCharging;
+                m_CurrentCampacity = totalHoursAfterCharging; 
             }
         }
     }

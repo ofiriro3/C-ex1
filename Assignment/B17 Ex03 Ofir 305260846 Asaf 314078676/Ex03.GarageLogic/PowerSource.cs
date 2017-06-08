@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic
     public abstract class PowerSource
     {
         protected readonly float r_MaxCampacity;
-        protected const float v_MinValue = 0;
+        protected const float v_MinCampacity = 0;
         protected float m_CurrentCampacity;
         public enum eFuel
         {
