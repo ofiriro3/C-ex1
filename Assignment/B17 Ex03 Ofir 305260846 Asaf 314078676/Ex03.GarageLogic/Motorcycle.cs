@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic
 {
-    class Motorcycle
+    class Motorcycle : Vehicle
     {
 
         private eLicenceType m_LicenceType;
@@ -17,5 +17,12 @@ namespace Ex03.GarageLogic
             B1
         }
 
+        public Motorcycle(string i_ModuleName, string i_LicensePlate, eLicenceType i_LicenceType, int i_EngineVolume,
+		   List<Wheel> i_Wheels, PowerSource i_PowerSource) 
+            : base(i_ModuleName, i_LicensePlate, i_Wheels, i_PowerSource)
+        {
+            m_LicenceType = i_LicenceType;
+            m_EngineVolume = i_EngineVolume;
+		}
     }
 }
