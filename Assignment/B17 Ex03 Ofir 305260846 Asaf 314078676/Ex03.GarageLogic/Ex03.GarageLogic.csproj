@@ -37,7 +37,11 @@
     <Compile Include="Battery.cs" />
     <Compile Include="Car.cs" />
     <Compile Include="FuelTank.cs" />
+    <Compile Include="Garage.cs" />
+    <Compile Include="Motorcycle.cs" />
     <Compile Include="PowerSource.cs" />
+    <Compile Include="SystemVehicleManger.cs" />
+    <Compile Include="Truck.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheel.cs" />

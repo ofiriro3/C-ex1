@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Wheel = Ex03.GarageLogic.Wheel;
-namespace Ex03.ConsoleUI
+
+namespace Ex03.GarageLogic
 {
     public abstract class Vehicle
     {
