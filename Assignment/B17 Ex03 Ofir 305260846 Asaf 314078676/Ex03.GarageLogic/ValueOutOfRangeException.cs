@@ -7,22 +7,33 @@ namespace Ex03.GarageLogic
     class ValueOutOfRangeException : Exception
     {
 
-        private string m_FilePath;
-        public string FilePath
+        private float m_MaxValue;
+        private float m_MinValue;
+        public float MaxValue
         {
-            get { return m_FilePath; }
+            get {
+                return m_MaxValue;
+            }
         }
-
-        private string m_Word;
-        public string Word
+        public float MinValue
         {
-            get { return m_Word; }
+            get
+            {
+                return m_MinValue;
+            }
         }
-
-        public FindInFileException(Exception i_InnerException, string i_Word, string i_FilePath)
-            // sending two params to the base CTOR:
-            : base(string.Format("An error occured while trying to find the word {0} in file {1}", i_Word, i_FilePath),
+       
+        public ValueOutOfRangeException(Exception i_InnerException, float i_MinValue, float i_MaxValue , float i_inputValue)  
+            : base(string.Format(
+ @"An error occured while trying to add {3} , your input must be a float number between {1} - {2}"
+, i_MinValue, i_MaxValue,i_inputValue),
             i_InnerException)
+        { }
+
+        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue, float i_inputValue)  
+            : base(string.Format(
+ @"An error occured while trying to add {3} , your input must be a float number between {1} - {2}"
+, i_MinValue, i_MaxValue, i_inputValue))
         { }
     }
 }
