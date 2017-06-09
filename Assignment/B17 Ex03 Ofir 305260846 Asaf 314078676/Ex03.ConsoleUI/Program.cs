@@ -6,7 +6,7 @@ namespace Ex03.ConsoleUI
 {
     public class Program
     {
-        public static void main()
+        public static void Main()
         {
             UserInterfaceForGarage.run();
         }

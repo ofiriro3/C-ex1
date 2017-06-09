@@ -169,6 +169,22 @@ Status in garage : {2}"
             return carFound;
         }
 
+        public Garage.GarageVehicle FindCarByLicensePlate(string i_LicensePlate)
+        {
+            // I've added this function
+            GarageVehicle vehicleThatHasThisPlate = null;
+            foreach (GarageVehicle vehicle in m_Vehicles )
+            {
+                if (vehicle.Vehicle.LicensePlate == i_LicensePlate)
+                {
+                    vehicleThatHasThisPlate = vehicle; 
+                    break;
+                }
+            }
+
+            return vehicleThatHasThisPlate;
+        }
+
         public bool ChargeElectricVehicle(string i_LicensePlate, float i_AmountOfMinutes)
         {
 			bool carFound = false;
@@ -195,16 +211,17 @@ Status in garage : {2}"
 			return carFound;
         }
 
-		public bool PrintGarageVehicle(string i_LicensePlate)
+		public bool PrintGarageVehicle(string i_LicensePlate , out string VehicleDetailsToPrint)
 		{
 			bool carFound = false;
+            VehicleDetailsToPrint = null;
 
-			foreach (GarageVehicle garageVehicle in m_Vehicles)
+            foreach (GarageVehicle garageVehicle in m_Vehicles)
 			{
 				if (garageVehicle.Vehicle.LicensePlate.Equals(i_LicensePlate))
 				{
 					carFound = true;
-                    garageVehicle.ToString();
+                    VehicleDetailsToPrint = garageVehicle.ToString();
                     break;
 				}
 			}

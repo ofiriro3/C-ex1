@@ -7,23 +7,6 @@ namespace Ex03.GarageLogic
     public static class SystemVehicleManger
     {
 
-
-        public static bool FindCarByLicensePlate(Garage io_Garage, string i_id)
-        {
-            bool isExist = false;
-            foreach (string id in io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarage())
-            {
-                if (id == i_id)
-                {
-                    io_Garage.ChangeStateOfVehicle(i_id, Garage.GarageVehicle.eVehicleStatus.InRepair);
-                    isExist = true;
-                    break;
-                }
-            }
-
-            return isExist;
-        }
-
         public static void createVehicleInGarage(Garage io_Garage, List<string> generalDetails, List<float> i_PowerSourceDetails,
             List<Wheel> i_Wheels, List<string> i_VehicleDetails, e_TypeOfVehicle typeOfVehicle)
         {

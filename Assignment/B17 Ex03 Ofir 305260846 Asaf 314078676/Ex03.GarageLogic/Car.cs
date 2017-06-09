@@ -8,6 +8,12 @@ namespace Ex03.GarageLogic
     {
         private eColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
+        private string carModule;
+        private string vehicleLicense;
+        private string color;
+        private int numberOfDoors;
+        private List<Wheel> wheels;
+        private FuelTank fuelTank;
 
         public enum eColor
         {
@@ -20,28 +26,18 @@ namespace Ex03.GarageLogic
         {
             Two, 
             Three,
-            Four
+            Four,
+            Five
         } 
 
         public Car(string i_ModuleName, string i_LicensePlate, eColor i_Color, eNumberOfDoors i_NumberOfDoors, 
                    List<Wheel> i_Wheels, PowerSource i_PowerSource) 
-            : base(i_ModuleName, i_LicensePlate, i_Wheels, i_PowerSource, 4)
+            : base(i_ModuleName, i_LicensePlate, i_Wheels, i_PowerSource)
         {
             m_Color = i_Color;
             m_NumberOfDoors = i_NumberOfDoors;
         }
 
-
-		public override string ToString()
-		{
-			StringBuilder returnString = new StringBuilder();
-			returnString.Append(base.ToString());
-			returnString.Append(String.Format(
-				@"Color : {0}
-                Number Of Doors : {1}", m_Color, m_NumberOfDoors
-			));
-
-			return returnString.ToString();
-		}
+        
     }
 }
