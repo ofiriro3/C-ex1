@@ -81,7 +81,7 @@ namespace Ex03.GarageLogic
             string motorcycleLicenceType = i_VehicleDetails[0];
             // maybe add a try/catch fo this
             int engineVolume = int.Parse(i_VehicleDetails[1]);
-            Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, motorcycleLicenceType, engineVolume, i_i_Wheels, battery);
+            Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense,Motorcycle.eLicenceType.A, engineVolume, i_i_Wheels, battery);
 
             Garage.GarageVehicle motorCycleToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, motorcycleToAdd);
@@ -99,7 +99,7 @@ namespace Ex03.GarageLogic
             // maybe add a try/catch fo this
             int engineVolume = int.Parse(i_VehicleDetails[1]);
             //add engine valume
-            Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, motorcycleLicenceType, engineVolume, i_Wheels, fuelTank);
+            Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, Motorcycle.eLicenceType.A, engineVolume, i_Wheels, fuelTank);
 
             Garage.GarageVehicle motorCycleToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, motorcycleToAdd);
@@ -115,7 +115,7 @@ namespace Ex03.GarageLogic
             // maybe add a try/catch fo this
             string color = i_VehicleDetails[0];
             int numberOfDoors = int.Parse(i_VehicleDetails[1]);
-            Car carToAdd = new Car(i_Module, i_vehicleLicense, color, numberOfDoors, i_Wheels, battery);
+            Car carToAdd = new Car(i_Module, i_vehicleLicense,Car.eColor.Black, Car.eNumberOfDoors.Four, i_Wheels, battery);
 
             Garage.GarageVehicle carToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, carToAdd);
@@ -131,7 +131,7 @@ namespace Ex03.GarageLogic
             // maybe add a try/catch fo this
             string color = i_VehicleDetails[0];
             int numberOfDoors = int.Parse(i_VehicleDetails[1]);
-            Car carToAdd = new Car(i_Module, i_vehicleLicense, color, numberOfDoors, i_Wheels, fuelTank);
+            Car carToAdd = new Car(i_Module, i_vehicleLicense, Car.eColor.Black, Car.eNumberOfDoors.Four, i_Wheels, fuelTank);
 
             Garage.GarageVehicle carToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, carToAdd);

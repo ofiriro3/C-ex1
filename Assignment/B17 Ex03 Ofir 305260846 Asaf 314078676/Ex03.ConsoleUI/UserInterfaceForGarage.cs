@@ -78,24 +78,35 @@ Press 7 for full details of a specific car"));
 "in case you do not want to filter the result press any other key"));
             String inputFromUser = Console.ReadLine();
             bool toFilter = (inputFromUser == "1");
+            List<string> listOfVehicleToString;
             if(toFilter)
             {
                 Console.WriteLine(string.Format(
  "For showing only the 'in repair cars' press 1" +
- "For showing the  "));
+ "For showing only the 'Repaired' Vehicles press 2" +
+ "For showing only the 'Paid' Vehicles press 3" ));
+                int statusToFilter = int.Parse(Console.ReadLine());
+                Garage.GarageVehicle.eVehicleStatus theStatusWeSee =  = Garage.GarageVehicle.eVehicleStatus.InRepair;
+                switch (statusToFilter)
+                {
+                    case 1: theStatusWeSee = Garage.GarageVehicle.eVehicleStatus.InRepair; break;
+                    case 2: theStatusWeSee = Garage.GarageVehicle.eVehicleStatus.Repaired; break;
+                    case 3: theStatusWeSee = Garage.GarageVehicle.eVehicleStatus.Paid; break;
+                }
 
-                io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(Garage.GarageVehicle.eVehicleStatus.InRepair);
+               listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(theStatusWeSee);
             }
             else
             {
-               
+                listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarage();
             }
 
+            foreach(string vehicle in listOfVehicleToString)
+            {
+                Console.WriteLine(vehicle);
+            }
 
-
-            
-            io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarage();
-        }
+            }
 
         private static void addNewCarToGarage(Garage io_Garage)
         {
