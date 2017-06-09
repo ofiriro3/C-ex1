@@ -103,7 +103,8 @@ Press 7 for full details of a specific car"));
 1. Regular motorcycle
 2. Electircal motorcycle
 3. Regular car
-4. Truck
+4. Electronic car
+5. Truck
 or press Q to go back"));
 
             int commandToDo;
@@ -112,26 +113,79 @@ or press Q to go back"));
             {
                 case -1: ; break;
                 case 1: createRegularMotorCycle(io_Garage, carID); break;
-                case 2: createElectornicMotorCycle(io_Garage, carID); break;
+                case 2: createElectricMotorCycle(io_Garage, carID); break;
                 case 3: createRegularCar(io_Garage, carID); break;
-                case 4: createTruck(io_Garage, carID); break;
-                case 7: printFullDetailsOfACar(io_Garage, carID); break;
+                case 4: printFullDetailsOfACar(io_Garage, carID); break;
+                case 5: createTruck(io_Garage, carID); break;
                 default: Console.WriteLine("Invalid input , please choose a number between 0 - 7 "); break;
             }
 
         }
 
-        private static void createRegularMotorCycle(Garage io_Garage, string carID)
+        public enum e_TypeOfVehicle
         {
-
-            // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
-            List<String> generalDetails = getGenralDeatailsVehicle(carID);
-            List<float> electricalDetails = getElectricalDetails(); ;
-            List<Wheel> wheelList = getWeelsDetails(2,33f);
-            SystemVehicleManger.createRegularMotorCycle(io_Garage, generalDetails, electricalDetails, wheelList);
-
+            CarOnFuel,
+            CarOnBattry,
+            MotorcycleOnBattey,
+            MotorcycleOnFuel,
+            Truck
         }
 
+        private static void createVehicle(Garage io_Garage, string carID, bool workOnBattry, e_TypeOfVehicle typeOfVehicle)
+        {
+            // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
+            List<String> generalDetails = getGenralDeatailsVehicle(carID);
+            List<float> powerSourceDeatails;
+            if (workOnBattry == true)
+            {
+                powerSourceDeatails = getElectricalDetails();
+            }
+            else
+            {
+                powerSourceDeatails = GetVeichelByFuelDetails();
+            }
+
+            List<String> vehicleDetails;
+            List<Wheel> wheels;
+            switch (typeOfVehicle)
+            {
+                // in both cases do the same
+                case e_TypeOfVehicle.CarOnBattry:
+                case e_TypeOfVehicle.CarOnFuel:
+                    vehicleDetails = getCarDetails();
+                    wheels = getWeelsDetails(2, 33);
+                    SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails,
+                        wheels, vehicleDetails, typeOfVehicle);
+                    break;
+                case e_TypeOfVehicle.MotorcycleOnFuel:
+                case e_TypeOfVehicle.MotorcycleOnBattey:
+                    vehicleDetails = getMotorcycleDetails();
+                    wheels = getWeelsDetails(4, 30);
+                    SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
+                        vehicleDetails, typeOfVehicle);
+                    break;
+                case e_TypeOfVehicle.Truck:
+                    vehicleDetails = getTruckDetails();
+                    wheels = getWeelsDetails(12, 32);
+                    SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
+                        vehicleDetails, typeOfVehicle);
+                    break;
+            }
+        }
+
+        private static List<String> getTruckDetails()
+        {
+            List<String> truckDetails = new List<string>();
+            Console.WriteLine("Does your truck carry a toxic carrgo ?");
+            string isToxic = Console.ReadLine();
+            Console.WriteLine("What is your maximum carry weight ?");
+            string maximumCarryWeight = Console.ReadLine();
+            truckDetails.Add(isToxic);
+            truckDetails.Add(maximumCarryWeight);
+
+            return truckDetails;
+
+        }
         private static List<float> getElectricalDetails()
         {
             List<float> electricDetails = new List<float>();
@@ -145,7 +199,8 @@ or press Q to go back"));
         private static List<float> GetVeichelByFuelDetails()
         {
             List<float> FuelDetailsList = new List<float>();
-            Console.WriteLine("Please eneter how much fuel do you have in your tank");
+            Console.WriteLine("Please eneter how much fuel d" +
+                "o you have in your tank");
             float fuelLeftInTank = getValidNumberFromUser();
             FuelDetailsList.Add(fuelLeftInTank);
 
@@ -170,6 +225,20 @@ or press Q to go back"));
             return fuelLeftInTank;
         }
 
+        private static List<String> getCarDetails()
+        {
+            List<String> carDetails = new List<string>();
+            Console.WriteLine("What is your car color ? <Yellow,White,Black,Blue>");
+            string color = Console.ReadLine();
+            Console.WriteLine("How many doors do you have in your car? <2-5>");
+            Console.WriteLine("Please enter the Vehicle module");
+            string numberOfDoors = Console.ReadLine();
+            carDetails.Add(color);
+            carDetails.Add(numberOfDoors);
+
+            return carDetails;
+        }
+
         private static List<String> getGenralDeatailsVehicle (string carID)
         { 
             List<String> details = new List<string>();
@@ -192,6 +261,24 @@ or press Q to go back"));
 
         }
 
+        private static List<String> getMotorcycleDetails()
+        {
+            List<String> motorcycleDetails = new List<String>();
+            Console.WriteLine("Please enter your motorcycle licence type");
+            string motorcycleLicenceType = Console.ReadLine();
+            Console.WriteLine("Please enter your engine volume");
+            string engingeVolumeInStringFormat = Console.ReadLine();
+            int engineVolume;
+            bool castingWasGood = int.TryParse(engingeVolumeInStringFormat, out engineVolume);
+            if (!castingWasGood)
+            {
+                throw new ArgumentException("This is not a valid number for engine Volume");
+            }
+            motorcycleDetails.Add(motorcycleLicenceType);
+            motorcycleDetails.Add(engingeVolumeInStringFormat);
+
+            return motorcycleDetails;
+        }
         private static List<Wheel> getWeelsDetails(int i_NumberOfWheels,float i_MaxTirePressure)
         {
             List<Wheel> listOfWheels = new List<Wheel>();
