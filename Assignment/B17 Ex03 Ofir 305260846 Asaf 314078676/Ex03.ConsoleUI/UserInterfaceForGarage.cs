@@ -270,6 +270,7 @@ or press Q to go back"));
 
         private static List<String> getGenralDeatailsVehicle (string i_CarLicense)
         {
+            
             List<String> details = new List<string>();
             details.Add(i_CarLicense);
             Console.WriteLine("We would like you to write few necessary details for our mangment System");
