@@ -9,7 +9,6 @@ namespace Ex03.GarageLogic
 
         private eLicenceType m_LicenceType;
         private int m_EngineVolume;
-		private const int m_NumOfWheels = 2;
         public enum eLicenceType
         {
             A,
@@ -18,17 +17,10 @@ namespace Ex03.GarageLogic
             B1
         }
 
-        public Motorcycle(string i_ModuleName, string i_LicensePlate, string i_LicenceType, int i_EngineVolume,
-           List<Wheel> i_Wheels, PowerSource i_PowerSource)
-        {
-            //TODO:
-            // A ctor that knows how to deal with string i_LincenceType and convery it into i_LicenceType
-            // in case it does not fit any of the possible value throws argument Exepction 
-        }
 
         public Motorcycle(string i_ModuleName, string i_LicensePlate, eLicenceType i_LicenceType, int i_EngineVolume,
            List<Wheel> i_Wheels, PowerSource i_PowerSource)
-            : base(i_ModuleName, i_LicensePlate, i_Wheels, i_PowerSource)
+            : base(i_ModuleName, i_LicensePlate, i_Wheels, i_PowerSource, 2)
         {
             m_LicenceType = i_LicenceType;
             m_EngineVolume = i_EngineVolume;
