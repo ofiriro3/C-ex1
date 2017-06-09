@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Ex03.ConsoleUI
 {
-    class Program
+    public class Program
     {
+        public static void main()
+        {
+            UserInterfaceForGarage.run();
+        }
     }
 }

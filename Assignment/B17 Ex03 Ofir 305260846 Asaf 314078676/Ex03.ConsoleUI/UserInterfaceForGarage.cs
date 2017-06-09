@@ -4,14 +4,12 @@ using System.Text;
 using Ex03.GarageLogic;
 using Garage = Ex03.GarageLogic.Garage;
 using SystemVehicleManger = Ex03.GarageLogic.SystemVehicleManger;
+using e_TypeOfVehicle = Ex03.GarageLogic.e_TypeOfVehicle;
 
 namespace Ex03.ConsoleUI
 {
     public static class UserInterfaceForGarage
     {
-
-
-
         public static void run()
         {
             Garage myGarage = new Garage();
@@ -75,7 +73,28 @@ Press 7 for full details of a specific car"));
 
         private static void printCarList(Garage io_Garage)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(string.Format
+("If you want to filter the results 1 and then press enter" +
+"in case you do not want to filter the result press any other key"));
+            String inputFromUser = Console.ReadLine();
+            bool toFilter = (inputFromUser == "1");
+            if(toFilter)
+            {
+                Console.WriteLine(string.Format(
+ "For showing only the 'in repair cars' press 1" +
+ "For showing the  "));
+
+                io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(Garage.GarageVehicle.eVehicleStatus.InRepair);
+            }
+            else
+            {
+               
+            }
+
+
+
+            
+            io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarage();
         }
 
         private static void addNewCarToGarage(Garage io_Garage)
@@ -91,9 +110,7 @@ Press 7 for full details of a specific car"));
             {
                 creatNewVehicle(carID, io_Garage);
             }
-            
-
-
+ 
         }
 
         private static void creatNewVehicle(string carID,Garage io_Garage)
@@ -109,26 +126,18 @@ or press Q to go back"));
 
             int commandToDo;
             getValidInputFromUser(out commandToDo);
+            bool workOnBattery = true;
             switch (commandToDo)
             {
                 case -1: ; break;
-                case 1: createRegularMotorCycle(io_Garage, carID); break;
-                case 2: createElectricMotorCycle(io_Garage, carID); break;
-                case 3: createRegularCar(io_Garage, carID); break;
-                case 4: printFullDetailsOfACar(io_Garage, carID); break;
-                case 5: createTruck(io_Garage, carID); break;
+                case 1: createVehicle(io_Garage, carID, !workOnBattery, e_TypeOfVehicle.MotorcycleOnFuel); break;
+                case 2: createVehicle(io_Garage, carID, workOnBattery, e_TypeOfVehicle.MotorcycleOnBattey); break;
+                case 3: createVehicle(io_Garage, carID, !workOnBattery, e_TypeOfVehicle.CarOnFuel); break;
+                case 4: createVehicle(io_Garage, carID, workOnBattery, e_TypeOfVehicle.CarOnBattry); break;
+                case 5: createVehicle(io_Garage, carID, workOnBattery, e_TypeOfVehicle.Truck); break;
                 default: Console.WriteLine("Invalid input , please choose a number between 0 - 7 "); break;
             }
 
-        }
-
-        public enum e_TypeOfVehicle
-        {
-            CarOnFuel,
-            CarOnBattry,
-            MotorcycleOnBattey,
-            MotorcycleOnFuel,
-            Truck
         }
 
         private static void createVehicle(Garage io_Garage, string carID, bool workOnBattry, e_TypeOfVehicle typeOfVehicle)
@@ -279,6 +288,7 @@ or press Q to go back"));
 
             return motorcycleDetails;
         }
+
         private static List<Wheel> getWeelsDetails(int i_NumberOfWheels,float i_MaxTirePressure)
         {
             List<Wheel> listOfWheels = new List<Wheel>();

@@ -42,6 +42,7 @@
     <Compile Include="PowerSource.cs" />
     <Compile Include="SystemVehicleManger.cs" />
     <Compile Include="Truck.cs" />
+    <Compile Include="e_TypeOfVehicle.cs" />
     <Compile Include="ValueOutOfRangeException.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheel.cs" />
