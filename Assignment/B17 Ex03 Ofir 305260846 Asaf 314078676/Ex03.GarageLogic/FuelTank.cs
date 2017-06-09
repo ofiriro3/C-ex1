@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic
         {
             float expectedAmountOfFuel = i_Liters + m_CurrentCampacity;
             
-            if(i_FuelType.Equals(m_FuelType))
+            if(! i_FuelType.Equals(m_FuelType))
             {
                 throw new ArgumentException("You are trying to add wrong fuel to the vehicle");
             }

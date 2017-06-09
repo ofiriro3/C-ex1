@@ -199,20 +199,20 @@ or press Q to go back"));
                 case e_TypeOfVehicle.CarOnBattry:
                 case e_TypeOfVehicle.CarOnFuel:
                     vehicleDetails = getCarDetails();
-                    wheels = getWeelsDetails(2, 33);
+                    wheels = getWheelsDetails(2, 33);
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails,
                         wheels, vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.MotorcycleOnFuel:
                 case e_TypeOfVehicle.MotorcycleOnBattey:
                     vehicleDetails = getMotorcycleDetails();
-                    wheels = getWeelsDetails(4, 30);
+                    wheels = getWheelsDetails(4, 30);
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                         vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.Truck:
                     vehicleDetails = getTruckDetails();
-                    wheels = getWeelsDetails(12, 32);
+                    wheels = getWheelsDetails(12, 32);
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                         vehicleDetails, typeOfVehicle);
                     break;
@@ -301,13 +301,13 @@ or press Q to go back"));
             return motorcycleDetails;
         }
 
-        private static List<Wheel> getWeelsDetails(int i_NumberOfWheels,float i_MaxTirePressure)
+        private static List<Wheel> getWheelsDetails(int i_NumberOfWheels,float i_MaxTirePressure)
         {
             List<Wheel> listOfWheels = new List<Wheel>();
             
             for(int i = 0;i < i_NumberOfWheels;i++)
             {
-                Console.WriteLine(string.Format("Please enter the tire pressure of the {i} Wheel", i));
+                Console.WriteLine(string.Format("Please enter the tire pressure of the {0} Wheel", i));
                 float currentWheelPressure = getValidFloatFromUser();
                 Console.WriteLine(string.Format("Please enter the manufacturer name of the Wheel"));
                 string manufactor = Console.ReadLine();
@@ -342,7 +342,7 @@ or press Q to go back"));
                         Console.WriteLine("Wrong input format please type again");
                     }
 
-                    else if (o_validAnswer >= i_MinValidValueToChoose || o_validAnswer <= i_MaxValidValueToChoose)
+                    else if (o_validAnswer < i_MinValidValueToChoose || o_validAnswer > i_MaxValidValueToChoose)
                     {
                         Console.WriteLine("Value is not in range, please enter a value between {0} - {1}",
                             i_MinValidValueToChoose, i_MaxValidValueToChoose);
@@ -355,7 +355,7 @@ or press Q to go back"));
         {
             float validFloat;
             bool isValidFloat = float.TryParse(Console.ReadLine(), out validFloat);
-            while(isValidFloat)
+            while(! isValidFloat)
             {
                 Console.WriteLine("Invalid Input please enter a real number");
                 isValidFloat= float.TryParse(Console.ReadLine(), out validFloat);
@@ -369,7 +369,7 @@ or press Q to go back"));
         {
             int validInt = -1;
             bool isValidInt = int.TryParse(Console.ReadLine(), out validInt);
-            while (isValidInt)
+            while (! isValidInt)
             {
                 Console.WriteLine("Invalid Input please enter a number");
                 isValidInt = int.TryParse(Console.ReadLine(), out validInt);
@@ -382,7 +382,7 @@ or press Q to go back"));
         {
             bool validBool = false;
             bool isValidInt = bool.TryParse(Console.ReadLine(), out validBool);
-            while (isValidInt)
+            while (! isValidInt)
             {
                 Console.WriteLine("Invalid Input please enter a boolean <true,false>");
                 isValidInt = bool.TryParse(Console.ReadLine(), out validBool);
