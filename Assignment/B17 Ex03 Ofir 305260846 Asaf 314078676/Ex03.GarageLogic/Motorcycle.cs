@@ -34,6 +34,18 @@ namespace Ex03.GarageLogic
             m_EngineVolume = i_EngineVolume;
         }
 
+        public override string ToString()
+        {
+            StringBuilder returnString = new StringBuilder();
+            returnString.Append(base.ToString());
+            returnString.Append(String.Format(
+                @"Licence Type : {0}
+                Engine Volume : {1}", m_LicenceType, m_EngineVolume
+            ));
+
+            return returnString.ToString();
+        }
+
 
     }
 }

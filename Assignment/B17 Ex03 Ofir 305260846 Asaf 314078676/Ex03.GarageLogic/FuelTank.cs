@@ -31,5 +31,15 @@ namespace Ex03.GarageLogic
                 m_CurrentCampacity = expectedAmountOfFuel;
             }
         }
+
+		public override string ToString()
+		{
+			return String.Format(
+@"Power Source : {0}
+Current Capacity : {1}
+Fuel Type : {2}", "Fuel Tank"
+            , m_CurrentCampacity, m_FuelType
+			);
+		}
     }
 }

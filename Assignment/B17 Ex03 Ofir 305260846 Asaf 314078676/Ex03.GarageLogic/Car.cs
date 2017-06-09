@@ -43,5 +43,17 @@ namespace Ex03.GarageLogic
             // covert numberOfDoors to enum and throws execption in case of an invalid input
             //same for color
         }
+
+		public override string ToString()
+		{
+			StringBuilder returnString = new StringBuilder();
+			returnString.Append(base.ToString());
+			returnString.Append(String.Format(
+				@"Color : {0}
+                Number Of Doors : {1}", m_Color, m_NumberOfDoors
+			));
+
+			return returnString.ToString();
+		}
     }
 }

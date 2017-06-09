@@ -25,5 +25,13 @@ namespace Ex03.GarageLogic
                 m_CurrentCampacity = totalHoursAfterCharging; 
             }
         }
+
+		public override string ToString()
+		{
+			return String.Format(
+				@"Power Source : {0}
+                Current Capacity : {1}", "Battery", m_CurrentCampacity
+			);
+		}
     }
 }

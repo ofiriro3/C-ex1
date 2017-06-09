@@ -57,10 +57,22 @@ namespace Ex03.GarageLogic
 		}
 
         public override string ToString(){
-			//TODO: Finish this 
-			return String.Format(
+            StringBuilder returnString = new StringBuilder();
+            int indexOfWheel = 0;
+
+            returnString.Append(String.Format(
 @"Module Name : {0}
-License Plate : {1}", m_ModuleName, m_LicensePlate);
+License Plate : {1}", m_ModuleName, m_LicensePlate));
+            foreach(Wheel wheel in m_Wheels)
+            {
+                returnString.AppendLine(String.Format("Wheel {0} : ", indexOfWheel));
+                returnString.Append(wheel.ToString());
+                indexOfWheel++;
+            }
+
+            returnString.Append(m_PowerSource.GetType().GetMethod("ToString").Invoke(m_PowerSource, null));
+
+            return returnString.ToString();
         }
     }
 }

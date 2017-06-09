@@ -64,7 +64,8 @@ namespace Ex03.GarageLogic
 Number of owner :D {1}
 Status in garage : {2}"
                 , m_OwnerName, m_OwnerNumber, m_Status));
-                returnString.AppendLine(m_Vehicle.ToString());
+                m_Vehicle.GetType().GetMethod("ToString").Invoke(m_Vehicle, null);
+                returnString.Append(m_Vehicle.ToString());
 
                 return returnString.ToString();
             }
