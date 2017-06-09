@@ -36,14 +36,174 @@ namespace Ex03.GarageLogic
                 m_Vehicle = i_Vehicle;
             }
 
-        }
-
-        public void PrintListOfLicensePlateNumbersOfVehiclesInGarage(GarageVehicle.eVehicleStatus i_VehicleStatus)
-        {
-            foreach(GarageVehicle vehicle in m_Vehicles)
+            public Vehicle Vehicle
             {
-                
+                get 
+                {
+                    return m_Vehicle;
+                }
+            }
+
+			public eVehicleStatus Status
+			{
+				get
+				{
+                    return m_Status;
+				}
+                set
+                {
+                    m_Status = value;
+                }
+			}
+
+            public override string ToString()
+            {
+                StringBuilder returnString = new StringBuilder();
+                returnString.Append(String.Format(
+@"Name of owner : {0}
+Number of owner :D {1}
+Status in garage : {2}"
+                , m_OwnerName, m_OwnerNumber, m_Status));
+                returnString.AppendLine(m_Vehicle.ToString());
+
+                return returnString.ToString();
             }
         }
+
+        public List<string> GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(GarageVehicle.eVehicleStatus i_VehicleStatus)
+        {
+            List<string> listOfPlateNumbers = new List<string>();
+
+            foreach(GarageVehicle garageVehicle in m_Vehicles)
+            {
+                if(garageVehicle.Status.Equals(i_VehicleStatus))
+                {
+                    listOfPlateNumbers.Add(garageVehicle.Vehicle.LicensePlate);
+                }
+            }
+
+            return listOfPlateNumbers;
+        }
+
+		public List<string> GetListOfLicensePlateNumbersOfVehiclesInGarage()
+		{
+			List<string> listOfPlateNumbers = new List<string>();
+
+			foreach (GarageVehicle garageVehicle in m_Vehicles)
+			{
+				listOfPlateNumbers.Add(garageVehicle.Vehicle.LicensePlate);
+			}
+
+			return listOfPlateNumbers;
+		}
+
+        //return true of car was in garage, false if not
+        public bool ChangeStateOfVehicle(string i_LicensePlate, GarageVehicle.eVehicleStatus i_NewStatus)
+        {
+            bool carFound = false;
+
+			foreach (GarageVehicle garageVehicle in m_Vehicles)
+			{
+                if (garageVehicle.Vehicle.LicensePlate.Equals(i_LicensePlate))
+				{
+                    carFound = true;
+                    garageVehicle.Status = i_NewStatus;
+                    break;
+				}
+			}
+
+            return carFound;
+        }
+
+		//return true of car was in garage, false if not
+		public bool InflateWheelsOfVehicleToMax(string i_LicensePlate)
+        {
+            bool carFound = false;
+
+			foreach (GarageVehicle garageVehicle in m_Vehicles)
+			{
+				if (garageVehicle.Vehicle.LicensePlate.Equals(i_LicensePlate))
+				{
+					carFound = true;
+                    foreach(Wheel wheel in garageVehicle.Vehicle.Wheels)
+                    {
+                        wheel.InflateToMax();
+                    }
+                    break;
+				}
+			}
+
+            return carFound;
+        }
+
+		//return true of car was in garage, false if not
+        public bool FillGasInGasVehicle(string i_LicensePlate, PowerSource.eFuel i_TypeOfGass, float i_AmountOfGass)
+        {
+            bool carFound = false;
+
+			foreach (GarageVehicle garageVehicle in m_Vehicles)
+			{
+				if (garageVehicle.Vehicle.LicensePlate.Equals(i_LicensePlate))
+				{
+					carFound = true;
+                    FuelTank fuelTank = garageVehicle.Vehicle.PowerSource as FuelTank;
+                    if (fuelTank == null)
+                    {
+                        throw new ArgumentException("This vehicle doesn't run on gass");    
+                    }
+
+                    else
+                    {
+                        fuelTank.Charge(i_AmountOfGass, i_TypeOfGass);
+                    }
+					break;
+				}
+			}
+
+            return carFound;
+        }
+
+        public bool ChargeElectricVehicle(string i_LicensePlate, float i_AmountOfMinutes)
+        {
+			bool carFound = false;
+
+			foreach (GarageVehicle garageVehicle in m_Vehicles)
+			{
+				if (garageVehicle.Vehicle.LicensePlate.Equals(i_LicensePlate))
+				{
+					carFound = true;
+                    Battery battery = garageVehicle.Vehicle.PowerSource as Battery;
+                    if (battery == null)
+					{
+						throw new ArgumentException("This vehicle isn't electric");
+					}
+
+					else
+					{
+                        battery.Charge(i_AmountOfMinutes);
+					}
+					break;
+				}
+			}
+
+			return carFound;
+        }
+
+		public bool PrintGarageVehicle(string i_LicensePlate)
+		{
+			bool carFound = false;
+
+			foreach (GarageVehicle garageVehicle in m_Vehicles)
+			{
+				if (garageVehicle.Vehicle.LicensePlate.Equals(i_LicensePlate))
+				{
+					carFound = true;
+                    garageVehicle.ToString();
+                    break;
+				}
+			}
+
+			return carFound;
+		}
     }
 }

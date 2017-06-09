@@ -29,5 +29,18 @@ namespace Ex03.GarageLogic
                 m_CurrentTirePressure += i_PressureToAdd;
             }
         }
+
+        public void InflateToMax()
+        {
+            m_CurrentTirePressure = r_MaxTirePressure;
+        }
+
+        public override string ToString()
+        {
+            return String.Format(
+                @"Current Tire Pressure : {0}
+                Manufacturer : {1}", m_CurrentTirePressure, m_Manufacturer            
+            );
+        }
     }
 }
