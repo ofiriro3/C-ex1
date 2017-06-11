@@ -62,14 +62,19 @@ Press 7 for full details of a specific car"));
             string licensePlate = Console.ReadLine();
             string carDetailsToPrint;
             bool isTheCarInTheGarage = io_Garage.PrintGarageVehicle(licensePlate, out carDetailsToPrint);
-            if(! isTheCarInTheGarage)
-            {
-                Console.WriteLine("sorry your car was not found!");
-            }
-            else
-            {
-                Console.WriteLine(carDetailsToPrint);
-            }
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage," ");
+        }
+
+        private static void hadnleInputCarFoundOrNot(bool i_Found, string i_Message)
+        {
+            if (!i_Found)
+			{
+				Console.WriteLine("sorry your car was not found!");
+			}
+			else
+			{
+                Console.WriteLine(i_Message);
+			}
         }
 
         private static void toChargeAnElectricCar(Garage io_Garage)
@@ -78,7 +83,8 @@ Press 7 for full details of a specific car"));
             string licensePlate = Console.ReadLine();
             Console.WriteLine("Please enter the amount of hours that you would like to charge your charger");
             float amountOfTimeToChargeBattery = getValidFloatFromUser();
-            io_Garage.ChargeElectricVehicle(licensePlate, amountOfTimeToChargeBattery);
+            bool isTheCarInTheGarage = io_Garage.ChargeElectricVehicle(licensePlate, amountOfTimeToChargeBattery);
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Car was charged!");
         }
 
         private static void toFuelACar(Garage io_Garage)
@@ -87,7 +93,8 @@ Press 7 for full details of a specific car"));
             string licensePlate = Console.ReadLine();
             PowerSource.eFuel typeOfGass = getValidFuelTypeFromUser();
             float amountOfGasToAdd = getValidFloatFromUser();
-            io_Garage.FillGasInGasVehicle(licensePlate, typeOfGass, amountOfGasToAdd);
+            bool isTheCarInTheGarage = io_Garage.FillGasInGasVehicle(licensePlate, typeOfGass, amountOfGasToAdd);
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Car was Fueled!");
         }
 
         private static void inflateCarWheels(Garage io_Garage)
@@ -95,7 +102,8 @@ Press 7 for full details of a specific car"));
 
             Console.WriteLine("Please enter the car's License Plate that you would like to inflate it's wheels");
             string licensePlate = Console.ReadLine();
-            io_Garage.InflateWheelsOfVehicleToMax(licensePlate);
+            bool isTheCarInTheGarage = io_Garage.InflateWheelsOfVehicleToMax(licensePlate);
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Wheels were inflated!");
         }
 
         private static void changeVehicleStatus(Garage io_Garage)
@@ -104,7 +112,8 @@ Press 7 for full details of a specific car"));
             string licensePlate = Console.ReadLine();
             Console.WriteLine("Please enter your desired status for the car"); 
             Garage.GarageVehicle.eVehicleStatus newStatusForVehicle = getValidStatusCar();
-            io_Garage.ChangeStateOfVehicle(licensePlate, newStatusForVehicle);
+            bool isTheCarInTheGarage = io_Garage.ChangeStateOfVehicle(licensePlate, newStatusForVehicle);
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Wheels were inflated!");
         }
 
         private static void printCarList(Garage io_Garage)
