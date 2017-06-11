@@ -30,7 +30,8 @@ namespace Ex03.GarageLogic
 		{
 			return String.Format(
 				@"Power Source : {0}
-                Current Capacity : {1}", "Battery", m_CurrentCampacity
+                Current Capacity : {1}
+", "Battery", m_CurrentCampacity
 			);
 		}
     }

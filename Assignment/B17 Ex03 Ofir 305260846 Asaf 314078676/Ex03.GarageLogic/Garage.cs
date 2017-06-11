@@ -61,8 +61,9 @@ namespace Ex03.GarageLogic
                 StringBuilder returnString = new StringBuilder();
                 returnString.Append(String.Format(
 @"Name of owner : {0}
-Number of owner :D {1}
-Status in garage : {2}"
+Number of owner : {1}
+Status in garage : {2}
+"
                 , m_OwnerName, m_OwnerNumber, m_Status));
                 m_Vehicle.GetType().GetMethod("ToString").Invoke(m_Vehicle, null);
                 returnString.Append(m_Vehicle.ToString());

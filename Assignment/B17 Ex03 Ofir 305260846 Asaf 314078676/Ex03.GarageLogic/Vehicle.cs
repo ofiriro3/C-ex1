@@ -62,7 +62,8 @@ namespace Ex03.GarageLogic
 
             returnString.Append(String.Format(
 @"Module Name : {0}
-License Plate : {1}", m_ModuleName, m_LicensePlate));
+License Plate : {1}
+", m_ModuleName, m_LicensePlate));
             foreach(Wheel wheel in m_Wheels)
             {
                 returnString.AppendLine(String.Format("Wheel {0} : ", indexOfWheel));

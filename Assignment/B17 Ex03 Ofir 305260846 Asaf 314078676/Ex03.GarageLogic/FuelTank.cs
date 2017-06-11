@@ -37,7 +37,8 @@ namespace Ex03.GarageLogic
 			return String.Format(
 @"Power Source : {0}
 Current Capacity : {1}
-Fuel Type : {2}", "Fuel Tank"
+Fuel Type : {2}
+", "Fuel Tank"
             , m_CurrentCampacity, m_FuelType
 			);
 		}

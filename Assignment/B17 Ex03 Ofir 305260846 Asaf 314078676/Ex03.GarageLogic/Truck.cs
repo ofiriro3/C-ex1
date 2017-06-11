@@ -22,8 +22,9 @@ namespace Ex03.GarageLogic
 			StringBuilder returnString = new StringBuilder();
 			returnString.Append(base.ToString());
 			returnString.Append(String.Format(
-				@"Carries Toxic : {0}
-                Max Carry Weight : {1}", m_CarriesToxic, m_MaxCarryWeight
+@"Carries Toxic : {0}
+Max Carry Weight : {1}
+", m_CarriesToxic, m_MaxCarryWeight
 			));
 
 			return returnString.ToString();
