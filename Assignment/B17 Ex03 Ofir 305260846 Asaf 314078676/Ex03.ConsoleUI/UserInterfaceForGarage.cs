@@ -136,11 +136,17 @@ Press 7 for full details of a specific car"));
                 listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarage();
             }
 
-            foreach(string vehicle in listOfVehicleToString)
+            if (listOfVehicleToString.Count == 0)
             {
-                Console.WriteLine(vehicle);
+                Console.WriteLine("No Vehicles in garage!");
             }
-
+            else
+            {
+                foreach (string vehicle in listOfVehicleToString)
+                {
+                    Console.WriteLine(vehicle);
+                }
+            }
         }
 
         private static void addNewCarToGarage(Garage io_Garage)
