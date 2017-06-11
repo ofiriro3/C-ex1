@@ -62,7 +62,7 @@ Press 7 for full details of a specific car"));
             string licensePlate = Console.ReadLine();
             string carDetailsToPrint;
             bool isTheCarInTheGarage = io_Garage.PrintGarageVehicle(licensePlate, out carDetailsToPrint);
-            hadnleInputCarFoundOrNot(isTheCarInTheGarage," ");
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, carDetailsToPrint);
         }
 
         private static void hadnleInputCarFoundOrNot(bool i_Found, string i_Message)
@@ -208,14 +208,14 @@ or press Q to go back"));
                 case e_TypeOfVehicle.CarOnBattry:
                 case e_TypeOfVehicle.CarOnFuel:
                     vehicleDetails = getCarDetails();
-                    wheels = getWheelsDetails(2, 33);
+                    wheels = getWheelsDetails(4, 30);
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails,
                         wheels, vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.MotorcycleOnFuel:
                 case e_TypeOfVehicle.MotorcycleOnBattey:
                     vehicleDetails = getMotorcycleDetails();
-                    wheels = getWheelsDetails(4, 30);
+                    wheels = getWheelsDetails(2, 33);
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                         vehicleDetails, typeOfVehicle);
                     break;
