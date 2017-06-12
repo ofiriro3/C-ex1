@@ -65,7 +65,7 @@ Press 7 for full details of a specific vehicle"));
 
         private static void printFullDetailsOfACar(Garage io_Garage)
         {
-            Console.WriteLine("Please enter the License Plate of the car you would like to charge");
+            Console.WriteLine("Please enter the License Plate of the vehicle you would like to charge");
             string licensePlate = Console.ReadLine();
             string carDetailsToPrint;
             bool isTheCarInTheGarage = io_Garage.PrintGarageVehicle(licensePlate, out carDetailsToPrint);
@@ -76,7 +76,7 @@ Press 7 for full details of a specific vehicle"));
         {
             if (!i_Found)
 			{
-				Console.WriteLine("sorry your car was not found!");
+				Console.WriteLine("sorry your vehicle was not found!");
 			}
 			else
 			{
@@ -86,7 +86,7 @@ Press 7 for full details of a specific vehicle"));
 
         private static void toChargeAnElectricCar(Garage io_Garage)
         {
-            Console.WriteLine("Please enter the License Plate of the car you would like to charge");
+            Console.WriteLine("Please enter the License Plate of the vehicle you would like to charge");
             string licensePlate = Console.ReadLine();
             Console.WriteLine("Please enter the amount of hours that you would like to charge your charger");
             float amountOfTimeToChargeBattery = getValidPositiveFloatFromUser();
@@ -96,9 +96,10 @@ Press 7 for full details of a specific vehicle"));
 
         private static void toFuelACar(Garage io_Garage)
         {
-            Console.WriteLine("Please enter the car's License Plate that you would like to fuel ");
+            Console.WriteLine("Please enter the vehicle's License Plate that you would like to fuel ");
             string licensePlate = Console.ReadLine();
             PowerSource.eFuel typeOfGass = getValidFuelTypeFromUser();
+            Console.WriteLine("Please enter the amount of fuel to add");
             float amountOfGasToAdd = getValidPositiveFloatFromUser();
             bool isTheCarInTheGarage = io_Garage.FillGasInGasVehicle(licensePlate, typeOfGass, amountOfGasToAdd);
             hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Vehicle {0} was fueld!", licensePlate));
@@ -107,7 +108,7 @@ Press 7 for full details of a specific vehicle"));
         private static void inflateCarWheels(Garage io_Garage)
         {
 
-            Console.WriteLine("Please enter the car's License Plate that you would like to inflate it's wheels");
+            Console.WriteLine("Please enter the vehicle's License Plate that you would like to inflate it's wheels");
             string licensePlate = Console.ReadLine();
             bool isTheCarInTheGarage = io_Garage.InflateWheelsOfVehicleToMax(licensePlate);
             hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Wheels of vehicle {0} were inflated!", licensePlate));
@@ -117,7 +118,7 @@ Press 7 for full details of a specific vehicle"));
         {
             Console.WriteLine("Please enter the License Plate that you would like to change it status");
             string licensePlate = Console.ReadLine();
-            Console.WriteLine("Please enter your desired status for the car"); 
+            Console.WriteLine("Please enter your desired status for the vehicle"); 
             Garage.GarageVehicle.eVehicleStatus newStatusForVehicle = getValidStatusCar();
             bool isTheCarInTheGarage = io_Garage.ChangeStateOfVehicle(licensePlate, newStatusForVehicle);
             hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Status for vehicle {0} was changed to {1}!", licensePlate, newStatusForVehicle));
@@ -158,7 +159,7 @@ Press 7 for full details of a specific vehicle"));
 
         private static void addNewCarToGarage(Garage io_Garage)
         {
-            Console.WriteLine("Please enter your car's license number");
+            Console.WriteLine("Please enter your vehicle's license number");
             string licenseNumber = Console.ReadLine();
             Garage.GarageVehicle vehicleWeWantToAdd = io_Garage.FindCarByLicensePlate(licenseNumber);
             if(vehicleWeWantToAdd != null)
@@ -169,6 +170,7 @@ Press 7 for full details of a specific vehicle"));
             else
             {
                 creatNewVehicle(licenseNumber, io_Garage);
+                Console.WriteLine("Vehicle was successfuly added to garage!");
             }
  
         }
@@ -176,7 +178,7 @@ Press 7 for full details of a specific vehicle"));
         private static void creatNewVehicle(string i_CarLicense, Garage io_Garage)
         {
             Console.WriteLine(string.Format
-(@"Please choose the car type that you want to enter the garage
+(@"Please choose the vehicle type that you want to enter the garage
 1. Regular motorcycle
 2. Electircal motorcycle
 3. Regular car
@@ -185,7 +187,7 @@ Press 7 for full details of a specific vehicle"));
 or press Q to go back"));
 
             int commandToDo;
-            getValidAnswerToMultyplyChoiceAnswer(out commandToDo,1,5);
+            getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, 5);
             bool workOnBattery = true;
             switch (commandToDo)
             {
@@ -282,7 +284,7 @@ or press Q to go back"));
             List<String> carDetails = new List<string>();
             Car.eColor color = getValidColorFromUser();
             Console.WriteLine("How many doors do you have in your car? <2-5>");
-            Console.WriteLine("Please enter the Vehicle module");
+            Console.WriteLine("Please enter the car's module");
             Car.eNumberOfDoors numberOfDoors = getValidNumberOfDoorsFromUser();
             carDetails.Add(color.ToString());
             carDetails.Add(numberOfDoors.ToString());
@@ -433,7 +435,7 @@ or press Q to go back"));
 2.Octan 96
 3.Octan 98
 4.Soler"));
-            getValidAnswerToMultyplyChoiceAnswer(out numberOfFuelTheUserChose,1, 3);
+            getValidAnswerToMultyplyChoiceAnswer(out numberOfFuelTheUserChose,1, 4);
             PowerSource.eFuel fuelToReturn = PowerSource.eFuel.Octan95;
 
             switch (numberOfFuelTheUserChose)
