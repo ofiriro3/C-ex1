@@ -20,14 +20,17 @@ namespace Ex03.ConsoleUI
                 try
                 {
                     Console.WriteLine(string.Format
-    (@"Please choose one of the folowing
-Press 1 for add another Vehicle to the garage
-Press 2 for print the License Plates of all cars that are now in the garage
-Press 3 for change a car status in the garage
-Press 4 to inflate one of the cars wheels
-Press 5 to fuel a car
-Press 6 to charge a battery of an electricity car
-Press 7 for full details of a specific car"));
+    (@"
+=================================
+Please choose one of the folowing : 
+
+Press 1 for add another vehicle to the garage
+Press 2 for print the License Plates of all vehicles that are now in the garage
+Press 3 for change a vehicle status in the garage
+Press 4 to inflate the vehicles wheels
+Press 5 to fuel a vehicle
+Press 6 to charge a battery of an electricity vehicle
+Press 7 for full details of a specific vehicle"));
 
                     int inputCommand;
                     getValidAnswerToMultyplyChoiceAnswer(out inputCommand, 1, 7);
@@ -44,6 +47,10 @@ Press 7 for full details of a specific car"));
                         default: Console.WriteLine("Invalid input , please choose a number between 0 - 7 "); break;
                     }
 
+                }
+                catch(ValueOutOfRangeException e)
+                {
+                    Console.Write(e.Message);
                 }
                 catch(FormatException e)
                 {
@@ -82,9 +89,9 @@ Press 7 for full details of a specific car"));
             Console.WriteLine("Please enter the License Plate of the car you would like to charge");
             string licensePlate = Console.ReadLine();
             Console.WriteLine("Please enter the amount of hours that you would like to charge your charger");
-            float amountOfTimeToChargeBattery = getValidFloatFromUser();
+            float amountOfTimeToChargeBattery = getValidPositiveFloatFromUser();
             bool isTheCarInTheGarage = io_Garage.ChargeElectricVehicle(licensePlate, amountOfTimeToChargeBattery);
-            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Car was charged!");
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Vehicle {0} was chraged!", licensePlate));
         }
 
         private static void toFuelACar(Garage io_Garage)
@@ -92,9 +99,9 @@ Press 7 for full details of a specific car"));
             Console.WriteLine("Please enter the car's License Plate that you would like to fuel ");
             string licensePlate = Console.ReadLine();
             PowerSource.eFuel typeOfGass = getValidFuelTypeFromUser();
-            float amountOfGasToAdd = getValidFloatFromUser();
+            float amountOfGasToAdd = getValidPositiveFloatFromUser();
             bool isTheCarInTheGarage = io_Garage.FillGasInGasVehicle(licensePlate, typeOfGass, amountOfGasToAdd);
-            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Car was Fueled!");
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Vehicle {0} was fueld!", licensePlate));
         }
 
         private static void inflateCarWheels(Garage io_Garage)
@@ -103,7 +110,7 @@ Press 7 for full details of a specific car"));
             Console.WriteLine("Please enter the car's License Plate that you would like to inflate it's wheels");
             string licensePlate = Console.ReadLine();
             bool isTheCarInTheGarage = io_Garage.InflateWheelsOfVehicleToMax(licensePlate);
-            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Wheels were inflated!");
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Wheels of vehicle {0} were inflated!", licensePlate));
         }
 
         private static void changeVehicleStatus(Garage io_Garage)
@@ -113,7 +120,7 @@ Press 7 for full details of a specific car"));
             Console.WriteLine("Please enter your desired status for the car"); 
             Garage.GarageVehicle.eVehicleStatus newStatusForVehicle = getValidStatusCar();
             bool isTheCarInTheGarage = io_Garage.ChangeStateOfVehicle(licensePlate, newStatusForVehicle);
-            hadnleInputCarFoundOrNot(isTheCarInTheGarage, "Wheels were inflated!");
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Status for vehicle {0} was changed to {1}!", licensePlate, newStatusForVehicle));
         }
 
         private static void printCarList(Garage io_Garage)
@@ -156,7 +163,7 @@ Press 7 for full details of a specific car"));
             Garage.GarageVehicle vehicleWeWantToAdd = io_Garage.FindCarByLicensePlate(licenseNumber);
             if(vehicleWeWantToAdd != null)
             {
-                Console.WriteLine(string.Format("Your car is already in the garage {0}", licenseNumber));
+                Console.WriteLine(string.Format("Vehicle {0} is already in the garage", licenseNumber));
                 vehicleWeWantToAdd.Status = Garage.GarageVehicle.eVehicleStatus.InRepair;
             }
             else
@@ -241,7 +248,7 @@ or press Q to go back"));
             bool isToxicBool = getValidboolFromUser();
             string isToxic = isToxicBool.ToString();
             Console.WriteLine("What is your maximum carry weight ?");
-            int maximumCarryWeight = getValidIntFromUser();
+            int maximumCarryWeight = getValidPositiveIntFromUser();
             string maximumCarryWeightStringFormat = Console.ReadLine();
             truckDetails.Add(isToxic);
             truckDetails.Add(maximumCarryWeightStringFormat);
@@ -253,7 +260,7 @@ or press Q to go back"));
         {
             List<float> electricDetails = new List<float>();
             Console.WriteLine("Please enter how much power left in your battery");
-            float powerLeftInBattery = getValidFloatFromUser();
+            float powerLeftInBattery = getValidPositiveFloatFromUser();
             electricDetails.Add(powerLeftInBattery);
 
             return electricDetails;
@@ -263,7 +270,7 @@ or press Q to go back"));
         {
             List<float> FuelDetailsList = new List<float>();
             Console.WriteLine("Please enter how much fuel do you have in your tank");
-            float fuelLeftInTank = getValidFloatFromUser();
+            float fuelLeftInTank = getValidPositiveFloatFromUser();
             FuelDetailsList.Add(fuelLeftInTank);
 
             return FuelDetailsList;
@@ -290,17 +297,16 @@ or press Q to go back"));
             details.Add(i_CarLicense);
             Console.WriteLine("We would like you to write few necessary details for our mangment System");
             Console.WriteLine("Please enter the Vehicle module");
-            string carModule = Console.ReadLine();
+            string carModule = getValidStringFromUser();
             details.Add(carModule);
             Console.WriteLine("Please enter the Name of the owner");
-            string owner = Console.ReadLine();
+            string owner = getValidStringFromUser();
             details.Add(owner);
             Console.WriteLine("Please enter your Cellphone");
-            string CellPhoneNumber = Console.ReadLine();
+            string CellPhoneNumber = getValidStringFromUser();
             details.Add(CellPhoneNumber);
 
             return details;
-
         }
 
         private static List<String> getMotorcycleDetails()
@@ -309,7 +315,7 @@ or press Q to go back"));
             Console.WriteLine("Please enter your motorcycle licence type");
             Motorcycle.eLicenceType motorcycleLicenceType = getValidLicenceType();
             Console.WriteLine("Please enter your engine volume");
-            int engineVolume = getValidIntFromUser();
+            int engineVolume = getValidPositiveIntFromUser();
             motorcycleDetails.Add(motorcycleLicenceType.ToString());
             motorcycleDetails.Add(engineVolume.ToString());
 
@@ -323,7 +329,7 @@ or press Q to go back"));
             for(int i = 0;i < i_NumberOfWheels;i++)
             {
                 Console.WriteLine(string.Format("Please enter the tire pressure of the {0} Wheel", i));
-                float currentWheelPressure = getValidFloatFromUser();
+                float currentWheelPressure = getValidPositiveFloatFromUser();
                 Console.WriteLine(string.Format("Please enter the manufacturer name of the Wheel"));
                 string manufactor = Console.ReadLine();
                 Wheel currentWheelToCreate = new Wheel(manufactor, currentWheelPressure, i_MaxTirePressure);
@@ -366,13 +372,24 @@ or press Q to go back"));
                 }
         }
 
-        private static float getValidFloatFromUser()
+        private static string getValidStringFromUser()
         {
-            float validFloat;
-            bool isValidFloat = float.TryParse(Console.ReadLine(), out validFloat);
-            while(! isValidFloat)
+            string validString = "";
+            while ((validString = Console.ReadLine()).Length == 0)
             {
-                Console.WriteLine("Invalid Input please enter a real number");
+              Console.WriteLine("Invalid Input please enter a non empty string");  
+            }
+
+            return validString;
+        }
+
+        private static float getValidPositiveFloatFromUser()
+        {
+            float validFloat = -1;
+            bool isValidFloat = float.TryParse(Console.ReadLine(), out validFloat);
+            while(! isValidFloat || validFloat < 0)
+            {
+                Console.WriteLine("Invalid Input please enter a positive number");
                 isValidFloat= float.TryParse(Console.ReadLine(), out validFloat);
             }
 
@@ -380,13 +397,13 @@ or press Q to go back"));
         }
 
 
-        private static int getValidIntFromUser()
+        private static int getValidPositiveIntFromUser()
         {
             int validInt = -1;
             bool isValidInt = int.TryParse(Console.ReadLine(), out validInt);
-            while (! isValidInt)
+            while (!isValidInt || validInt < 0)
             {
-                Console.WriteLine("Invalid Input please enter a number");
+                Console.WriteLine("Invalid Input please enter a positive number");
                 isValidInt = int.TryParse(Console.ReadLine(), out validInt);
             }
 

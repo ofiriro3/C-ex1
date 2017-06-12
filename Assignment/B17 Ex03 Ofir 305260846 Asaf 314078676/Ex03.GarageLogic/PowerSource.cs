@@ -18,10 +18,14 @@ namespace Ex03.GarageLogic
         }
 
 
-        public PowerSource(float i_MaxCampacity , float i_currentCampacity)
+        public PowerSource(float i_MaxCampacity , float i_CurrentCampacity)
         {
+			if (i_CurrentCampacity > i_MaxCampacity)
+			{
+                throw new ValueOutOfRangeException(0, i_MaxCampacity, i_CurrentCampacity);
+            }
             r_MaxCampacity = i_MaxCampacity;
-            m_CurrentCampacity = i_currentCampacity;
+            m_CurrentCampacity = i_CurrentCampacity;
         }
     }
 }

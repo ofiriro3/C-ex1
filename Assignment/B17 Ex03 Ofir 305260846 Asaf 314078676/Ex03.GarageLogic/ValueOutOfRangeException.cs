@@ -23,18 +23,14 @@ namespace Ex03.GarageLogic
             }
         }
        
-        public ValueOutOfRangeException(Exception i_InnerException, float i_MinValue, float i_MaxValue , float i_inputValue)  
+        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue , float i_InputValue)  
             : base(string.Format(
- @"An error occured while trying to add {3} , your input must be a float number between {1} - {2}"
-, i_MinValue, i_MaxValue,i_inputValue),
-            i_InnerException)
-        { }
-
-        public ValueOutOfRangeException(float i_MinValue, float i_MaxValue, float i_inputValue)  
-            : base(string.Format(
- @"An error occured while trying to add {3} , your input must be a float number between {1} - {2}"
-, i_MinValue, i_MaxValue, i_inputValue))
-        { }
+ @"An error occured while trying to add {2} , your input must be a float number between {0} - {1}"
+        , i_MinValue, i_MaxValue, i_InputValue))
+        {
+            m_MinValue = i_MinValue;
+            m_MaxValue = i_MaxValue;
+        }
     }
 }
 

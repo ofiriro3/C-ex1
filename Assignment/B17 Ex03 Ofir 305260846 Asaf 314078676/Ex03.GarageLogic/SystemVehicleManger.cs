@@ -88,7 +88,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        private static void createARegularCar(Garage io_Garage, string i_Owner, string i_Module,
+        private static void createAElectricCar(Garage io_Garage, string i_Owner, string i_Module,
             string i_vehicleLicense, string i_CellphoneNumber, float i_currentPowerInPowerSource, List<Wheel> i_Wheels, List<string> i_VehicleDetails)
         {
             Battery battery = new Battery(2.5f, i_currentPowerInPowerSource);
@@ -103,7 +103,7 @@ namespace Ex03.GarageLogic
 
         }
 
-        private static void createAElectricCar(Garage io_Garage, string i_Owner, string i_Module,
+        private static void createARegularCar(Garage io_Garage, string i_Owner, string i_Module,
             string i_vehicleLicense, string i_CellphoneNumber, float i_currentPowerInPowerSource, 
             List<Wheel> i_Wheels, List<string> i_VehicleDetails)
         {

@@ -13,6 +13,10 @@ namespace Ex03.GarageLogic
 
         public Wheel(string i_Manufacturer, float i_CurrentTirePressure, float i_MaxTirePressure)
         {
+            if(i_CurrentTirePressure > i_MaxTirePressure)
+            {
+                throw new ValueOutOfRangeException(0, i_MaxTirePressure, i_CurrentTirePressure);
+            }
             m_Manufacturer = i_Manufacturer;
             m_CurrentTirePressure = i_CurrentTirePressure;
             r_MaxTirePressure = i_MaxTirePressure;
