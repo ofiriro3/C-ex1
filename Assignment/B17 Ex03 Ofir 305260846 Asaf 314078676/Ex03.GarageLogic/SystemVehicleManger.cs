@@ -14,7 +14,7 @@ namespace Ex03.GarageLogic
 			MotorcycleOnFuel,
 			Truck
 		}
-
+        /**
         public abstract class SupportedVehicle
         {
             public e_TypeOfVehicle Type { get; set; }
@@ -63,6 +63,7 @@ namespace Ex03.GarageLogic
 
             return supportredVehicles;
         }
+        **/
 
         public static void createVehicleInGarage(Garage io_Garage, List<string> generalDetails, List<float> i_PowerSourceDetails,
             List<Wheel> i_Wheels, List<string> i_VehicleDetails, e_TypeOfVehicle typeOfVehicle)
