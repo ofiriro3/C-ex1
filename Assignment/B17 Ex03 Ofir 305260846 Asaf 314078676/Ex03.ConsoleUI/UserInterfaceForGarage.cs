@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic;
-using Garage = Ex03.GarageLogic.Garage;
-using SystemVehicleManger = Ex03.GarageLogic.SystemVehicleManger;
-using e_TypeOfVehicle = Ex03.GarageLogic.e_TypeOfVehicle;
 
 namespace Ex03.ConsoleUI
 {
