@@ -6,6 +6,63 @@ namespace Ex03.GarageLogic
 {
     public static class SystemVehicleManger
     {
+		public enum e_TypeOfVehicle
+		{
+			CarOnFuel,
+			CarOnBattry,
+			MotorcycleOnBattey,
+			MotorcycleOnFuel,
+			Truck
+		}
+
+        public abstract class SupportedVehicle
+        {
+            public e_TypeOfVehicle Type { get; set; }
+            public int NumberOfWheels {get; set; }
+            public int MaxWheelPressure { get; set; }
+			public SupportedVehicle(e_TypeOfVehicle i_Type, int i_NumberOfWheels, int i_MaxWheelPressure)
+            {
+                Type = i_Type;
+                NumberOfWheels = i_NumberOfWheels;
+                MaxWheelPressure = i_MaxWheelPressure;
+            }
+        }
+
+		public class GasSupportedVehicle : SupportedVehicle
+		{
+			public float GasTankCapacity { get; set; }
+            public PowerSource.eFuel GasType { get; set; }
+			public GasSupportedVehicle(e_TypeOfVehicle i_Type, int i_NumberOfWheels, int i_MaxWheelPressure, float i_GasTankCapacity,
+                                      PowerSource.eFuel i_GasType) : base(i_Type, i_NumberOfWheels, i_MaxWheelPressure)
+			{
+                GasTankCapacity = i_GasTankCapacity;
+                GasType = i_GasType;
+			}
+
+		}
+
+		public class ElectricSupportedVehicle : SupportedVehicle
+		{
+			public float BatteryCapacity { get; set; }
+			public ElectricSupportedVehicle(e_TypeOfVehicle i_Type, int i_NumberOfWheels, int i_MaxWheelPressure, float i_BatteryCapacity)
+                : base(i_Type, i_NumberOfWheels, i_MaxWheelPressure)
+            {
+                BatteryCapacity = i_BatteryCapacity;
+			}
+		}
+
+        public static List<SupportedVehicle> GetSupportedVehicle()
+        {
+            List<SupportedVehicle> supportredVehicles = new List<SupportedVehicle>();
+
+            supportredVehicles.Add(new GasSupportedVehicle(e_TypeOfVehicle.MotorcycleOnFuel, 2, 33, 5.5f, PowerSource.eFuel.Octan95));
+            supportredVehicles.Add(new GasSupportedVehicle(e_TypeOfVehicle.CarOnFuel, 4, 30, 42f, PowerSource.eFuel.Octan98));
+            supportredVehicles.Add(new GasSupportedVehicle(e_TypeOfVehicle.Truck, 12, 32, 135f, PowerSource.eFuel.Octan96));
+            supportredVehicles.Add(new ElectricSupportedVehicle(e_TypeOfVehicle.MotorcycleOnBattey, 2, 33, 2.7f));
+            supportredVehicles.Add(new ElectricSupportedVehicle(e_TypeOfVehicle.CarOnBattry, 4, 30, 2.5f));
+
+            return supportredVehicles;
+        }
 
         public static void createVehicleInGarage(Garage io_Garage, List<string> generalDetails, List<float> i_PowerSourceDetails,
             List<Wheel> i_Wheels, List<string> i_VehicleDetails, e_TypeOfVehicle typeOfVehicle)
