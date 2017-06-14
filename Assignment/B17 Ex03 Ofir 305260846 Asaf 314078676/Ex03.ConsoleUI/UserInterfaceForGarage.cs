@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic;
 using e_TypeOfVehicle = Ex03.GarageLogic.SystemVehicleManger.e_TypeOfVehicle;
+using e_TypeOfPowerSource = Ex03.GarageLogic.SystemVehicleManger.e_TypeOfPowerSource;
 
 namespace Ex03.ConsoleUI
 {
@@ -175,36 +176,53 @@ Press 7 for full details of a specific vehicle"));
 
         private static void creatNewVehicle(string i_CarLicense, Garage io_Garage)
         {
-            Console.WriteLine(string.Format
-(@"Please choose the vehicle type that you want to enter the garage
-1. Regular motorcycle
-2. Electircal motorcycle
-3. Regular car
-4. Electronic car
-5. Truck
-or press Q to go back"));
+            StringBuilder query = new StringBuilder();
+            query.AppendLine("Please choose the vehicle type that you want to enter the garage: ");
+            Dictionary<e_TypeOfVehicle, e_TypeOfPowerSource> supportredVehicles = SystemVehicleManger.GetSupportedVehicle();
+            int runningIndex = 1;
+            e_TypeOfVehicle userChosenVehicle = e_TypeOfVehicle.MotorcycleOnBattey;
+            e_TypeOfPowerSource userChosenVehiclePowersource = e_TypeOfPowerSource.Battery;
+
+            foreach(e_TypeOfVehicle type in supportredVehicles.Keys)
+            {
+                query.AppendLine(runningIndex + ". " + type.ToString());
+                runningIndex++;
+            }
+
+            query.AppendLine("or press Q to go back");
+            Console.WriteLine(query.ToString());
 
             int commandToDo;
-            getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, 5);
-            bool workOnBattery = true;
+            getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, supportredVehicles.Count + 1);
+            runningIndex = 1;
+			foreach (e_TypeOfVehicle type in supportredVehicles.Keys)
+			{
+                if (runningIndex == commandToDo)
+                {
+                    userChosenVehicle = type;
+                    if(!supportredVehicles.TryGetValue(type, out userChosenVehiclePowersource))
+                    {
+                        throw new FormatException();
+                    }
+                    break;
+                }
+                runningIndex++;
+			}
+
             switch (commandToDo)
             {
                 case -1: ; throw new FormatException();
-                case 1: createNewVehicleHelper(io_Garage, i_CarLicense, !workOnBattery, e_TypeOfVehicle.MotorcycleOnFuel); break;
-                case 2: createNewVehicleHelper(io_Garage, i_CarLicense, workOnBattery, e_TypeOfVehicle.MotorcycleOnBattey); break;
-                case 3: createNewVehicleHelper(io_Garage, i_CarLicense, !workOnBattery, e_TypeOfVehicle.CarOnFuel); break;
-                case 4: createNewVehicleHelper(io_Garage, i_CarLicense, workOnBattery, e_TypeOfVehicle.CarOnBattry); break;
-                case 5: createNewVehicleHelper(io_Garage, i_CarLicense, workOnBattery, e_TypeOfVehicle.Truck); break;
+                default: createNewVehicleHelper(io_Garage, i_CarLicense, userChosenVehiclePowersource, userChosenVehicle); break;
             }
 
         }
 
-        private static void createNewVehicleHelper(Garage io_Garage, string i_CarLicense, bool workOnBattry, e_TypeOfVehicle typeOfVehicle)
+        private static void createNewVehicleHelper(Garage io_Garage, string i_CarLicense, e_TypeOfPowerSource typeOfPowerSource, e_TypeOfVehicle typeOfVehicle)
         {
             // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
             List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense);
             List<float> powerSourceDeatails;
-            if (workOnBattry == true)
+            if (typeOfPowerSource.Equals(e_TypeOfPowerSource.Battery))
             {
                 powerSourceDeatails = getElectricalDetails();
             }
