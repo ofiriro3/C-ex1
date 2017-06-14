@@ -213,32 +213,26 @@ or press Q to go back"));
                 powerSourceDeatails = GetVeichelByFuelDetails();
             }
 
-            List<string> vehicleDetails;
-            List<string> wheels;
+            List<string> vehicleDetails = null;
+            List<string> wheels = getWheelDetails();
             switch (typeOfVehicle)
             {
                 // in both cases do the same
                 case e_TypeOfVehicle.CarOnBattry:
                 case e_TypeOfVehicle.CarOnFuel:
                     vehicleDetails = getCarDetails();
-                    wheels = getWheelDetails();
-                    SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails,
-                        wheels, vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.MotorcycleOnFuel:
                 case e_TypeOfVehicle.MotorcycleOnBattey:
                     vehicleDetails = getMotorcycleDetails();
-                    wheels = getWheelDetails();
-                    SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
-                        vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.Truck:
                     vehicleDetails = getTruckDetails();
-                    wheels = getWheelDetails();
-                    SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
-                        vehicleDetails, typeOfVehicle);
                     break;
             }
+
+			SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
+						vehicleDetails, typeOfVehicle);
         }
 
         private static List<String> getTruckDetails()
