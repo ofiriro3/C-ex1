@@ -213,28 +213,28 @@ or press Q to go back"));
                 powerSourceDeatails = GetVeichelByFuelDetails();
             }
 
-            List<String> vehicleDetails;
-            List<Wheel> wheels;
+            List<string> vehicleDetails;
+            List<string> wheels;
             switch (typeOfVehicle)
             {
                 // in both cases do the same
                 case e_TypeOfVehicle.CarOnBattry:
                 case e_TypeOfVehicle.CarOnFuel:
                     vehicleDetails = getCarDetails();
-                    wheels = getWheelsDetails(4, 30);
+                    wheels = getWheelDetails();
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails,
                         wheels, vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.MotorcycleOnFuel:
                 case e_TypeOfVehicle.MotorcycleOnBattey:
                     vehicleDetails = getMotorcycleDetails();
-                    wheels = getWheelsDetails(2, 33);
+                    wheels = getWheelDetails();
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                         vehicleDetails, typeOfVehicle);
                     break;
                 case e_TypeOfVehicle.Truck:
                     vehicleDetails = getTruckDetails();
-                    wheels = getWheelsDetails(12, 32);
+                    wheels = getWheelDetails();
                     SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                         vehicleDetails, typeOfVehicle);
                     break;
@@ -322,21 +322,18 @@ or press Q to go back"));
             return motorcycleDetails;
         }
 
-        private static List<Wheel> getWheelsDetails(int i_NumberOfWheels,float i_MaxTirePressure)
+        private static List<string> getWheelDetails()
         {
-            List<Wheel> listOfWheels = new List<Wheel>();
-            
-            for(int i = 0;i < i_NumberOfWheels;i++)
-            {
-                Console.WriteLine(string.Format("Please enter the tire pressure of the {0} Wheel", i));
-                float currentWheelPressure = getValidPositiveFloatFromUser();
-                Console.WriteLine(string.Format("Please enter the manufacturer name of the Wheel"));
-                string manufactor = Console.ReadLine();
-                Wheel currentWheelToCreate = new Wheel(manufactor, currentWheelPressure, i_MaxTirePressure);
-                listOfWheels.Add(currentWheelToCreate);
-            }
+            List<string> wheelDetail = new List<string>();
 
-            return listOfWheels;
+            Console.WriteLine(string.Format("Please enter the tire pressure of the Wheel"));
+            float currentWheelPressure = getValidPositiveFloatFromUser();
+            Console.WriteLine(string.Format("Please enter the manufacturer name of the Wheel"));
+            string manufactor = Console.ReadLine();
+            wheelDetail.Add(manufactor);
+            wheelDetail.Add(currentWheelPressure.ToString());
+
+            return wheelDetail;
 
         }
 
