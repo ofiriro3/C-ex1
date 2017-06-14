@@ -6,16 +6,18 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
+        
+        private const int v_MinTirePressure = 0;
+        private readonly float r_MaxTirePressure;
         private string m_Manufacturer;
         private float m_CurrentTirePressure;
-        private readonly float r_MaxTirePressure;
-        private const int v_MinTirePressure = 0;
 
         public Wheel(string i_Manufacturer, float i_CurrentTirePressure, float i_MaxTirePressure)
         {
             if(i_CurrentTirePressure > i_MaxTirePressure)
             {
                 throw new ValueOutOfRangeException(0, i_MaxTirePressure, i_CurrentTirePressure);
+
             }
             m_Manufacturer = i_Manufacturer;
             m_CurrentTirePressure = i_CurrentTirePressure;
@@ -41,7 +43,7 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return String.Format(
+            return string.Format(
 @"Current Tire Pressure : {0}
 Manufacturer : {1}
 ", m_CurrentTirePressure, m_Manufacturer            

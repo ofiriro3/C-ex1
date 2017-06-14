@@ -6,8 +6,7 @@ namespace Ex03.GarageLogic
 {
     public class Garage
     {
-        List<GarageVehicle> m_Vehicles;
-
+        private List<GarageVehicle> m_Vehicles;
 
         public Garage()
         {
@@ -19,7 +18,7 @@ namespace Ex03.GarageLogic
             private string m_OwnerName;
             private string m_OwnerNumber;
             private eVehicleStatus m_Status;
-            Vehicle m_Vehicle;
+            private Vehicle m_Vehicle;
 
             public enum eVehicleStatus
             {
@@ -50,6 +49,7 @@ namespace Ex03.GarageLogic
 				{
                     return m_Status;
 				}
+
                 set
                 {
                     m_Status = value;
@@ -59,12 +59,10 @@ namespace Ex03.GarageLogic
             public override string ToString()
             {
                 StringBuilder returnString = new StringBuilder();
-                returnString.Append(String.Format(
+                returnString.Append(string.Format(
 @"Name of owner : {0}
 Number of owner : {1}
-Status in garage : {2}
-"
-                , m_OwnerName, m_OwnerNumber, m_Status));
+Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
                 m_Vehicle.GetType().GetMethod("ToString").Invoke(m_Vehicle, null);
                 returnString.Append(m_Vehicle.ToString());
 
@@ -104,7 +102,7 @@ Status in garage : {2}
 			return listOfPlateNumbers;
 		}
 
-        //return true of car was in garage, false if not
+        ////return true of car was in garage, false if not
         public bool ChangeStateOfVehicle(string i_LicensePlate, GarageVehicle.eVehicleStatus i_NewStatus)
         {
             bool carFound = false;

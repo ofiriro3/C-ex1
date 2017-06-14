@@ -30,15 +30,12 @@ namespace Ex03.GarageLogic
         {
             StringBuilder returnString = new StringBuilder();
             returnString.Append(base.ToString());
-            returnString.Append(String.Format(
+            returnString.Append(string.Format(
 @"Licence Type : {0}
-Engine Volume : {1}
-", m_LicenceType, m_EngineVolume
+Engine Volume : {1}", m_LicenceType, m_EngineVolume
             ));
 
             return returnString.ToString();
         }
-
-
     }
 }

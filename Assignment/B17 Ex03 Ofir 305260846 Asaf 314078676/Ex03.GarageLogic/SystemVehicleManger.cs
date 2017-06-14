@@ -14,6 +14,7 @@ namespace Ex03.GarageLogic
 			MotorcycleOnFuel,
 			Truck
 		}
+
         /**
         public abstract class SupportedVehicle
         {
@@ -64,7 +65,6 @@ namespace Ex03.GarageLogic
             return supportredVehicles;
         }
         **/
-
         public static void createVehicleInGarage(Garage io_Garage, List<string> generalDetails, List<float> i_PowerSourceDetails,
             List<string> i_Wheels, List<string> i_VehicleDetails, e_TypeOfVehicle typeOfVehicle)
         {
@@ -84,7 +84,7 @@ namespace Ex03.GarageLogic
 
                 case e_TypeOfVehicle.CarOnFuel:
                     createARegularCar(io_Garage, owner, carModule, i_vehicleLicense,
-                    i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
+                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
 
                 case e_TypeOfVehicle.MotorcycleOnFuel:
                     createARegularMotorCycle(io_Garage, owner, carModule,
@@ -97,7 +97,6 @@ namespace Ex03.GarageLogic
                 case e_TypeOfVehicle.Truck:
                     createATruck(io_Garage, owner, carModule,
                     i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
-
             }
         }
 
@@ -113,7 +112,6 @@ namespace Ex03.GarageLogic
             Garage.GarageVehicle truckToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, truckToAdd);
             io_Garage.addNewVehicleToGarage(truckToAddToGarage);
-
         }
 
         private static void createAnElectricMotorCycle(Garage io_Garage, string i_Owner, string i_Module, string i_vehicleLicense,
@@ -122,7 +120,7 @@ namespace Ex03.GarageLogic
             Battery battery = new Battery(2.7f, i_currentPowerInPowerSource);
             Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), i_VehicleDetails[0]));
 
-            // maybe add a try/catch fo this
+            //// maybe add a try/catch fo this
             int engineVolume = int.Parse(i_VehicleDetails[1]);
 			List<Wheel> wheels = generateWheels(2, 33, i_Wheels[0], i_Wheels[1]);
             Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, licenceType, engineVolume, wheels, battery);
@@ -137,16 +135,14 @@ namespace Ex03.GarageLogic
             FuelTank fuelTank = new FuelTank(5.5f, i_currentPowerInPowerSource, PowerSource.eFuel.Octan95);
             Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), i_VehicleDetails[0]));
 
-            // maybe add a try/catch fo this
+            //// maybe add a try/catch fo this
             int engineVolume = int.Parse(i_VehicleDetails[1]);
-			//add engine valume
+			////add engine valume
 			List<Wheel> wheels = generateWheels(2, 33, i_Wheels[0], i_Wheels[1]);
             Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, licenceType, engineVolume, wheels, fuelTank);
-
             Garage.GarageVehicle motorCycleToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, motorcycleToAdd);
             io_Garage.addNewVehicleToGarage(motorCycleToAddToGarage);
-
         }
 
         private static void createAElectricCar(Garage io_Garage, string i_Owner, string i_Module,
@@ -158,11 +154,9 @@ namespace Ex03.GarageLogic
             Car.eNumberOfDoors numberOfDoors = (Car.eNumberOfDoors)(Enum.Parse(typeof(Car.eNumberOfDoors), i_VehicleDetails[1]));
 			List<Wheel> wheels = generateWheels(4, 30, i_Wheels[0], i_Wheels[1]);
             Car carToAdd = new Car(i_Module, i_vehicleLicense,color, numberOfDoors, wheels, battery);
-
             Garage.GarageVehicle carToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, carToAdd);
             io_Garage.addNewVehicleToGarage(carToAddToGarage);
-
         }
 
         private static void createARegularCar(Garage io_Garage, string i_Owner, string i_Module,
@@ -184,7 +178,7 @@ namespace Ex03.GarageLogic
 		private static List<Wheel> generateWheels(int i_NumberOfWheels, float i_MaxTirePressure, string i_Manufactor, string i_CurrentWheelPressure)
 		{
 			List<Wheel> listOfWheels = new List<Wheel>();
-
+    
 			for (int i = 0; i < i_NumberOfWheels; i++)
 			{
                 float currentPressure = float.Parse(i_CurrentWheelPressure);

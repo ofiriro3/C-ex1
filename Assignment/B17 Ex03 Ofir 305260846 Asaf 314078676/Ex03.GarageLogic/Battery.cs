@@ -8,10 +8,9 @@ namespace Ex03.GarageLogic
     {
         public Battery(float i_MaxCampacity, float i_CurrentCampacity)
         : base(i_MaxCampacity, i_CurrentCampacity)
-        {}
+        {
+        }
         
-
-        // in the constructor to add the maxCampacity
         public void Charge(float i_NumberOfChargingHours)
         {
             // throws execption if exceeded max campacity
@@ -26,13 +25,13 @@ namespace Ex03.GarageLogic
             }
         }
 
-		public override string ToString()
-		{
-			return String.Format(
+        public override string ToString()
+        {
+            string batteryToString =  string.Format(
 @"Power Source : {0}
-Current Capacity : {1}
-", "Battery", m_CurrentCampacity
-			);
-		}
+Current Capacity : {1}", "Battery", m_CurrentCampacity);
+
+            return batteryToString;
+        }
     }
 }
