@@ -38,9 +38,8 @@ namespace Ex03.GarageLogic
 @"Power Source : {0}
 Current Capacity : {1}
 Fuel Type : {2}
-", "Fuel Tank"
-            , m_CurrentCampacity, m_FuelType
-			);
+Max Capacity : {3}
+", "Fuel Tank", m_CurrentCampacity, m_FuelType, r_MaxCampacity);
 		}
     }
 }

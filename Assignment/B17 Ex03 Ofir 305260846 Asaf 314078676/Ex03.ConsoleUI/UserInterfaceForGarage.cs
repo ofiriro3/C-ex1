@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic;
-using e_TypeOfVehicle = Ex03.GarageLogic.SystemVehicleManger.e_TypeOfVehicle;
 using e_TypeOfPowerSource = Ex03.GarageLogic.SystemVehicleManger.e_TypeOfPowerSource;
 
 namespace Ex03.ConsoleUI
 {
     public static class UserInterfaceForGarage
     {
-        public static void run()
+        public static void Run()
         {
             Garage myGarage = new Garage();
-
             bool programIsRunning = true;
+
             while (programIsRunning)
             {
                 try
@@ -30,7 +29,6 @@ Press 4 to inflate the vehicles wheels
 Press 5 to fuel a vehicle
 Press 6 to charge a battery of an electricity vehicle
 Press 7 for full details of a specific vehicle"));
-
                     int inputCommand;
                     getValidAnswerToMultyplyChoiceAnswer(out inputCommand, 1, 7);
                     switch (inputCommand)
@@ -45,16 +43,18 @@ Press 7 for full details of a specific vehicle"));
                         case 7: printFullDetailsOfACar(myGarage); break;
                         default: Console.WriteLine("Invalid input , please choose a number between 0 - 7 "); break;
                     }
-
                 }
+
                 catch(ValueOutOfRangeException e)
                 {
                     Console.Write(e.Message);
                 }
+
                 catch(FormatException e)
                 {
                     Console.Write(e.Message);
                 }
+
                 catch(ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
@@ -106,7 +106,6 @@ Press 7 for full details of a specific vehicle"));
 
         private static void inflateCarWheels(Garage io_Garage)
         {
-
             Console.WriteLine("Please enter the vehicle's License Plate that you would like to inflate it's wheels");
             string licensePlate = Console.ReadLine();
             bool isTheCarInTheGarage = io_Garage.InflateWheelsOfVehicleToMax(licensePlate);
@@ -138,6 +137,7 @@ Press 7 for full details of a specific vehicle"));
                 Garage.GarageVehicle.eVehicleStatus theStatusTheUserChose = getValidStatusCar();
                listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(theStatusTheUserChose);
             }
+
             else
             {
                 listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarage();
@@ -147,6 +147,7 @@ Press 7 for full details of a specific vehicle"));
             {
                 Console.WriteLine("No Vehicles in garage!");
             }
+
             else
             {
                 foreach (string vehicle in listOfVehicleToString)
@@ -166,23 +167,23 @@ Press 7 for full details of a specific vehicle"));
                 Console.WriteLine(string.Format("Vehicle {0} is already in the garage", licenseNumber));
                 vehicleWeWantToAdd.Status = Garage.GarageVehicle.eVehicleStatus.InRepair;
             }
+
             else
             {
                 creatNewVehicle(licenseNumber, io_Garage);
                 Console.WriteLine("Vehicle was successfuly added to garage!");
             }
- 
         }
 
         private static void creatNewVehicle(string i_CarLicense, Garage io_Garage)
         {
             StringBuilder query = new StringBuilder();
-            query.AppendLine("Please choose the vehicle type that you want to enter the garage: ");
             Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = SystemVehicleManger.GetSupportedVehicle();
             int runningIndex = 1;
             Type userChosenVehicle = null;
             e_TypeOfPowerSource userChosenVehiclePowersource = e_TypeOfPowerSource.Battery;
 
+            query.AppendLine("Please choose the vehicle type that you want to enter the garage: ");
             foreach(Type type in supportredVehicles.Keys)
             {
                 List<e_TypeOfPowerSource> powerSources = null;
@@ -204,7 +205,6 @@ Press 7 for full details of a specific vehicle"));
             }
 
             bool finishClassifyVehicle = false;
-
 			foreach (Type type in supportredVehicles.Keys)
 			{
 				List<e_TypeOfPowerSource> powerSources = null;
@@ -235,10 +235,10 @@ Press 7 for full details of a specific vehicle"));
             List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense); // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
 			List<float> powerSourceDeatails = (i_TypeOfPowerSource.Equals(e_TypeOfPowerSource.Battery)) ? getElectricalDetails() : getVeichelByFuelDetails();
             List<string> wheels = getWheelDetails();
-            Dictionary<string, List<string>> vehicleUniqeProperties = SystemVehicleManger.getVehicleUniqeProperties(i_TypeOfVehicle);
+            Dictionary<string, List<string>> vehicleUniqeProperties = SystemVehicleManger.GetVehicleUniqeProperties(i_TypeOfVehicle);
             Dictionary<string, string> vehicleUniqeDetails = getVehicleUniqDetails(vehicleUniqeProperties);   
 
-			SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
+			SystemVehicleManger.CreateVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                                                       vehicleUniqeDetails, i_TypeOfVehicle, i_TypeOfPowerSource);
         }
 
@@ -280,7 +280,6 @@ Press 7 for full details of a specific vehicle"));
             return vehicleUniqDetails;
         }
 
-
         private static List<float> getElectricalDetails()
         {
             List<float> electricDetails = new List<float>();
@@ -298,14 +297,12 @@ Press 7 for full details of a specific vehicle"));
             float fuelLeftInTank = getValidPositiveFloatFromUser();
             FuelDetailsList.Add(fuelLeftInTank);
 
-            return FuelDetailsList;
-            
+            return FuelDetailsList;   
         }
 
 
-        private static List<String> getGenralDeatailsVehicle (string i_CarLicense)
+        private static List<String> getGenralDeatailsVehicle(string i_CarLicense)
         {
-            
             List<String> details = new List<string>();
             details.Add(i_CarLicense);
             Console.WriteLine("We would like you to write few necessary details for our mangment System");
@@ -334,45 +331,45 @@ Press 7 for full details of a specific vehicle"));
             wheelDetail.Add(currentWheelPressure.ToString());
 
             return wheelDetail;
-
         }
 
-        private static void getValidAnswerToMultyplyChoiceAnswer(out int o_validAnswer, int i_MinValidValueToChoose,
+        private static void getValidAnswerToMultyplyChoiceAnswer(out int o_ValidAnswer, int i_MinValidValueToChoose,
                                                     int i_MaxValidValueToChoose)
         {
-                bool validCommandFromUser = false;
-                string inputFromUser ;
-                o_validAnswer = -1;
-                while (!validCommandFromUser)
+            bool validCommandFromUser = false;
+            string inputFromUser;
+            o_ValidAnswer = -1;
+
+            while (!validCommandFromUser)
+            {
+                Console.WriteLine("Please enter a command for the program or press Q to exit");
+                inputFromUser = Console.ReadLine();
+                if (inputFromUser == "Q")
                 {
-                    Console.WriteLine("Please enter a command for the program or press Q to exit");
-                    inputFromUser = Console.ReadLine();
-                    if (inputFromUser == "Q")
-                    {
-                        o_validAnswer = -1;
-                        break;
-                     }
-
-                    validCommandFromUser = int.TryParse(inputFromUser, out o_validAnswer);
-                 
-                    if( validCommandFromUser == false)
-                    {
-                        Console.WriteLine("Wrong input format please type again");
-                    }
-
-                    else if (o_validAnswer < i_MinValidValueToChoose || o_validAnswer > i_MaxValidValueToChoose)
-                    {
-                        Console.WriteLine("Value is not in range, please enter a value between {0} - {1}",
-                            i_MinValidValueToChoose, i_MaxValidValueToChoose);
-                        validCommandFromUser = false;
-                    }
+                    o_ValidAnswer = -1;
+                    break;
                 }
+
+                validCommandFromUser = int.TryParse(inputFromUser, out o_ValidAnswer);
+                if( validCommandFromUser == false)
+                {
+                    Console.WriteLine("Wrong input format please type again");
+                }
+
+                else if (o_ValidAnswer < i_MinValidValueToChoose || o_ValidAnswer > i_MaxValidValueToChoose)
+                {
+                    Console.WriteLine("Value is not in range, please enter a value between {0} - {1}",
+                        i_MinValidValueToChoose, i_MaxValidValueToChoose);
+                    validCommandFromUser = false;
+                }
+            }
         }
 
 
         private static string getValidStringFromUser()
         {
             string validString = "";
+
             while ((validString = Console.ReadLine()).Length == 0)
             {
               Console.WriteLine("Invalid Input please enter a non empty string");  
@@ -386,6 +383,7 @@ Press 7 for full details of a specific vehicle"));
         {
             float validFloat = -1;
             bool isValidFloat = float.TryParse(Console.ReadLine(), out validFloat);
+
             while(! isValidFloat || validFloat < 0)
             {
                 Console.WriteLine("Invalid Input please enter a positive number");
@@ -407,7 +405,6 @@ Press 7 for full details of a specific vehicle"));
 4.Soler"));
             getValidAnswerToMultyplyChoiceAnswer(out numberOfFuelTheUserChose,1, 4);
             PowerSource.eFuel fuelToReturn = PowerSource.eFuel.Octan95;
-
             switch (numberOfFuelTheUserChose)
             {
                 case -1: throw new FormatException();
@@ -421,7 +418,6 @@ Press 7 for full details of a specific vehicle"));
             return fuelToReturn;
         }
 
- 
         private static Garage.GarageVehicle.eVehicleStatus getValidStatusCar()
         {
             Console.WriteLine(string.Format(
@@ -440,7 +436,6 @@ Press 7 for full details of a specific vehicle"));
             }
 
             return statusForCar;
-
         }
     }
 }

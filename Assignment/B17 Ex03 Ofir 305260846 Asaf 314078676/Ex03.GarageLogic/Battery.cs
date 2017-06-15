@@ -29,7 +29,8 @@ namespace Ex03.GarageLogic
         {
             return string.Format(
 @"Power Source : {0}
-Current Capacity : {1}", "Battery", m_CurrentCampacity);
+Current Capacity : {1} 
+Max Capacity : {2}" , "Battery", m_CurrentCampacity, r_MaxCampacity);
         }
     }
 }
