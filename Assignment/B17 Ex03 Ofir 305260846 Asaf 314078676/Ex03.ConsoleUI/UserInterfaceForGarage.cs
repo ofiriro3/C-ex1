@@ -193,11 +193,15 @@ Press 7 for full details of a specific vehicle"));
                     runningIndex++;
                 }
             }
-            Console.WriteLine(query.ToString());
 
+            Console.WriteLine(query.ToString());
             int commandToDo;
             getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, runningIndex);
             runningIndex = 1;
+            if(commandToDo == -1) // user decided to exit
+            {
+                throw new FormatException();
+            }
 
 			foreach (Type type in supportredVehicles.Keys)
 			{
@@ -215,28 +219,13 @@ Press 7 for full details of a specific vehicle"));
 				}
 			}
 
-            switch (commandToDo)
-            {
-                case -1: ; throw new FormatException();
-                default: createNewVehicleHelper(io_Garage, i_CarLicense, userChosenVehiclePowersource, userChosenVehicle); break;
-            }
-
+            createNewVehicleHelper(io_Garage, i_CarLicense, userChosenVehiclePowersource, userChosenVehicle);
         }
 
         private static void createNewVehicleHelper(Garage io_Garage, string i_CarLicense, e_TypeOfPowerSource i_TypeOfPowerSource, Type i_TypeOfVehicle)
         {
-            // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
-            List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense);
-            List<float> powerSourceDeatails;
-            if (i_TypeOfPowerSource.Equals(e_TypeOfPowerSource.Battery))
-            {
-                powerSourceDeatails = getElectricalDetails();
-            }
-            else
-            {
-                powerSourceDeatails = GetVeichelByFuelDetails();
-            }
-
+            List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense); // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
+			List<float> powerSourceDeatails = (i_TypeOfPowerSource.Equals(e_TypeOfPowerSource.Battery)) ? getElectricalDetails() : getVeichelByFuelDetails();
             List<string> wheels = getWheelDetails();
             Dictionary<string, List<string>> vehicleUniqeProperties = SystemVehicleManger.getVehicleUniqeProperties(i_TypeOfVehicle);
             Dictionary<string, string> vehicleUniqeDetails = getVehicleUniqDetails(vehicleUniqeProperties);   
@@ -265,6 +254,11 @@ Press 7 for full details of a specific vehicle"));
 
 					int commandToDo;
 					getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, parameterOptions.Count);
+                    if(commandToDo == -1) // user decided to exit
+                    {
+                        throw new FormatException();
+                    }
+
                     runningIndex = 1;
 					foreach (string parameterOption in parameterOptions)
 					{
@@ -286,7 +280,7 @@ Press 7 for full details of a specific vehicle"));
 
             return vehicleUniqDetails;
         }
-
+        /*
         private static List<String> getTruckDetails()
         {
             List<String> truckDetails = new List<string>();
@@ -302,6 +296,8 @@ Press 7 for full details of a specific vehicle"));
             return truckDetails;
 
         }
+        */
+
         private static List<float> getElectricalDetails()
         {
             List<float> electricDetails = new List<float>();
@@ -312,7 +308,7 @@ Press 7 for full details of a specific vehicle"));
             return electricDetails;
         }
 
-        private static List<float> GetVeichelByFuelDetails()
+        private static List<float> getVeichelByFuelDetails()
         {
             List<float> FuelDetailsList = new List<float>();
             Console.WriteLine("Please enter how much fuel do you have in your tank");
@@ -322,7 +318,7 @@ Press 7 for full details of a specific vehicle"));
             return FuelDetailsList;
             
         }
-
+        /*
         private static List<String> getCarDetails()
         {
             List<String> carDetails = new List<string>();
@@ -335,6 +331,7 @@ Press 7 for full details of a specific vehicle"));
 
             return carDetails;
         }
+        */
 
         private static List<String> getGenralDeatailsVehicle (string i_CarLicense)
         {
@@ -355,6 +352,7 @@ Press 7 for full details of a specific vehicle"));
             return details;
         }
 
+        /*
         private static List<String> getMotorcycleDetails()
         {
             List<String> motorcycleDetails = new List<String>();
@@ -367,6 +365,7 @@ Press 7 for full details of a specific vehicle"));
 
             return motorcycleDetails;
         }
+        */
 
         private static List<string> getWheelDetails()
         {
@@ -415,6 +414,7 @@ Press 7 for full details of a specific vehicle"));
                 }
         }
 
+
         private static string getValidStringFromUser()
         {
             string validString = "";
@@ -425,6 +425,7 @@ Press 7 for full details of a specific vehicle"));
 
             return validString;
         }
+
 
         private static float getValidPositiveFloatFromUser()
         {
@@ -439,7 +440,7 @@ Press 7 for full details of a specific vehicle"));
             return validFloat;
         }
 
-
+        /*
         private static int getValidPositiveIntFromUser()
         {
             int validInt = -1;
@@ -465,7 +466,7 @@ Press 7 for full details of a specific vehicle"));
 
             return validBool;
         }
-
+        */
         private static PowerSource.eFuel getValidFuelTypeFromUser()
         {
 
@@ -492,6 +493,7 @@ Press 7 for full details of a specific vehicle"));
             return fuelToReturn;
         }
 
+        /*
         private static Car.eColor getValidColorFromUser()
         {
 
@@ -572,6 +574,7 @@ Press 7 for full details of a specific vehicle"));
 
             return licenceType;
         }
+        */
         private static Garage.GarageVehicle.eVehicleStatus getValidStatusCar()
         {
             Console.WriteLine(string.Format(
