@@ -11,7 +11,6 @@ namespace Ex03.GarageLogic
         protected readonly int r_NumberOfWheels;
         protected string m_ModuleName;
         protected string m_LicensePlate;
-        protected float m_RemainingPower;
         protected List<Wheel> m_Wheels;
         protected PowerSource m_PowerSource;
 

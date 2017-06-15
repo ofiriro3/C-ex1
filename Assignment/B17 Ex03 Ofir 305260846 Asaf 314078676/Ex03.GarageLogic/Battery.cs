@@ -17,7 +17,7 @@ namespace Ex03.GarageLogic
             float totalHoursAfterCharging = i_NumberOfChargingHours + m_CurrentCampacity;
             if (m_CurrentCampacity < v_MinCampacity || r_MaxCampacity < totalHoursAfterCharging)
             {
-                throw new ValueOutOfRangeException(v_MinCampacity, r_MaxCampacity, totalHoursAfterCharging);
+                throw new ValueOutOfRangeException(0, r_MaxCampacity - m_CurrentCampacity, totalHoursAfterCharging);
             }
             else
             {
@@ -30,7 +30,8 @@ namespace Ex03.GarageLogic
             return string.Format(
 @"Power Source : {0}
 Current Capacity : {1} 
-Max Capacity : {2}" , "Battery", m_CurrentCampacity, r_MaxCampacity);
+Max Capacity : {2}
+" , "Battery", m_CurrentCampacity, r_MaxCampacity);
         }
     }
 }

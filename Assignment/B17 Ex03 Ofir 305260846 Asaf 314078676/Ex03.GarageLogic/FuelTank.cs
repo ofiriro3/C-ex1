@@ -24,7 +24,7 @@ namespace Ex03.GarageLogic
             }
             else if(m_CurrentCampacity < v_MinCampacity || r_MaxCampacity < expectedAmountOfFuel )
             {
-                throw new ValueOutOfRangeException(v_MinCampacity, r_MaxCampacity, expectedAmountOfFuel);
+                throw new ValueOutOfRangeException(0, r_MaxCampacity - m_CurrentCampacity, expectedAmountOfFuel);
             }
             else
             {
