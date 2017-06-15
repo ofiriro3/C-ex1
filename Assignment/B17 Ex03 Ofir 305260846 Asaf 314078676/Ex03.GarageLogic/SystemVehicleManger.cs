@@ -23,7 +23,7 @@ namespace Ex03.GarageLogic
 
         public static Dictionary<Type, List<e_TypeOfPowerSource>> GetSupportedVehicle()
         {
-            Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = new Dictionary<Type, e_TypeOfPowerSource>();
+            Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = new Dictionary<Type, List<e_TypeOfPowerSource>>();
             List<e_TypeOfPowerSource> carPowerSourceOptions = new List<e_TypeOfPowerSource>(2);
             List<e_TypeOfPowerSource> motorcyclePowerSorceOptions = new List<e_TypeOfPowerSource>(2);
             List<e_TypeOfPowerSource> truckPowerSorceOptions = new List<e_TypeOfPowerSource>(1);
@@ -40,16 +40,13 @@ namespace Ex03.GarageLogic
             return supportredVehicles;
         }
 
-        public static Dictionary<string, string> getVehicleUniqeProperties(Type typeOfVehicle)
+        public static Dictionary<string, List<string>> getVehicleUniqeProperties(Type typeOfVehicle)
         {
-            Dictionary<string , string> VehicleUniqeProperties = new Dictionary<string, string>();
+            Dictionary<string , List<string>> VehicleUniqeProperties = new Dictionary<string, List<string>>();
 
             Type type = typeof(Car);
             
-            foreach (var property in type.GetProperties())
-            {
-                VehicleUniqeProperties.Add(property.Name.ToString(), property.MemberType.ToString());
-            }
+            
 
             return VehicleUniqeProperties;
         }
