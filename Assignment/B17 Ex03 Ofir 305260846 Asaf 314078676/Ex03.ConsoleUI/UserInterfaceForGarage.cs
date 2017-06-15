@@ -267,18 +267,7 @@ Press 7 for full details of a specific vehicle"));
                         throw new FormatException();
                     }
 
-                    vehicleUniqDetails.Add(parameter,parameterOptions[commandToDo]);
-                    /*
-                    runningIndex = 1;
-					foreach (string parameterOption in parameterOptions)
-					{
-                        if(runningIndex == commandToDo)
-                        {
-                            vehicleUniqDetails.Add(parameter, parameterOption);
-                            break;
-                        }
-						runningIndex++;
-					}*/
+                    vehicleUniqDetails.Add(parameter,parameterOptions[commandToDo - 1]);
                 }
 
                 else
