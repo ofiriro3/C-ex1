@@ -70,7 +70,7 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
             }
         }
         
-        public void addNewVehicleToGarage(GarageVehicle io_GarageVehicleToAdd)
+        public void AddNewVehicleToGarage(GarageVehicle io_GarageVehicleToAdd)
         {
             m_Vehicles.Add(io_GarageVehicleToAdd);
         }
@@ -120,7 +120,6 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
             return carFound;
         }
 
-		//return true of car was in garage, false if not
 		public bool InflateWheelsOfVehicleToMax(string i_LicensePlate)
         {
             bool carFound = false;
@@ -141,7 +140,7 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
 
             return carFound;
         }
-		//return true of car was in garage, false if not
+
         public bool FillGasInGasVehicle(string i_LicensePlate, PowerSource.eFuel i_TypeOfGass, float i_AmountOfGass)
         {
             bool carFound = false;
@@ -160,6 +159,7 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
                     {
                         fuelTank.Charge(i_AmountOfGass, i_TypeOfGass);
                     }
+
 					break;
 				}
 			}
@@ -197,11 +197,11 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
 					{
 						throw new ArgumentException("This vehicle isn't electric");
 					}
-
 					else
 					{
                         battery.Charge(i_AmountOfMinutes);
 					}
+
 					break;
 				}
 			}
@@ -209,7 +209,7 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
 			return carFound;
         }
 
-		public bool PrintGarageVehicle(string i_LicensePlate , out string VehicleDetailsToPrint)
+		public bool PrintGarageVehicle(string i_LicensePlate, out string VehicleDetailsToPrint)
 		{
 			bool carFound = false;
             VehicleDetailsToPrint = null;

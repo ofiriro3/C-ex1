@@ -6,7 +6,6 @@ namespace Ex03.GarageLogic
 {
     public class Wheel
     {
-        
         private const int v_MinTirePressure = 0;
         private readonly float r_MaxTirePressure;
         private string m_Manufacturer;
@@ -17,11 +16,11 @@ namespace Ex03.GarageLogic
             if(i_CurrentTirePressure > i_MaxTirePressure)
             {
                 throw new ValueOutOfRangeException(0, i_MaxTirePressure, i_CurrentTirePressure);
-
             }
             m_Manufacturer = i_Manufacturer;
             m_CurrentTirePressure = i_CurrentTirePressure;
             r_MaxTirePressure = i_MaxTirePressure;
+
         }
 
         public void Inflate(float i_PressureToAdd)

@@ -17,10 +17,10 @@ namespace Ex03.GarageLogic
             m_MaxCarryWeight = i_MaxCarryWeight;
         }
 
-        public static Dictionary<String,List<String>> GetUniqueParameters()
+        public static Dictionary<string, List<string>> GetUniqueParameters()
         {
-            Dictionary<String, List<String>> uniqueParameters = new Dictionary<string, List<string>>(2);
-            List<String> possibleParamertsForToxic = new List<string>(2);
+            Dictionary<string, List<string>> uniqueParameters = new Dictionary<string, List<string>>(2);
+            List<string> possibleParamertsForToxic = new List<string>(2);
             possibleParamertsForToxic.Add("true");
             possibleParamertsForToxic.Add("false");
             uniqueParameters.Add("carriesToxic", possibleParamertsForToxic);
@@ -33,11 +33,10 @@ namespace Ex03.GarageLogic
 		{
 			StringBuilder returnString = new StringBuilder();
 			returnString.Append(base.ToString());
-			returnString.Append(String.Format(
+			returnString.Append(string.Format(
 @"Carries Toxic : {0}
 Max Carry Weight : {1}
-", m_CarriesToxic, m_MaxCarryWeight
-			));
+", m_CarriesToxic, m_MaxCarryWeight));
 
 			return returnString.ToString();
 		}

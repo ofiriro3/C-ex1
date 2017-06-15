@@ -66,7 +66,7 @@ namespace Ex03.GarageLogic
 
 			Garage.GarageVehicle garageVehicle = new Garage.GarageVehicle(owner, cellphoneNumber,
                                                                           Garage.GarageVehicle.eVehicleStatus.InRepair, vehicleToAdd);
-            io_Garage.addNewVehicleToGarage(garageVehicle);
+            io_Garage.AddNewVehicleToGarage(garageVehicle);
         }
 
         private static Truck createATruck(Garage io_Garage, string i_Module, string i_VehicleLicense,

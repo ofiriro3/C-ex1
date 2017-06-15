@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic
     {
         private eColor m_Color;
         private eNumberOfDoors m_NumberOfDoors;
-
+        
         public enum eColor
         {
             Yellow,
@@ -32,20 +32,22 @@ namespace Ex03.GarageLogic
             m_NumberOfDoors = i_NumberOfDoors;
         }
 
-
-        public static Dictionary<String, List<String>> GetUniqueParameters()
+        public static Dictionary<string, List<string>> GetUniqueParameters()
         {
-            Dictionary<String, List<String>> uniqueParameters = new Dictionary<string, List<string>>(2);
-            List<String> possibleParamertsForColor = new List<string>(4);
+            Dictionary<string, List<string>> uniqueParameters = new Dictionary<string, List<string>>(2);
+            List<string> possibleParamertsForColor = new List<string>(4);
+
             foreach (eColor color in Enum.GetValues(typeof(eColor)))
             {
                 possibleParamertsForColor.Add(color.ToString());
             }
-            List<String> possibleParamertsForNumberOfDoors = new List<string>(4);
+
+            List<string> possibleParamertsForNumberOfDoors = new List<string>(4);
             foreach (eNumberOfDoors numberOfDoors in Enum.GetValues(typeof(eNumberOfDoors)))
             {
                 possibleParamertsForNumberOfDoors.Add(numberOfDoors.ToString());
             }
+
             uniqueParameters.Add("color", possibleParamertsForColor);
             uniqueParameters.Add("numberOfDoors", possibleParamertsForNumberOfDoors);
 

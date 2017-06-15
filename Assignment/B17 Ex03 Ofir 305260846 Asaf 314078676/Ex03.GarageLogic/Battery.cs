@@ -27,11 +27,11 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(
-@"Power Source : {0}
+            return 
+                string.Format(
+@"Power Source : {0} 
 Current Capacity : {1} 
-Max Capacity : {2}
-" , "Battery", m_CurrentCampacity, r_MaxCampacity);
+Max Capacity : {2}", "Battery", m_CurrentCampacity, r_MaxCampacity);
         }
     }
 }

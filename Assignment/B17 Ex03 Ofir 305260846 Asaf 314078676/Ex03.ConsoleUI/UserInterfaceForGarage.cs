@@ -22,13 +22,13 @@ namespace Ex03.ConsoleUI
 =================================
 Please choose one of the folowing : 
 
-Press 1 for add another vehicle to the garage
-Press 2 for print the License Plates of all vehicles that are now in the garage
-Press 3 for change a vehicle status in the garage
+Press 1 to add another vehicle to the garage
+Press 2 to print the License Plates of all vehicles that are now in the garage
+Press 3 to change a vehicle status in the garage
 Press 4 to inflate the vehicles wheels
 Press 5 to fuel a vehicle
 Press 6 to charge a battery of an electricity vehicle
-Press 7 for full details of a specific vehicle"));
+Press 7 to full details of a specific vehicle"));
                     int inputCommand;
                     getValidAnswerToMultyplyChoiceAnswer(out inputCommand, 1, 7);
                     Console.Clear();
@@ -133,8 +133,8 @@ Press 7 for full details of a specific vehicle"));
         private static void printCarList(Garage io_Garage)
         {
             Console.WriteLine(string.Format
-(@"If you want to filter results please press'y' and then press enter" +
-"in case you do not want to filter the result press any other key and then press enter"));
+(@"If you want to filter results please press'y' and then press enter
+in case you do not want to filter the result press any other key and then press enter"));
             String inputFromUser = Console.ReadLine();
             bool toFilter = (inputFromUser == "y");
             List<string> listOfVehicleToString;
@@ -142,8 +142,9 @@ Press 7 for full details of a specific vehicle"));
             {
                 Console.WriteLine(string.Format(
  "Please enter the category that you are looking for"));
-                Garage.GarageVehicle.eVehicleStatus theStatusTheUserChose = getValidStatusCar();
-               listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter(theStatusTheUserChose);
+               Garage.GarageVehicle.eVehicleStatus theStatusTheUserChose = getValidStatusCar();
+               listOfVehicleToString = io_Garage.GetListOfLicensePlateNumbersOfVehiclesInGarageWithFilter
+                    (theStatusTheUserChose);
             }
 
             else
@@ -158,6 +159,7 @@ Press 7 for full details of a specific vehicle"));
 
             else
             {
+                Console.WriteLine("This are the list of cars according to your request:");
                 foreach (string vehicle in listOfVehicleToString)
                 {
                     Console.WriteLine(vehicle);
@@ -185,67 +187,88 @@ Press 7 for full details of a specific vehicle"));
 
         private static void creatNewVehicle(string i_CarLicense, Garage io_Garage)
         {
-            StringBuilder query = new StringBuilder();
-            Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = SystemVehicleManger.GetSupportedVehicle();
-            int runningIndex = 1;
-            Type userChosenVehicle = null;
-            e_TypeOfPowerSource userChosenVehiclePowersource = e_TypeOfPowerSource.Battery;
-
-            query.AppendLine("Please choose the vehicle type that you want to enter the garage: ");
-            foreach(Type type in supportredVehicles.Keys)
-            {
-                List<e_TypeOfPowerSource> powerSources = null;
-                supportredVehicles.TryGetValue(type, out powerSources);
-                foreach (e_TypeOfPowerSource powerSource in powerSources)
-                {
-                    query.AppendLine(String.Format("{0} .  {1}  {2}", runningIndex, type.Name.ToString(), powerSource.ToString()));
-                    runningIndex++;
-                }
-            }
-
-            Console.WriteLine(query.ToString());
+            
+            Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = SystemVehicleManger.GetSupportedVehicle();    
+            Type userChosenVehicle;
+            e_TypeOfPowerSource userChosenVehiclePowersource;
+            int runningIndex;
+            showVehicleOptions(supportredVehicles, out runningIndex);
             int commandToDo;
+            
             getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, runningIndex);
-            runningIndex = 1;
-            if(commandToDo == -1) // user decided to exit
+            if (commandToDo == -1) // user decided to exit
             {
                 throw new FormatException("You are back in the main menu");
             }
+            else
+            {
+                classifyVehicle(supportredVehicles, commandToDo, out userChosenVehicle, out userChosenVehiclePowersource);
+            }
+            
+            createNewVehicleHelper(io_Garage, i_CarLicense, userChosenVehiclePowersource, userChosenVehicle);
+        }
 
+        private static void classifyVehicle(Dictionary<Type, List<e_TypeOfPowerSource>> io_SupportredVehicles,
+             int i_commandToDo , out Type o_TypeofViechle,
+            out e_TypeOfPowerSource o_UserChosenVehiclePowersource)
+        {
+            int runningIndex = 1;
+            o_UserChosenVehiclePowersource = e_TypeOfPowerSource.FuelTank;
+            o_TypeofViechle = null;
             bool finishClassifyVehicle = false;
-			foreach (Type type in supportredVehicles.Keys)
-			{
-				List<e_TypeOfPowerSource> powerSources = null;
-				supportredVehicles.TryGetValue(type, out powerSources);
-				foreach (e_TypeOfPowerSource powerSource in powerSources)
-				{
-					if (runningIndex == commandToDo)
-					{
-						userChosenVehicle = type;
-                        userChosenVehiclePowersource = powerSource;
+            foreach (Type type in io_SupportredVehicles.Keys)
+            {
+                List<e_TypeOfPowerSource> powerSources = null;
+                io_SupportredVehicles.TryGetValue(type, out powerSources);
+                foreach (e_TypeOfPowerSource powerSource in powerSources)
+                {
+                    if (runningIndex == i_commandToDo)
+                    {
+                        o_TypeofViechle = type;
+                        o_UserChosenVehiclePowersource = powerSource;
                         finishClassifyVehicle = true;
                         break;
-					}
-					runningIndex++;
-				}
+                    }
+                    runningIndex++;
+                }
 
                 if (finishClassifyVehicle)
                 {
                     break;
                 }
-			}
+            }
 
-            createNewVehicleHelper(io_Garage, i_CarLicense, userChosenVehiclePowersource, userChosenVehicle);
+        }
+
+        private static void showVehicleOptions(Dictionary<Type, List<e_TypeOfPowerSource>> io_SupportredVehicles,
+           out int io_NumberOfOptions )
+        {
+            StringBuilder query = new StringBuilder();
+            query.AppendLine("Please choose the vehicle type that you want to enter the garage: ");
+            io_NumberOfOptions = 1;
+            foreach (Type type in io_SupportredVehicles.Keys)
+            {
+                List<e_TypeOfPowerSource> powerSources = null;
+                io_SupportredVehicles.TryGetValue(type, out powerSources);
+                foreach (e_TypeOfPowerSource powerSource in powerSources)
+                {
+                    query.AppendLine(String.Format("{0} .  {1}  {2}", io_NumberOfOptions, type.Name.ToString(), powerSource.ToString()));
+                    io_NumberOfOptions++;
+                }
+            }
+
+            Console.WriteLine(query.ToString());
         }
 
         private static void createNewVehicleHelper(Garage io_Garage, string i_CarLicense, e_TypeOfPowerSource i_TypeOfPowerSource, Type i_TypeOfVehicle)
         {
-            List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense); // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
-			List<float> powerSourceDeatails = (i_TypeOfPowerSource.Equals(e_TypeOfPowerSource.Battery)) ? getElectricalDetails() : getVeichelByFuelDetails();
+            List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense); 
+			List<float> powerSourceDeatails = (i_TypeOfPowerSource.Equals(e_TypeOfPowerSource.Battery)) ? 
+                getElectricalDetails() : getVeichelByFuelDetails();
             List<string> wheels = getWheelDetails();
-            Dictionary<string, List<string>> vehicleUniqeProperties = SystemVehicleManger.GetVehicleUniqeProperties(i_TypeOfVehicle);
+            Dictionary<string, List<string>> vehicleUniqeProperties = 
+                SystemVehicleManger.GetVehicleUniqeProperties(i_TypeOfVehicle);
             Dictionary<string, string> vehicleUniqeDetails = getVehicleUniqDetails(vehicleUniqeProperties);   
-
 			SystemVehicleManger.CreateVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
                                                       vehicleUniqeDetails, i_TypeOfVehicle, i_TypeOfPowerSource);
         }
