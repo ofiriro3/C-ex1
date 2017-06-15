@@ -131,6 +131,7 @@ Press 7 for full details of a specific vehicle"));
             String inputFromUser = Console.ReadLine();
             bool toFilter = (inputFromUser == "y");
             List<string> listOfVehicleToString;
+
             if(toFilter)
             {
                 Console.WriteLine(string.Format(
@@ -149,6 +150,7 @@ Press 7 for full details of a specific vehicle"));
             }
             else
             {
+                Console.WriteLine("The list of Vehicle according to your request is :");
                 foreach (string vehicle in listOfVehicleToString)
                 {
                     Console.WriteLine(vehicle);
