@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Ex03.GarageLogic;
@@ -131,7 +131,6 @@ Press 7 for full details of a specific vehicle"));
             String inputFromUser = Console.ReadLine();
             bool toFilter = (inputFromUser == "y");
             List<string> listOfVehicleToString;
-
             if(toFilter)
             {
                 Console.WriteLine(string.Format(
@@ -150,7 +149,6 @@ Press 7 for full details of a specific vehicle"));
             }
             else
             {
-                Console.WriteLine("The list of Vehicle according to your request is :");
                 foreach (string vehicle in listOfVehicleToString)
                 {
                     Console.WriteLine(vehicle);
@@ -281,23 +279,7 @@ Press 7 for full details of a specific vehicle"));
 
             return vehicleUniqDetails;
         }
-        /*
-        private static List<String> getTruckDetails()
-        {
-            List<String> truckDetails = new List<string>();
-            Console.WriteLine("Does your truck carry a toxic carrgo ?");
-            bool isToxicBool = getValidboolFromUser();
-            string isToxic = isToxicBool.ToString();
-            Console.WriteLine("What is your maximum carry weight ?");
-            int maximumCarryWeight = getValidPositiveIntFromUser();
-            string maximumCarryWeightStringFormat = Console.ReadLine();
-            truckDetails.Add(isToxic);
-            truckDetails.Add(maximumCarryWeightStringFormat);
 
-            return truckDetails;
-
-        }
-        */
 
         private static List<float> getElectricalDetails()
         {
@@ -319,20 +301,7 @@ Press 7 for full details of a specific vehicle"));
             return FuelDetailsList;
             
         }
-        /*
-        private static List<String> getCarDetails()
-        {
-            List<String> carDetails = new List<string>();
-            Car.eColor color = getValidColorFromUser();
-            Console.WriteLine("How many doors do you have in your car? <2-5>");
-            Console.WriteLine("Please enter the car's module");
-            Car.eNumberOfDoors numberOfDoors = getValidNumberOfDoorsFromUser();
-            carDetails.Add(color.ToString());
-            carDetails.Add(numberOfDoors.ToString());
 
-            return carDetails;
-        }
-        */
 
         private static List<String> getGenralDeatailsVehicle (string i_CarLicense)
         {
@@ -352,21 +321,6 @@ Press 7 for full details of a specific vehicle"));
 
             return details;
         }
-
-        /*
-        private static List<String> getMotorcycleDetails()
-        {
-            List<String> motorcycleDetails = new List<String>();
-            Console.WriteLine("Please enter your motorcycle licence type");
-            Motorcycle.eLicenceType motorcycleLicenceType = getValidLicenceType();
-            Console.WriteLine("Please enter your engine volume");
-            int engineVolume = getValidPositiveIntFromUser();
-            motorcycleDetails.Add(motorcycleLicenceType.ToString());
-            motorcycleDetails.Add(engineVolume.ToString());
-
-            return motorcycleDetails;
-        }
-        */
 
         private static List<string> getWheelDetails()
         {
@@ -441,33 +395,6 @@ Press 7 for full details of a specific vehicle"));
             return validFloat;
         }
 
-        /*
-        private static int getValidPositiveIntFromUser()
-        {
-            int validInt = -1;
-            bool isValidInt = int.TryParse(Console.ReadLine(), out validInt);
-            while (!isValidInt || validInt < 0)
-            {
-                Console.WriteLine("Invalid Input please enter a positive number");
-                isValidInt = int.TryParse(Console.ReadLine(), out validInt);
-            }
-
-            return validInt;
-        }
-
-        private static bool getValidboolFromUser()
-        {
-            bool validBool = false;
-            bool isValidInt = bool.TryParse(Console.ReadLine(), out validBool);
-            while (! isValidInt)
-            {
-                Console.WriteLine("Invalid Input please enter a boolean <true,false>");
-                isValidInt = bool.TryParse(Console.ReadLine(), out validBool);
-            }
-
-            return validBool;
-        }
-        */
         private static PowerSource.eFuel getValidFuelTypeFromUser()
         {
 
@@ -494,88 +421,7 @@ Press 7 for full details of a specific vehicle"));
             return fuelToReturn;
         }
 
-        /*
-        private static Car.eColor getValidColorFromUser()
-        {
-
-            int color;
-            Console.WriteLine(string.Format(
-@"What is your car color?  +
-1.Black
-2.Blue
-3.White
-4.Yellow"));
-            getValidAnswerToMultyplyChoiceAnswer(out color, 1, 4);
-            Car.eColor colorToReturn = Car.eColor.Black;
-
-            switch (color)
-            {
-                case -1: throw new FormatException();
-                case 1: colorToReturn = Car.eColor.Black; ; break;
-                case 2: colorToReturn = Car.eColor.Blue; ; break;
-                case 3: colorToReturn = Car.eColor.While; ; break;
-                case 4: colorToReturn = Car.eColor.Yellow; ; break;
-
-            }
-
-            return colorToReturn;
-        }
-
-    
-    private static Car.eNumberOfDoors getValidNumberOfDoorsFromUser()
-    {
-            
-
-        int numberOfDoors;
-        Console.WriteLine(string.Format(
-@"What is the number of doors in your car?  +
-2.Two
-3.Three
-4.Four
-5.Five"));
-        getValidAnswerToMultyplyChoiceAnswer(out numberOfDoors, 2, 5);
-        Car.eNumberOfDoors colorToReturn = Car.eNumberOfDoors.Four;
-
-        switch (numberOfDoors)
-        {
-            case -1: throw new FormatException();
-            case 2: colorToReturn = Car.eNumberOfDoors.Two; ; break;
-            case 3: colorToReturn = Car.eNumberOfDoors.Three; ; break;
-            case 4: colorToReturn = Car.eNumberOfDoors.Four; ; break;
-            case 5: colorToReturn = Car.eNumberOfDoors.Five; ; break;
-
-        }
-
-        return colorToReturn;
-    }
-
-
-        private static Motorcycle.eLicenceType getValidLicenceType()
-        {
-
-            int licenceTypeOfTheMotorecycle;
-            Console.WriteLine(string.Format(
-    @"What is your motorcycle licence type?  +
-1.A
-2.AB
-3.A2
-4.B1"));
-            getValidAnswerToMultyplyChoiceAnswer(out licenceTypeOfTheMotorecycle, 1, 4);
-            Motorcycle.eLicenceType licenceType = Motorcycle.eLicenceType.A;
-
-            switch (licenceTypeOfTheMotorecycle)
-            {
-                case -1: throw new FormatException();
-                case 1: licenceType = Motorcycle.eLicenceType.A; ; break;
-                case 2: licenceType = Motorcycle.eLicenceType.A2; ; break;
-                case 3: licenceType = Motorcycle.eLicenceType.AB; ; break;
-                case 4: licenceType = Motorcycle.eLicenceType.B1; ; break;
-
-            }
-
-            return licenceType;
-        }
-        */
+ 
         private static Garage.GarageVehicle.eVehicleStatus getValidStatusCar()
         {
             Console.WriteLine(string.Format(
