@@ -189,7 +189,7 @@ Press 7 for full details of a specific vehicle"));
                 supportredVehicles.TryGetValue(type, out powerSources);
                 foreach (e_TypeOfPowerSource powerSource in powerSources)
                 {
-                    query.AppendLine(String.Format("{0} .  {1}  {2}", runningIndex, type.ToString(), powerSources.ToString()));
+                    query.AppendLine(String.Format("{0} .  {1}  {2}", runningIndex, type.Name.ToString(), powerSource.ToString()));
                     runningIndex++;
                 }
             }
@@ -203,6 +203,8 @@ Press 7 for full details of a specific vehicle"));
                 throw new FormatException();
             }
 
+            bool finishClassifyVehicle = false;
+
 			foreach (Type type in supportredVehicles.Keys)
 			{
 				List<e_TypeOfPowerSource> powerSources = null;
@@ -213,10 +215,16 @@ Press 7 for full details of a specific vehicle"));
 					{
 						userChosenVehicle = type;
                         userChosenVehiclePowersource = powerSource;
+                        finishClassifyVehicle = true;
                         break;
 					}
 					runningIndex++;
 				}
+
+                if (finishClassifyVehicle)
+                {
+                    break;
+                }
 			}
 
             createNewVehicleHelper(io_Garage, i_CarLicense, userChosenVehiclePowersource, userChosenVehicle);
@@ -259,6 +267,8 @@ Press 7 for full details of a specific vehicle"));
                         throw new FormatException();
                     }
 
+                    vehicleUniqDetails.Add(parameter,parameterOptions[commandToDo]);
+                    /*
                     runningIndex = 1;
 					foreach (string parameterOption in parameterOptions)
 					{
@@ -268,7 +278,7 @@ Press 7 for full details of a specific vehicle"));
                             break;
                         }
 						runningIndex++;
-					}
+					}*/
                 }
 
                 else

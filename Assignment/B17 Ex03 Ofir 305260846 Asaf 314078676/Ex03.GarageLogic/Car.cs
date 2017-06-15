@@ -42,9 +42,9 @@ namespace Ex03.GarageLogic
                 possibleParamertsForColor.Add(color.ToString());
             }
             List<String> possibleParamertsForNumberOfDoors = new List<string>(4);
-            foreach (eColor numberOfDoors in Enum.GetValues(typeof(eNumberOfDoors)))
+            foreach (eNumberOfDoors numberOfDoors in Enum.GetValues(typeof(eNumberOfDoors)))
             {
-                possibleParamertsForColor.Add(numberOfDoors.ToString());
+                possibleParamertsForNumberOfDoors.Add(numberOfDoors.ToString());
             }
             uniqueParameters.Add("color", possibleParamertsForColor);
             uniqueParameters.Add("numberOfDoors", possibleParamertsForNumberOfDoors);
