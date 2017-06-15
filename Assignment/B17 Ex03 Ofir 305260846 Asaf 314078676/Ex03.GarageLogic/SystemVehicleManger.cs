@@ -21,14 +21,14 @@ namespace Ex03.GarageLogic
             FuelTank
         }
 
-        public static Dictionary<e_TypeOfVehicle, e_TypeOfPowerSource> GetSupportedVehicle()
+        public static Dictionary<Type, e_TypeOfPowerSource> GetSupportedVehicle()
         {
-            Dictionary<e_TypeOfVehicle, e_TypeOfPowerSource> supportredVehicles = new Dictionary<e_TypeOfVehicle, e_TypeOfPowerSource>();
-            supportredVehicles.Add(e_TypeOfVehicle.CarOnBattry, e_TypeOfPowerSource.Battery);
-            supportredVehicles.Add(e_TypeOfVehicle.MotorcycleOnBattey, e_TypeOfPowerSource.Battery);
-            supportredVehicles.Add(e_TypeOfVehicle.CarOnFuel, e_TypeOfPowerSource.FuelTank);
-            supportredVehicles.Add(e_TypeOfVehicle.MotorcycleOnFuel, e_TypeOfPowerSource.FuelTank);
-            supportredVehicles.Add(e_TypeOfVehicle.Truck, e_TypeOfPowerSource.FuelTank);
+            Dictionary<Type, e_TypeOfPowerSource> supportredVehicles = new Dictionary<Type, e_TypeOfPowerSource>();
+            supportredVehicles.Add(typeof (Car), e_TypeOfPowerSource.Battery);
+            supportredVehicles.Add(typeof(Motorcycle), e_TypeOfPowerSource.Battery);
+            supportredVehicles.Add(typeof(Car), e_TypeOfPowerSource.FuelTank);
+            supportredVehicles.Add(typeof(Motorcycle), e_TypeOfPowerSource.FuelTank);
+            supportredVehicles.Add(typeof(Truck), e_TypeOfPowerSource.FuelTank);
 
             return supportredVehicles;
         }
