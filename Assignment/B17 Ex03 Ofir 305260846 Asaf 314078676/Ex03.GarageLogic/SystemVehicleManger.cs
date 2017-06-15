@@ -52,8 +52,9 @@ namespace Ex03.GarageLogic
         }
 
         public static void createVehicleInGarage(Garage io_Garage,  List<string> generalDetails, List<float> i_PowerSourceDetails,
-            List<string> i_Wheels, //dic of two stringsList<string> i_VehicleDetails, Type typeOfVehicle, e_TypeOfPowerSource powerSource)
+            List<string> i_Wheels, List <string> i_VehicleDetails, Type typeOfVehicle, e_TypeOfPowerSource powerSource)
         {
+            //dic of two stringsList
             // license module owner cellphone
             string i_vehicleLicense = generalDetails[0];
             string carModule = generalDetails[1];
