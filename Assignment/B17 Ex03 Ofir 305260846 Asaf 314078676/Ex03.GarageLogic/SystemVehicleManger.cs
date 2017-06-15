@@ -21,14 +21,21 @@ namespace Ex03.GarageLogic
             FuelTank
         }
 
-        public static Dictionary<Type, e_TypeOfPowerSource> GetSupportedVehicle()
+        public static Dictionary<Type, List<e_TypeOfPowerSource>> GetSupportedVehicle()
         {
-            Dictionary<Type, e_TypeOfPowerSource> supportredVehicles = new Dictionary<Type, e_TypeOfPowerSource>();
-            supportredVehicles.Add(typeof (Car), e_TypeOfPowerSource.Battery);
-            supportredVehicles.Add(typeof(Motorcycle), e_TypeOfPowerSource.Battery);
-            supportredVehicles.Add(typeof(Car), e_TypeOfPowerSource.FuelTank);
-            supportredVehicles.Add(typeof(Motorcycle), e_TypeOfPowerSource.FuelTank);
-            supportredVehicles.Add(typeof(Truck), e_TypeOfPowerSource.FuelTank);
+            Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = new Dictionary<Type, e_TypeOfPowerSource>();
+            List<e_TypeOfPowerSource> carPowerSourceOptions = new List<e_TypeOfPowerSource>(2);
+            List<e_TypeOfPowerSource> motorcyclePowerSorceOptions = new List<e_TypeOfPowerSource>(2);
+            List<e_TypeOfPowerSource> truckPowerSorceOptions = new List<e_TypeOfPowerSource>(1);
+            carPowerSourceOptions.Add(e_TypeOfPowerSource.FuelTank);
+            carPowerSourceOptions.Add(e_TypeOfPowerSource.Battery);
+            motorcyclePowerSorceOptions.Add(e_TypeOfPowerSource.FuelTank);
+            motorcyclePowerSorceOptions.Add(e_TypeOfPowerSource.Battery);
+            truckPowerSorceOptions.Add(e_TypeOfPowerSource.FuelTank);
+
+            supportredVehicles.Add(typeof (Car),carPowerSourceOptions);
+            supportredVehicles.Add(typeof(Motorcycle),motorcyclePowerSorceOptions );
+            supportredVehicles.Add(typeof(Truck), truckPowerSorceOptions);
 
             return supportredVehicles;
         }

@@ -17,6 +17,18 @@ namespace Ex03.GarageLogic
             m_MaxCarryWeight = i_MaxCarryWeight;
         }
 
+        public static Dictionary<String,List<String>> GetUniqueParameters()
+        {
+            Dictionary<String, List<String>> uniqueParameters = new Dictionary<string, List<string>>(2);
+            List<String> possibleParamertsForToxic = new List<string>(2);
+            possibleParamertsForToxic.Add("true");
+            possibleParamertsForToxic.Add("false");
+            uniqueParameters.Add("carriesToxic", possibleParamertsForToxic);
+            uniqueParameters.Add("maxCarryWeight", null);
+
+            return uniqueParameters;
+        }
+
 		public override string ToString()
 		{
 			StringBuilder returnString = new StringBuilder();

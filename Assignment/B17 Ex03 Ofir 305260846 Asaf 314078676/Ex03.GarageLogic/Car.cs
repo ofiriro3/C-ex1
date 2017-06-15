@@ -32,7 +32,23 @@ namespace Ex03.GarageLogic
             m_NumberOfDoors = i_NumberOfDoors;
         }
 
-		public override string ToString()
+
+        public static Dictionary<String, List<String>> GetUniqueParameters()
+        {
+            Dictionary<String, List<String>> uniqueParameters = new Dictionary<string, List<string>>(2);
+            List<String> possibleParamertsForColor = new List<string>(4);
+            foreach (eColor color in Enum.GetValues(typeof(eColor)))
+            {
+                possibleParamertsForLicencetype.Add(licenceType.ToString());
+            }
+
+            uniqueParameters.Add("licenceType", possibleParamertsForLicencetype);
+            uniqueParameters.Add("engineVolume", null);
+
+            return uniqueParameters;
+        }
+
+        public override string ToString()
 		{
 			StringBuilder returnString = new StringBuilder();
 			returnString.Append(base.ToString());

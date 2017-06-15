@@ -26,6 +26,22 @@ namespace Ex03.GarageLogic
             m_EngineVolume = i_EngineVolume;
         }
 
+
+        public static Dictionary<String, List<String>> GetUniqueParameters()
+        {
+            Dictionary<String, List<String>> uniqueParameters = new Dictionary<string, List<string>>(2);
+            List<String> possibleParamertsForLicencetype = new List<string>(4);
+            foreach (eLicenceType licenceType in Enum.GetValues(typeof(eLicenceType)))
+            {
+                possibleParamertsForLicencetype.Add(licenceType.ToString());
+            }
+
+            uniqueParameters.Add("licenceType", possibleParamertsForLicencetype);
+            uniqueParameters.Add("engineVolume", null);
+
+            return uniqueParameters;
+        }
+
         public override string ToString()
         {
             StringBuilder returnString = new StringBuilder();
