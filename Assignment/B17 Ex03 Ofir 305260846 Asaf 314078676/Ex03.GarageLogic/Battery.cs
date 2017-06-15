@@ -27,11 +27,9 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            string batteryToString =  string.Format(
+            return string.Format(
 @"Power Source : {0}
 Current Capacity : {1}", "Battery", m_CurrentCampacity);
-
-            return batteryToString;
         }
     }
 }

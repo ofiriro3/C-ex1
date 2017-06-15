@@ -33,6 +33,22 @@ namespace Ex03.GarageLogic
             return supportredVehicles;
         }
 
+        //Find the rellevant attributes for the current vehicle
+
+        public static Dictionary<string, string> getVehicleUniqeProperties(e_TypeOfVehicle typeOfVehicle)
+        {
+            Dictionary<string , string> VehicleUniqeProperties = new Dictionary<string, string>();
+
+            Type type = typeof(Car);
+            
+            foreach (var property in type.GetProperties())
+            {
+                VehicleUniqeProperties.Add(property.Name.ToString(), property.MemberType.ToString());
+            }
+
+            return VehicleUniqeProperties;
+        }
+
         public static void createVehicleInGarage(Garage io_Garage, List<string> generalDetails, List<float> i_PowerSourceDetails,
             List<string> i_Wheels, List<string> i_VehicleDetails, e_TypeOfVehicle typeOfVehicle)
         {

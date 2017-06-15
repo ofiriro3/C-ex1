@@ -134,13 +134,13 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
                     {
                         wheel.InflateToMax();
                     }
+
                     break;
 				}
 			}
 
             return carFound;
         }
-
 		//return true of car was in garage, false if not
         public bool FillGasInGasVehicle(string i_LicensePlate, PowerSource.eFuel i_TypeOfGass, float i_AmountOfGass)
         {
@@ -156,7 +156,6 @@ Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
                     {
                         throw new ArgumentException("This vehicle doesn't run on gass");    
                     }
-
                     else
                     {
                         fuelTank.Charge(i_AmountOfGass, i_TypeOfGass);

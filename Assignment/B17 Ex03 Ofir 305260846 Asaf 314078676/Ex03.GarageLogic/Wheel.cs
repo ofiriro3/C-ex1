@@ -43,11 +43,12 @@ namespace Ex03.GarageLogic
 
         public override string ToString()
         {
-            return string.Format(
+            string Tostring = string.Format(
 @"Current Tire Pressure : {0}
 Manufacturer : {1}
-", m_CurrentTirePressure, m_Manufacturer            
-            );
+", m_CurrentTirePressure, m_Manufacturer);
+
+            return Tostring;
         }
     }
 }
