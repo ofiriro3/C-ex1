@@ -106,7 +106,7 @@ namespace Ex03.GarageLogic
             string valueOfCarrayWeight;
             i_VehicleDetails.TryGetValue("maxCarryWeight",out valueOfCarrayWeight);
             float maxCarryWeight = float.Parse(valueOfCarrayWeight);
-            if( maxCarryWeight > 0)
+            if( maxCarryWeight < 0)
             {
                 throw new FormatException("Cannot put negative value in the max Carry weight of the truck");
             }
@@ -127,7 +127,7 @@ namespace Ex03.GarageLogic
             i_VehicleDetails.TryGetValue("engineVolume", out engineVolumeValue);
             Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), engineVolumeValue));
             int engineVolume = int.Parse(engineVolumeValue);
-            if( engineVolume > 0 )
+            if( engineVolume < 0 )
             {
                 throw new FormatException();
             }
@@ -148,7 +148,7 @@ namespace Ex03.GarageLogic
             i_VehicleDetails.TryGetValue("engineVolume", out engineVolumeValue);
             Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), licenceTypeValue));
             int engineVolume = int.Parse(engineVolumeValue);
-            if (engineVolume > 0)
+            if (engineVolume < 0)
             {
                 throw new FormatException();
             }
