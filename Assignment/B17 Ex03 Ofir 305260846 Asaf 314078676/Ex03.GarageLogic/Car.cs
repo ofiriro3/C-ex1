@@ -39,11 +39,15 @@ namespace Ex03.GarageLogic
             List<String> possibleParamertsForColor = new List<string>(4);
             foreach (eColor color in Enum.GetValues(typeof(eColor)))
             {
-                possibleParamertsForLicencetype.Add(licenceType.ToString());
+                possibleParamertsForColor.Add(color.ToString());
             }
-
-            uniqueParameters.Add("licenceType", possibleParamertsForLicencetype);
-            uniqueParameters.Add("engineVolume", null);
+            List<String> possibleParamertsForNumberOfDoors = new List<string>(4);
+            foreach (eColor numberOfDoors in Enum.GetValues(typeof(eNumberOfDoors)))
+            {
+                possibleParamertsForColor.Add(numberOfDoors.ToString());
+            }
+            uniqueParameters.Add("color", possibleParamertsForColor);
+            uniqueParameters.Add("numberOfDoors", possibleParamertsForNumberOfDoors);
 
             return uniqueParameters;
         }

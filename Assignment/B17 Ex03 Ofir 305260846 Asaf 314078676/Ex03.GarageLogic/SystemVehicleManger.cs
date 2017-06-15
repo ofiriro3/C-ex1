@@ -40,9 +40,7 @@ namespace Ex03.GarageLogic
             return supportredVehicles;
         }
 
-        //Find the rellevant attributes for the current vehicle
-
-        public static Dictionary<string, string> getVehicleUniqeProperties(e_TypeOfVehicle typeOfVehicle)
+        public static Dictionary<string, string> getVehicleUniqeProperties(Type typeOfVehicle)
         {
             Dictionary<string , string> VehicleUniqeProperties = new Dictionary<string, string>();
 
@@ -56,8 +54,8 @@ namespace Ex03.GarageLogic
             return VehicleUniqeProperties;
         }
 
-        public static void createVehicleInGarage(Garage io_Garage, List<string> generalDetails, List<float> i_PowerSourceDetails,
-            List<string> i_Wheels, List<string> i_VehicleDetails, e_TypeOfVehicle typeOfVehicle)
+        public static void createVehicleInGarage(Garage io_Garage,  List<string> generalDetails, List<float> i_PowerSourceDetails,
+            List<string> i_Wheels, //dic of two stringsList<string> i_VehicleDetails, Type typeOfVehicle, e_TypeOfPowerSource powerSource)
         {
             // license module owner cellphone
             string i_vehicleLicense = generalDetails[0];
@@ -66,27 +64,35 @@ namespace Ex03.GarageLogic
             string i_CellphoneNumber = generalDetails[3];
             float i_currentPowerInPowerSource = i_PowerSourceDetails[0];
 
-            switch (typeOfVehicle)
+            if(typeOfVehicle == typeof(Car))
             {
-                case e_TypeOfVehicle.CarOnBattry:
-                    createAElectricCar(io_Garage, owner, carModule, i_vehicleLicense,
-                    i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
-
-                case e_TypeOfVehicle.CarOnFuel:
+                if(powerSource.Equals(e_TypeOfPowerSource.FuelTank))
+                {
                     createARegularCar(io_Garage, owner, carModule, i_vehicleLicense,
-                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
+                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); 
 
-                case e_TypeOfVehicle.MotorcycleOnFuel:
-                    createARegularMotorCycle(io_Garage, owner, carModule,
-                    i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
-
-                case e_TypeOfVehicle.MotorcycleOnBattey:
+                }
+                else
+                {
                     createAnElectricMotorCycle(io_Garage, owner, carModule,
                     i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
 
-                case e_TypeOfVehicle.Truck:
-                    createATruck(io_Garage, owner, carModule,
-                    i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
+                }
+                else if(typeOfVehicle == typeof(Motorcycle))
+                {
+                    if (powerSource.Equals(e_TypeOfPowerSource.FuelTank))
+                    {
+                        createARegularCar(io_Garage, owner, carModule, i_vehicleLicense,
+                            i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails);
+
+                    }
+                    else
+                    {
+                        createAnElectricMotorCycle(io_Garage, owner, carModule,
+                        i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
+
+                    }
+
             }
         }
 
