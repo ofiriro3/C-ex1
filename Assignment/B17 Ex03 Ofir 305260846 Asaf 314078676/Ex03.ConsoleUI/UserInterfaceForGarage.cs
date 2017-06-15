@@ -31,6 +31,7 @@ Press 6 to charge a battery of an electricity vehicle
 Press 7 for full details of a specific vehicle"));
                     int inputCommand;
                     getValidAnswerToMultyplyChoiceAnswer(out inputCommand, 1, 7);
+                    Console.Clear();
                     switch (inputCommand)
                     {
                         case -1: programIsRunning = false; break;
@@ -58,6 +59,12 @@ Press 7 for full details of a specific vehicle"));
                 catch(ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
+                }
+                finally
+                {
+                    Console.WriteLine("Please press any key to continue");
+                    Console.ReadLine();
+                    Console.Clear();
                 }
             }
         }
@@ -119,7 +126,8 @@ Press 7 for full details of a specific vehicle"));
             Console.WriteLine("Please enter your desired status for the vehicle"); 
             Garage.GarageVehicle.eVehicleStatus newStatusForVehicle = getValidStatusCar();
             bool isTheCarInTheGarage = io_Garage.ChangeStateOfVehicle(licensePlate, newStatusForVehicle);
-            hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format("Status for vehicle {0} was changed to {1}!", licensePlate, newStatusForVehicle));
+            hadnleInputCarFoundOrNot(isTheCarInTheGarage, String.Format(
+@"Status for vehicle {0} was changed to {1}!", licensePlate, newStatusForVehicle));
         }
 
         private static void printCarList(Garage io_Garage)
@@ -201,7 +209,7 @@ Press 7 for full details of a specific vehicle"));
             runningIndex = 1;
             if(commandToDo == -1) // user decided to exit
             {
-                throw new FormatException();
+                throw new FormatException("You are back in the main menu");
             }
 
             bool finishClassifyVehicle = false;
@@ -264,7 +272,7 @@ Press 7 for full details of a specific vehicle"));
 					getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, parameterOptions.Count);
                     if(commandToDo == -1) // user decided to exit
                     {
-                        throw new FormatException();
+                        throw new FormatException("You are back in the main menu");
                     }
 
                     vehicleUniqDetails.Add(parameter,parameterOptions[commandToDo - 1]);
@@ -407,7 +415,7 @@ Press 7 for full details of a specific vehicle"));
             PowerSource.eFuel fuelToReturn = PowerSource.eFuel.Octan95;
             switch (numberOfFuelTheUserChose)
             {
-                case -1: throw new FormatException();
+                case -1: throw new FormatException("You are back in the main menu");
                 case 1: fuelToReturn = PowerSource.eFuel.Octan95;break;
                 case 2: fuelToReturn = PowerSource.eFuel.Octan96; break;
                 case 3: fuelToReturn = PowerSource.eFuel.Octan98; break;
@@ -421,15 +429,15 @@ Press 7 for full details of a specific vehicle"));
         private static Garage.GarageVehicle.eVehicleStatus getValidStatusCar()
         {
             Console.WriteLine(string.Format(
-"1 for 'in repaired'" +
-"2 for 'Repaired'" +
-"3 for 'Paid' "));
+@"1 for 'in repaired'
+2 for 'Repaired'
+3 for 'Paid' "));
             int statusToFilter;
             getValidAnswerToMultyplyChoiceAnswer(out statusToFilter, 1, 3);
             Garage.GarageVehicle.eVehicleStatus statusForCar = Garage.GarageVehicle.eVehicleStatus.InRepair;
             switch (statusToFilter)
             {
-                case -1: throw new FormatException();
+                case -1: throw new FormatException("You are back in the main menu");
                 case 1: statusForCar = Garage.GarageVehicle.eVehicleStatus.InRepair; break;
                 case 2: statusForCar = Garage.GarageVehicle.eVehicleStatus.Repaired; break;
                 case 3: statusForCar = Garage.GarageVehicle.eVehicleStatus.Paid; break;
