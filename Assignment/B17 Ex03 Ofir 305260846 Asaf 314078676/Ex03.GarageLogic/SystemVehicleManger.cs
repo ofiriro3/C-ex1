@@ -42,13 +42,9 @@ namespace Ex03.GarageLogic
 
         public static Dictionary<string, List<string>> getVehicleUniqeProperties(Type typeOfVehicle)
         {
-            Dictionary<string , List<string>> VehicleUniqeProperties = new Dictionary<string, List<string>>();
+            Dictionary<string, List<string>> uniqeProperties = (Dictionary < string, List<string> > ) typeOfVehicle.GetMethod("GetUniqueParameters").Invoke(null, null);
 
-            Type type = typeof(Car);
-            
-            
-
-            return VehicleUniqeProperties;
+            return uniqeProperties;
         }
 
         public static void createVehicleInGarage(Garage io_Garage,  List<string> generalDetails, List<float> i_PowerSourceDetails,
@@ -62,44 +58,58 @@ namespace Ex03.GarageLogic
             string i_CellphoneNumber = generalDetails[3];
             float i_currentPowerInPowerSource = i_PowerSourceDetails[0];
 
-            if(typeOfVehicle == typeof(Car))
+            if (typeOfVehicle == typeof(Car))
             {
-                if(powerSource.Equals(e_TypeOfPowerSource.FuelTank))
+                if (powerSource.Equals(e_TypeOfPowerSource.FuelTank))
                 {
                     createARegularCar(io_Garage, owner, carModule, i_vehicleLicense,
-                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); 
+                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails);
+
+                }
+                else
+                {
+                    createAElectricCar(io_Garage, owner, carModule, i_vehicleLicense,
+                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails);
+                }
+            }
+            else if (typeOfVehicle == typeof(Motorcycle))
+            {
+                if (powerSource.Equals(e_TypeOfPowerSource.FuelTank))
+                {
+                    createARegularMotorCycle(io_Garage, owner, carModule, i_vehicleLicense,
+                        i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails);
 
                 }
                 else
                 {
                     createAnElectricMotorCycle(io_Garage, owner, carModule,
-                    i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
+                    i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); 
 
                 }
-                else if(typeOfVehicle == typeof(Motorcycle))
-                {
-                    if (powerSource.Equals(e_TypeOfPowerSource.FuelTank))
-                    {
-                        createARegularCar(io_Garage, owner, carModule, i_vehicleLicense,
-                            i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails);
 
-                    }
-                    else
-                    {
-                        createAnElectricMotorCycle(io_Garage, owner, carModule,
-                        i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); break;
-
-                    }
+            }
+            else
+            {
+                createATruck(io_Garage, owner, carModule,
+                    i_vehicleLicense, i_CellphoneNumber, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); 
 
             }
         }
 
         private static void createATruck(Garage io_Garage, string i_Owner, string i_Module, string i_vehicleLicense,
-            string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, List<string> i_VehicleDetails)
+            string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, Dictionary<string, string> i_VehicleDetails)
         {
             FuelTank fuelTank = new FuelTank(135f, i_currentPowerInPowerSource, PowerSource.eFuel.Octan96);
-            bool isToxic = bool.Parse(i_VehicleDetails[0]);
-            float maxCarryWeight = float.Parse(i_VehicleDetails[1]);
+            string valueOfToxic;
+            i_VehicleDetails.TryGetValue("carriesToxic", out valueOfToxic);
+            bool isToxic = bool.Parse(valueOfToxic);
+            string valueOfCarrayWeight;
+            i_VehicleDetails.TryGetValue("maxCarryWeight",out valueOfCarrayWeight);
+            float maxCarryWeight = float.Parse(valueOfCarrayWeight);
+            if( maxCarryWeight > 0)
+            {
+                throw new FormatException("Cannot put negative value in the max Carry weight of the truck");
+            }
             List<Wheel> wheels = generateWheels(12, 32, i_Wheels[0], i_Wheels[1]);
             Truck truckToAdd = new Truck(i_Module, i_vehicleLicense, isToxic, maxCarryWeight, wheels, fuelTank);
             Garage.GarageVehicle truckToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
@@ -108,11 +118,19 @@ namespace Ex03.GarageLogic
         }
 
         private static void createAnElectricMotorCycle(Garage io_Garage, string i_Owner, string i_Module, string i_vehicleLicense,
-            string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, List<string> i_VehicleDetails)
+            string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, Dictionary<string, string> i_VehicleDetails)
         {
             Battery battery = new Battery(2.7f, i_currentPowerInPowerSource);
-            Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), i_VehicleDetails[0]));
-            int engineVolume = int.Parse(i_VehicleDetails[1]);
+            string licenceTypeValue;
+            i_VehicleDetails.TryGetValue("licenceType", out licenceTypeValue);
+            string engineVolumeValue;
+            i_VehicleDetails.TryGetValue("engineVolume", out engineVolumeValue);
+            Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), engineVolumeValue));
+            int engineVolume = int.Parse(engineVolumeValue);
+            if( engineVolume > 0 )
+            {
+                throw new FormatException();
+            }
 			List<Wheel> wheels = generateWheels(2, 33, i_Wheels[0], i_Wheels[1]);
             Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, licenceType, engineVolume, wheels, battery);
             Garage.GarageVehicle motorCycleToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
@@ -120,12 +138,21 @@ namespace Ex03.GarageLogic
             io_Garage.addNewVehicleToGarage(motorCycleToAddToGarage);
         }
 
-        private static void createARegularMotorCycle(Garage io_Garage, string i_Owner, string i_Module, string i_vehicleLicense, string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, List<string> i_VehicleDetails)
+        private static void createARegularMotorCycle(Garage io_Garage, string i_Owner, string i_Module, string i_vehicleLicense, 
+            string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, Dictionary<string, string> i_VehicleDetails)
         {
             FuelTank fuelTank = new FuelTank(5.5f, i_currentPowerInPowerSource, PowerSource.eFuel.Octan95);
-            Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), i_VehicleDetails[0]));
-            int engineVolume = int.Parse(i_VehicleDetails[1]);
-			List<Wheel> wheels = generateWheels(2, 33, i_Wheels[0], i_Wheels[1]);
+            string licenceTypeValue;
+            i_VehicleDetails.TryGetValue("licenceType", out licenceTypeValue);
+            string engineVolumeValue;
+            i_VehicleDetails.TryGetValue("engineVolume", out engineVolumeValue);
+            Motorcycle.eLicenceType licenceType = (Motorcycle.eLicenceType)(Enum.Parse(typeof(Motorcycle.eLicenceType), licenceTypeValue));
+            int engineVolume = int.Parse(engineVolumeValue);
+            if (engineVolume > 0)
+            {
+                throw new FormatException();
+            }
+            List<Wheel> wheels = generateWheels(2, 33, i_Wheels[0], i_Wheels[1]);
             Motorcycle motorcycleToAdd = new Motorcycle(i_Module, i_vehicleLicense, licenceType, engineVolume, wheels, fuelTank);
             Garage.GarageVehicle motorCycleToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
                 Garage.GarageVehicle.eVehicleStatus.InRepair, motorcycleToAdd);
@@ -133,11 +160,17 @@ namespace Ex03.GarageLogic
         }
 
         private static void createAElectricCar(Garage io_Garage, string i_Owner, string i_Module,
-            string i_vehicleLicense, string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels, List<string> i_VehicleDetails)
+            string i_vehicleLicense, string i_CellphoneNumber, float i_currentPowerInPowerSource, List<string> i_Wheels,
+            Dictionary<string, string> i_VehicleDetails)
         {
             Battery battery = new Battery(2.5f, i_currentPowerInPowerSource);
-            Car.eColor color = (Car.eColor)(Enum.Parse(typeof(Car.eColor), i_VehicleDetails[0]));
-            Car.eNumberOfDoors numberOfDoors = (Car.eNumberOfDoors)(Enum.Parse(typeof(Car.eNumberOfDoors), i_VehicleDetails[1]));
+            string colorValue;
+            i_VehicleDetails.TryGetValue("color", out colorValue);
+            string numberOfDoorsValue;
+            i_VehicleDetails.TryGetValue("numberOfDoors", out numberOfDoorsValue);
+
+            Car.eColor color = (Car.eColor)(Enum.Parse(typeof(Car.eColor), colorValue));
+            Car.eNumberOfDoors numberOfDoors = (Car.eNumberOfDoors)(Enum.Parse(typeof(Car.eNumberOfDoors), numberOfDoorsValue));
 			List<Wheel> wheels = generateWheels(4, 30, i_Wheels[0], i_Wheels[1]);
             Car carToAdd = new Car(i_Module, i_vehicleLicense,color, numberOfDoors, wheels, battery);
             Garage.GarageVehicle carToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
@@ -147,11 +180,15 @@ namespace Ex03.GarageLogic
 
         private static void createARegularCar(Garage io_Garage, string i_Owner, string i_Module,
             string i_vehicleLicense, string i_CellphoneNumber, float i_currentPowerInPowerSource, 
-            List<string> i_Wheels, List<string> i_VehicleDetails)
+            List<string> i_Wheels, Dictionary<string, string> i_VehicleDetails)
         {
             FuelTank fuelTank = new FuelTank(42f, i_currentPowerInPowerSource, PowerSource.eFuel.Octan98);
-            Car.eColor color = (Car.eColor)(Enum.Parse(typeof(Car.eColor), i_VehicleDetails[0]));
-            Car.eNumberOfDoors numberOfDoors = (Car.eNumberOfDoors)(Enum.Parse(typeof(Car.eNumberOfDoors), i_VehicleDetails[1]));
+            string colorValue;
+            i_VehicleDetails.TryGetValue("color", out colorValue);
+            string numberOfDoorsValue;
+            i_VehicleDetails.TryGetValue("numberOfDoors", out numberOfDoorsValue);
+            Car.eColor color = (Car.eColor)(Enum.Parse(typeof(Car.eColor), colorValue));
+            Car.eNumberOfDoors numberOfDoors = (Car.eNumberOfDoors)(Enum.Parse(typeof(Car.eNumberOfDoors), numberOfDoorsValue));
 			List<Wheel> wheels = generateWheels(12, 32, i_Wheels[0], i_Wheels[1]);
             Car carToAdd = new Car(i_Module, i_vehicleLicense, color, numberOfDoors, wheels, fuelTank);
             Garage.GarageVehicle carToAddToGarage = new Garage.GarageVehicle(i_Owner, i_CellphoneNumber,
