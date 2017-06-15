@@ -178,35 +178,41 @@ Press 7 for full details of a specific vehicle"));
         {
             StringBuilder query = new StringBuilder();
             query.AppendLine("Please choose the vehicle type that you want to enter the garage: ");
-            Dictionary<e_TypeOfVehicle, e_TypeOfPowerSource> supportredVehicles = SystemVehicleManger.GetSupportedVehicle();
+            Dictionary<Type, List<e_TypeOfPowerSource>> supportredVehicles = SystemVehicleManger.GetSupportedVehicle();
             int runningIndex = 1;
-            e_TypeOfVehicle userChosenVehicle = e_TypeOfVehicle.MotorcycleOnBattey;
+            Type userChosenVehicle = null;
             e_TypeOfPowerSource userChosenVehiclePowersource = e_TypeOfPowerSource.Battery;
 
-            foreach(e_TypeOfVehicle type in supportredVehicles.Keys)
+            foreach(Type type in supportredVehicles.Keys)
             {
-                query.AppendLine(runningIndex + ". " + type.ToString());
-                runningIndex++;
+                List<e_TypeOfPowerSource> powerSources = null;
+                supportredVehicles.TryGetValue(type, out powerSources);
+                foreach (e_TypeOfPowerSource powerSource in powerSources)
+                {
+                    query.AppendLine(String.Format("{0} .  {1}  {2}", runningIndex, type.ToString(), powerSources.ToString()));
+                    runningIndex++;
+                }
             }
-
-            query.AppendLine("or press Q to go back");
             Console.WriteLine(query.ToString());
 
             int commandToDo;
-            getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, supportredVehicles.Count + 1);
+            getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, runningIndex);
             runningIndex = 1;
-			foreach (e_TypeOfVehicle type in supportredVehicles.Keys)
+
+			foreach (Type type in supportredVehicles.Keys)
 			{
-                if (runningIndex == commandToDo)
-                {
-                    userChosenVehicle = type;
-                    if(!supportredVehicles.TryGetValue(type, out userChosenVehiclePowersource))
-                    {
-                        throw new FormatException();
-                    }
-                    break;
-                }
-                runningIndex++;
+				List<e_TypeOfPowerSource> powerSources = null;
+				supportredVehicles.TryGetValue(type, out powerSources);
+				foreach (e_TypeOfPowerSource powerSource in powerSources)
+				{
+					if (runningIndex == commandToDo)
+					{
+						userChosenVehicle = type;
+                        userChosenVehiclePowersource = powerSource;
+                        break;
+					}
+					runningIndex++;
+				}
 			}
 
             switch (commandToDo)
@@ -217,12 +223,12 @@ Press 7 for full details of a specific vehicle"));
 
         }
 
-        private static void createNewVehicleHelper(Garage io_Garage, string i_CarLicense, e_TypeOfPowerSource typeOfPowerSource, e_TypeOfVehicle typeOfVehicle)
+        private static void createNewVehicleHelper(Garage io_Garage, string i_CarLicense, e_TypeOfPowerSource i_TypeOfPowerSource, Type i_TypeOfVehicle)
         {
             // CarID , car module , vehicleLicense , owner ,CellPhonenumber float powerLeft
             List<String> generalDetails = getGenralDeatailsVehicle(i_CarLicense);
             List<float> powerSourceDeatails;
-            if (typeOfPowerSource.Equals(e_TypeOfPowerSource.Battery))
+            if (i_TypeOfPowerSource.Equals(e_TypeOfPowerSource.Battery))
             {
                 powerSourceDeatails = getElectricalDetails();
             }
@@ -231,26 +237,54 @@ Press 7 for full details of a specific vehicle"));
                 powerSourceDeatails = GetVeichelByFuelDetails();
             }
 
-            List<string> vehicleDetails = null;
             List<string> wheels = getWheelDetails();
-            switch (typeOfVehicle)
-            {
-                // in both cases do the same
-                case e_TypeOfVehicle.CarOnBattry:
-                case e_TypeOfVehicle.CarOnFuel:
-                    vehicleDetails = getCarDetails();
-                    break;
-                case e_TypeOfVehicle.MotorcycleOnFuel:
-                case e_TypeOfVehicle.MotorcycleOnBattey:
-                    vehicleDetails = getMotorcycleDetails();
-                    break;
-                case e_TypeOfVehicle.Truck:
-                    vehicleDetails = getTruckDetails();
-                    break;
-            }
+            Dictionary<string, List<string>> vehicleUniqeProperties = SystemVehicleManger.getVehicleUniqeProperties(i_TypeOfVehicle);
+            Dictionary<string, string> vehicleUniqeDetails = getVehicleUniqDetails(vehicleUniqeProperties);   
 
 			SystemVehicleManger.createVehicleInGarage(io_Garage, generalDetails, powerSourceDeatails, wheels,
-						vehicleDetails, typeOfVehicle);
+                                                      vehicleUniqeDetails, i_TypeOfVehicle, i_TypeOfPowerSource);
+        }
+
+        private static Dictionary<string, string> getVehicleUniqDetails(Dictionary<string, List<string>> i_VehicleUniqeProperties)
+        {
+            Dictionary<string,string> vehicleUniqDetails = new Dictionary<string, string>(i_VehicleUniqeProperties.Count);
+
+            foreach(string parameter in i_VehicleUniqeProperties.Keys)
+            {
+				List<string> parameterOptions = null;
+				i_VehicleUniqeProperties.TryGetValue(parameter, out parameterOptions);
+                Console.WriteLine(String.Format("Please enter parameter : {0}", parameter));
+                if (parameterOptions != null)
+                {
+                    int runningIndex = 1;
+                    foreach (string parameterOption in parameterOptions)
+                    {
+                        Console.WriteLine(String.Format(@"{0} . {1}", runningIndex, parameterOption));
+                        runningIndex++;
+                    }
+
+					int commandToDo;
+					getValidAnswerToMultyplyChoiceAnswer(out commandToDo, 1, parameterOptions.Count);
+                    runningIndex = 1;
+					foreach (string parameterOption in parameterOptions)
+					{
+                        if(runningIndex == commandToDo)
+                        {
+                            vehicleUniqDetails.Add(parameter, parameterOption);
+                            break;
+                        }
+						runningIndex++;
+					}
+                }
+
+                else
+                {
+                    string answerFromUser = Console.ReadLine();
+                    vehicleUniqDetails.Add(parameter, answerFromUser);
+                }
+            }
+
+            return vehicleUniqDetails;
         }
 
         private static List<String> getTruckDetails()
