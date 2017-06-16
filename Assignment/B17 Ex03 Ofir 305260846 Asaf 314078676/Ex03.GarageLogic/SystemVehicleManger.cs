@@ -110,7 +110,7 @@ namespace Ex03.GarageLogic
             int engineVolume = int.Parse(engineVolumeValue);
             if( engineVolume < 0 )
             {
-                throw new FormatException();
+                throw new FormatException("EngineVolume can't get a negative value");
             }
 
 			List<Wheel> wheels = generateWheels(2, 33, i_Wheels[0], i_Wheels[1]);
