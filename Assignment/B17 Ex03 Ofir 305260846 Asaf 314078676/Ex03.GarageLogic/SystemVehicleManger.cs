@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -50,17 +50,17 @@ namespace Ex03.GarageLogic
             float i_currentPowerInPowerSource = i_PowerSourceDetails[0];
             if (i_TypeOfVehicle == typeof(Car))
             {
-                vehicleToAdd = createACar(io_Garage, carModule, vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails, i_PowerSource);
+                vehicleToAdd = createACar(carModule, vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails, i_PowerSource);
             }
 
             else if (i_TypeOfVehicle == typeof(Motorcycle))
             {
-                vehicleToAdd = createAMotorCycle(io_Garage, carModule, vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails, i_PowerSource);
+                vehicleToAdd = createAMotorCycle(carModule, vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails, i_PowerSource);
             }
 
             else
             {
-                vehicleToAdd = createATruck(io_Garage, carModule,
+                vehicleToAdd = createATruck(carModule,
                              vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails); 
             }
 
@@ -69,8 +69,9 @@ namespace Ex03.GarageLogic
             io_Garage.AddNewVehicleToGarage(garageVehicle);
         }
 
-        private static Truck createATruck(Garage io_Garage, string i_Module, string i_VehicleLicense,
-                                          float i_CurrentPowerInPowerSource, List<string> i_Wheels, Dictionary<string, string> i_VehicleDetails)
+        private static Truck createATruck(string i_Module, string i_VehicleLicense,
+                         float i_CurrentPowerInPowerSource, List<string> i_Wheels, 
+                                          Dictionary<string, string> i_VehicleDetails)
         {
             FuelTank fuelTank = new FuelTank(135f, i_CurrentPowerInPowerSource, PowerSource.eFuel.Octan96);
             string valueOfToxic;
@@ -88,8 +89,9 @@ namespace Ex03.GarageLogic
             return new Truck(i_Module, i_VehicleLicense, isToxic, maxCarryWeight, wheels, fuelTank);
         }
 
-        private static Motorcycle createAMotorCycle(Garage io_Garage, string i_Module, string i_VehicleLicense,
-                                                    float i_CurrentPowerInPowerSource, List<string> i_Wheels, Dictionary<string, string> i_VehicleDetails,e_TypeOfPowerSource i_PowerSource)
+        private static Motorcycle createAMotorCycle(string i_Module, string i_VehicleLicense,
+                  float i_CurrentPowerInPowerSource, List<string> i_Wheels,
+                             Dictionary<string, string> i_VehicleDetails,e_TypeOfPowerSource i_PowerSource)
         {
             PowerSource powerSource;
 			if(i_PowerSource.Equals(e_TypeOfPowerSource.Battery))
@@ -117,7 +119,7 @@ namespace Ex03.GarageLogic
             return new Motorcycle(i_Module, i_VehicleLicense, licenceType, engineVolume, wheels, powerSource);
         }
 
-        private static Car createACar(Garage io_Garage, string i_Module,
+        private static Car createACar(string i_Module,
             string i_VehicleLicense, float i_CurrentPowerInPowerSource, List<string> i_Wheels,
             Dictionary<string, string> i_VehicleDetails, e_TypeOfPowerSource i_PowerSource)
         {
