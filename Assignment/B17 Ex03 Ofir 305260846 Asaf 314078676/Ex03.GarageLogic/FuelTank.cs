@@ -14,6 +14,7 @@ namespace Ex03.GarageLogic
         {
             m_FuelType = i_FuelType;
         }
+
         public void Charge(float i_Liters, eFuel i_FuelType)
         {
             float expectedAmountOfFuel = i_Liters + m_CurrentCampacity;

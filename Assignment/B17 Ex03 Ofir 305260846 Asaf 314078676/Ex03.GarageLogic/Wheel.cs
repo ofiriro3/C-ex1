@@ -17,10 +17,10 @@ namespace Ex03.GarageLogic
             {
                 throw new ValueOutOfRangeException(0, i_MaxTirePressure, i_CurrentTirePressure);
             }
+
             m_Manufacturer = i_Manufacturer;
             m_CurrentTirePressure = i_CurrentTirePressure;
             r_MaxTirePressure = i_MaxTirePressure;
-
         }
 
         public void Inflate(float i_PressureToAdd)

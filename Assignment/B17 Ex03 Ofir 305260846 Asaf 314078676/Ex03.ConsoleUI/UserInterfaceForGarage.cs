@@ -71,7 +71,7 @@ Press 7 to full details of a specific vehicle"));
 
         private static void printFullDetailsOfACar(Garage io_Garage)
         {
-            Console.WriteLine("Please enter the License Plate of the vehicle you would like to charge");
+            Console.WriteLine("Please enter the License Plate of the vehicle you wish to show it's details");
             string licensePlate = Console.ReadLine();
             string carDetailsToPrint;
             bool isTheCarInTheGarage = io_Garage.PrintGarageVehicle(licensePlate, out carDetailsToPrint);

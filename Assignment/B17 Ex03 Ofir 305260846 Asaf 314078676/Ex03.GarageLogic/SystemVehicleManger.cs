@@ -31,10 +31,11 @@ namespace Ex03.GarageLogic
 
             return supportredVehicles;
         }
-
-        public static Dictionary<string, List<string>> GetVehicleUniqeProperties(Type typeOfVehicle)
+        
+        public static Dictionary<string, List<string>> GetVehicleUniqeProperties(Type i_TypeOfVehicle)
         {
-            Dictionary<string, List<string>> uniqeProperties = (Dictionary < string, List<string> > ) typeOfVehicle.GetMethod("GetUniqueParameters").Invoke(null, null);
+            Dictionary<string, List<string>> uniqeProperties = 
+                (Dictionary <string, List<string> > )i_TypeOfVehicle.GetMethod("GetUniqueParameters").Invoke(null, null);
 
             return uniqeProperties;
         }
@@ -50,12 +51,14 @@ namespace Ex03.GarageLogic
             float i_currentPowerInPowerSource = i_PowerSourceDetails[0];
             if (i_TypeOfVehicle == typeof(Car))
             {
-                vehicleToAdd = createACar(carModule, vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails, i_PowerSource);
+                vehicleToAdd = createACar(carModule, vehicleLicense, i_currentPowerInPowerSource, 
+                    i_Wheels, i_VehicleDetails, i_PowerSource);
             }
 
             else if (i_TypeOfVehicle == typeof(Motorcycle))
             {
-                vehicleToAdd = createAMotorCycle(carModule, vehicleLicense, i_currentPowerInPowerSource, i_Wheels, i_VehicleDetails, i_PowerSource);
+                vehicleToAdd = createAMotorCycle(carModule, vehicleLicense, i_currentPowerInPowerSource,
+                    i_Wheels, i_VehicleDetails, i_PowerSource);
             }
 
             else
@@ -80,11 +83,12 @@ namespace Ex03.GarageLogic
             string valueOfCarrayWeight;
             i_VehicleDetails.TryGetValue("maxCarryWeight",out valueOfCarrayWeight);
             float maxCarryWeight = float.Parse(valueOfCarrayWeight);
-            if( maxCarryWeight < 0)
+
+            if ( maxCarryWeight < 0)
             {
                 throw new FormatException("Cannot put negative value in the max Carry weight of the truck");
             }
-
+        
             List<Wheel> wheels = generateWheels(12, 32, i_Wheels[0], i_Wheels[1]);
             return new Truck(i_Module, i_VehicleLicense, isToxic, maxCarryWeight, wheels, fuelTank);
         }
@@ -145,7 +149,8 @@ namespace Ex03.GarageLogic
         }
 
 
-		private static List<Wheel> generateWheels(int i_NumberOfWheels, float i_MaxTirePressure, string i_Manufactor, string i_CurrentWheelPressure)
+		private static List<Wheel> generateWheels(int i_NumberOfWheels, float i_MaxTirePressure,
+            string i_Manufactor, string i_CurrentWheelPressure)
 		{
 			List<Wheel> listOfWheels = new List<Wheel>();
     

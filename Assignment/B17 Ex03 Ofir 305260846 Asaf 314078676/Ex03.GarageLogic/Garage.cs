@@ -58,15 +58,15 @@ namespace Ex03.GarageLogic
 
             public override string ToString()
             {
-                StringBuilder returnString = new StringBuilder();
-                returnString.Append(string.Format(
+                StringBuilder garageToString = new StringBuilder();
+                garageToString.Append(string.Format(
 @"Name of owner : {0}
 Number of owner : {1}
 Status in garage : {2}", m_OwnerName, m_OwnerNumber, m_Status));
                 m_Vehicle.GetType().GetMethod("ToString").Invoke(m_Vehicle, null);
-                returnString.Append(m_Vehicle.ToString());
+                garageToString.Append(m_Vehicle.ToString());
 
-                return returnString.ToString();
+                return garageToString.ToString();
             }
         }
         
