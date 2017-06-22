@@ -8,19 +8,53 @@ namespace Ex04.Menus.Interfaces
     {
         protected List<MenuItem> m_MenuItems;
 
-        public SubMenuItem()
+        public SubMenuItem(string i_Title) : base(i_Title)
         {
             m_MenuItems = new List<MenuItem>();
         }
 
+		public SubMenuItem(string i_Title, List<MenuItem> i_MenuItems) : base(i_Title)
+		{
+            m_MenuItems = i_MenuItems;
+		}
+
+        public List<MenuItem> MenuItems
+        {
+            get 
+            { 
+                return m_MenuItems; 
+            }
+
+            set 
+            { 
+                m_MenuItems = value; 
+            }
+        }
+
         public bool AddItem(MenuItem i_Item)
         {
-            return false;
+            bool succefulStatus = true;
+
+            foreach(MenuItem item in m_MenuItems)
+            {
+                if(item.Equals(i_Item))
+                {
+                    succefulStatus = false;
+                    break;
+                }
+            }
+
+            if(succefulStatus)
+            {
+                m_MenuItems.Add(i_Item);
+            }
+
+            return succefulStatus;
         }
 
         public bool RemoveItem(MenuItem i_Item)
         {
-            return false;
+            return m_MenuItems.Remove(i_Item);
         }
 
         internal override void onClick()

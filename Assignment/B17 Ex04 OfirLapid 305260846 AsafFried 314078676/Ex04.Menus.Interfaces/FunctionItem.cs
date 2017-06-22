@@ -8,7 +8,7 @@ namespace Ex04.Menus.Interfaces
     {
         private IFunction m_Function;
 
-        public FunctionItem(IFunction i_Function)
+        public FunctionItem(string i_Title, IFunction i_Function) : base(i_Title)
         {
             m_Function = i_Function;
         }
