@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex04.Menus.Test
 {
-    public class CountSpace : eIFunction
+    public class CountSpace : IFunction
     {
         
         public void run()
