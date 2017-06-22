@@ -31,13 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CharsCount.cs" />
-    <Compile Include="CountSpace.cs" />
     <Compile Include="TestInterface.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="DisplayVersion.cs" />
-    <Compile Include="ShowDate.cs" />
-    <Compile Include="ShowTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ex04.Menus.Delegates\Ex04.Menus.Delegates.csproj">
