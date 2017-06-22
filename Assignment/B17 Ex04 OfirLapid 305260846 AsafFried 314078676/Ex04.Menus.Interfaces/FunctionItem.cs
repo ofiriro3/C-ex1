@@ -13,7 +13,7 @@ namespace Ex04.Menus.Interfaces
             m_Function = i_Function;
         }
 
-        protected override void onClick()
+        internal override void onClick()
         {
             m_Function.Run();
         }

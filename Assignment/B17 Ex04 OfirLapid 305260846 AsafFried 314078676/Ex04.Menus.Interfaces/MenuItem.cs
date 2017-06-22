@@ -45,7 +45,7 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        protected abstract void onClick();
+        internal abstract void onClick();
 
     }
 }
