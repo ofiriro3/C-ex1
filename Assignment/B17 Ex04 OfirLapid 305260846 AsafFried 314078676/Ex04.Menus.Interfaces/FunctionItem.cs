@@ -8,16 +8,14 @@ namespace Ex04.Menus.Interfaces
     {
         private IFunction m_Function;
 
-        public FunctionItem(IFunction function)
+        public FunctionItem(IFunction i_Function)
         {
-            m_Function = function;
+            m_Function = i_Function;
         }
 
         protected override void onClick()
         {
-            throw new NotImplementedException();
+            m_Function.Run();
         }
-
-        
     }
 }
