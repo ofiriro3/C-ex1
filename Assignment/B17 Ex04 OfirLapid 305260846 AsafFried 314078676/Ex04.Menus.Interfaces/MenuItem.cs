@@ -50,7 +50,7 @@ namespace Ex04.Menus.Interfaces
             }
         }
 
-        internal abstract void onClick();
+        public abstract void onClick();
 
     }
 }
