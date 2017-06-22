@@ -11,7 +11,7 @@ namespace Ex04.Menus.Test
             FunctionItem countSpaces = new FunctionItem("Count Spaces", new CountSpace());
             FunctionItem charsCount = new FunctionItem("Display Version", new CharsCount());
 
-            SubMenuItem info = new 
+            SubMenuItem Actions = new SubMenuItem("Actions");
             SubMenuItem accessAndInfo = new SubMenuItem("Actions and Info");
             accessAndInfo.AddItem(new FunctionItem("Display Version", new DisplayVersion());
             accessAndInfo.AddItem();
