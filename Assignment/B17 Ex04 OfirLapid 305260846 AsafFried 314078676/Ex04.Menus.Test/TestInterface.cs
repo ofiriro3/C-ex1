@@ -24,5 +24,68 @@ namespace Ex04.Menus.Test
             
             mainMenu.onClick();
 		}
+
+		public class CharsCount : IFunction
+		{
+			public void Run()
+			{
+				Console.WriteLine("Please enter a sentence");
+				string sentenceFromUser = Console.ReadLine();
+				int counter = 0;
+
+				foreach (char letter in sentenceFromUser)
+				{
+					if (Char.IsLetter(letter))
+					{
+						counter++;
+					}
+				}
+
+				Console.WriteLine("Your sentence has {0} letter in it", counter);
+			}
+		}
+
+		public class CountSpace : IFunction
+		{
+
+			public void Run()
+			{
+				Console.WriteLine("Please enter a Sentence");
+				string sentenceFromUser = Console.ReadLine();
+				int lengthOfOriginalString = sentenceFromUser.Length;
+				sentenceFromUser.Replace(" ", string.Empty);
+				int lengthAfterRemoveSpaces = sentenceFromUser.Length;
+
+				Console.WriteLine("You have {0} spaces in your string", lengthOfOriginalString - lengthAfterRemoveSpaces);
+
+			}
+
+		}
+
+		public class DisplayVersion : IFunction
+		{
+			public void Run()
+			{
+				Console.WriteLine("App Version: 17.2.4.0");
+			}
+		}
+
+		public class ShowDate : IFunction
+		{
+			public void Run()
+			{
+				DateTime dateAndTime = DateTime.Today;
+				Console.WriteLine("The time now is {0}", dateAndTime.ToString("d"));
+			}
+		}
+
+		public class ShowTime : IFunction
+		{
+			public void Run()
+			{
+				DateTime dateAndTime = DateTime.Now;
+				Console.WriteLine("The time now is {0}", dateAndTime.ToString("T"));
+			}
+		}
     }
 }
