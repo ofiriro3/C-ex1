@@ -23,7 +23,10 @@ namespace Ex04.Menus.Interfaces
 
                 catch(FinishedOperation execption)
                 {
-                    Console.WriteLine(execption.ToString());
+                    Console.WriteLine(execption.Message);
+                    Console.WriteLine("Press any key to continue");
+                    Console.ReadLine();
+                      
                 }
             } 
         }

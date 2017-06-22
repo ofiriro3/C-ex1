@@ -13,7 +13,7 @@ namespace Ex04.Menus.Test
             Console.WriteLine("Please enter a Sentence");
             string sentenceFromUser = Console.ReadLine();
             int lengthOfOriginalString = sentenceFromUser.Length;
-            sentenceFromUser.Replace(" ", string.Empty);
+            sentenceFromUser = sentenceFromUser.Replace(" ", string.Empty);
             int lengthAfterRemoveSpaces = sentenceFromUser.Length;
 
             Console.WriteLine("You have {0} spaces in your string", lengthOfOriginalString - lengthAfterRemoveSpaces);

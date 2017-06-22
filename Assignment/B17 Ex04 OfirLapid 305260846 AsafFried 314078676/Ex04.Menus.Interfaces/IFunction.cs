@@ -7,6 +7,7 @@ namespace Ex04.Menus.Interfaces
     public interface IFunction
     {
         void Run();
+
     }
 }
 

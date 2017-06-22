@@ -9,8 +9,8 @@ namespace Ex04.Menus.Test
     {
         public void Run()
         {
-            DateTime dateAndTime = new DateTime();
-            Console.WriteLine("The time now is {0}", dateAndTime.TimeOfDay.ToString());
+            DateTime dateAndTime = DateTime.Now;   
+            Console.WriteLine("The time now is {0}", dateAndTime.ToString("T"));
         }
     }
 }

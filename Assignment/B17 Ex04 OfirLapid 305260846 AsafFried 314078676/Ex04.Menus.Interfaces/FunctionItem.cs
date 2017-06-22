@@ -16,6 +16,7 @@ namespace Ex04.Menus.Interfaces
         public override void onClick()
         {
             m_Function.Run();
+            throw new FinishedOperation(this);
         }
     }
 }

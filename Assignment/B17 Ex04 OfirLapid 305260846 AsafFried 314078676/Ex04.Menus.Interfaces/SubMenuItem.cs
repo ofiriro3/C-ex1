@@ -92,7 +92,8 @@ namespace Ex04.Menus.Interfaces
                     continue;
                 }
 
-                m_MenuItems[choice].onClick();
+                m_MenuItems[choice - 1].onClick();
+                
                 
             }
             
@@ -108,7 +109,7 @@ namespace Ex04.Menus.Interfaces
 
             while (!validCommandFromUser)
             {
-                Console.WriteLine(string.Format("Please enter your choice({0}-{1} or 0 to exit", minValidValueToChoose, maxValidValueToChoose));
+                Console.WriteLine(string.Format("Please enter your choice({0}-{1}) or 0 to exit", minValidValueToChoose, maxValidValueToChoose));
                 inputFromUser = Console.ReadLine();
                 validCommandFromUser = int.TryParse(inputFromUser, out o_ValidAnswer);
                 if (validCommandFromUser == false)
@@ -116,7 +117,7 @@ namespace Ex04.Menus.Interfaces
                     Console.WriteLine("Wrong input format please type again");
                 }
 
-                else if (o_ValidAnswer < minValidValueToChoose || o_ValidAnswer > maxValidValueToChoose || o_ValidAnswer != 0)
+                else if ((o_ValidAnswer < minValidValueToChoose || o_ValidAnswer > maxValidValueToChoose) && o_ValidAnswer != 0)
                 {
                     Console.WriteLine("Value is not in range");
                     validCommandFromUser = false;
