@@ -1,10 +1,10 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    interface IFunction
+    public interface IFunction
     {
         void Run();
     }
