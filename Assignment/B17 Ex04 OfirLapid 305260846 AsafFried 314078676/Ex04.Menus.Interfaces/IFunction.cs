@@ -9,3 +9,10 @@ namespace Ex04.Menus.Interfaces
         void Run();
     }
 }
+
+namespace Ex04.Menus.Interfaces
+{
+    public class eIFunction
+    {
+    }
+}

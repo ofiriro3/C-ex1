@@ -34,6 +34,7 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="FinishedOperation.cs" />
     <Compile Include="FunctionItem.cs" />
     <Compile Include="IFunction.cs" />
     <Compile Include="MainMenuItem.cs" />
