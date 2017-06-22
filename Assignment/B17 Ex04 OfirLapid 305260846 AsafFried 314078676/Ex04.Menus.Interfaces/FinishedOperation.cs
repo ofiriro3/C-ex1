@@ -8,7 +8,7 @@ namespace Ex04.Menus.Interfaces
     {
         public FinishedOperation(FunctionItem i_FunctionItem)
         : base(string.Format("The opreation {0} was successfuly executed !", i_FunctionItem.Title))
-        { }
+        {}
         
          
     }
