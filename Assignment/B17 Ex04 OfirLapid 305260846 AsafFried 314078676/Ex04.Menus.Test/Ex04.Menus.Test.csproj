@@ -33,7 +33,9 @@
   <ItemGroup>
     <Compile Include="CharsCount.cs" />
     <Compile Include="CountSpace.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="DisplayVersion.cs" />
+    <Compile Include="ShowDate.cs" />
+    <Compile Include="ShowTime.cs" />
     <Compile Include="TestInterface.cs" />
   </ItemGroup>
   <ItemGroup>
