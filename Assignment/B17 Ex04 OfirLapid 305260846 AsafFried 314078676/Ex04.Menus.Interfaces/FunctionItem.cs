@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    class FunctionItem : MenuItem
+    public class FunctionItem : MenuItem
     {
         private IFunction m_Function;
 
@@ -13,7 +13,7 @@ namespace Ex04.Menus.Interfaces
             m_Function = i_Function;
         }
 
-        internal override void onClick()
+        public override void onClick()
         {
             m_Function.Run();
         }
