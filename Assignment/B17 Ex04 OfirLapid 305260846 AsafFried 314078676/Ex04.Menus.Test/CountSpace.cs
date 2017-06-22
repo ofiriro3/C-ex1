@@ -8,7 +8,7 @@ namespace Ex04.Menus.Test
     public class CountSpace : IFunction
     {
         
-        public void run()
+        public void Run()
         {
             Console.WriteLine("Please enter a Sentence");
             string sentenceFromUser = Console.ReadLine();

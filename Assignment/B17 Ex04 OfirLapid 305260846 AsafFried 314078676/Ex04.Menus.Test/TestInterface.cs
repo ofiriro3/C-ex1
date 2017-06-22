@@ -7,15 +7,20 @@ namespace Ex04.Menus.Test
 		public static void Run()
 		{
             MainMenuItem mainMenu = new MainMenuItem("Main Menu");
-            FunctionItem displayVersion = new FunctionItem("Display Version", new DisplayVersion());
-            FunctionItem countSpaces = new FunctionItem("Count Spaces", new CountSpace());
-            FunctionItem charsCount = new FunctionItem("Display Version", new CharsCount());
+            SubMenuItem accessAndInfo = new SubMenuItem("Actions and Info");
+            SubMenuItem showDateAndTime = new SubMenuItem("Show Date/Time");
 
             SubMenuItem Actions = new SubMenuItem("Actions");
-            SubMenuItem accessAndInfo = new SubMenuItem("Actions and Info");
-            accessAndInfo.AddItem(new FunctionItem("Display Version", new DisplayVersion());
-            accessAndInfo.AddItem();
+            Actions.AddItem(new FunctionItem("Count Spaces", new CountSpace()));
+            Actions.AddItem(new FunctionItem("Chars Count", new CharsCount()));
+            accessAndInfo.AddItem(new FunctionItem("Display Version", new DisplayVersion()));
+            accessAndInfo.AddItem(Actions);
 
+            showDateAndTime.AddItem(new FunctionItem("Show Time", new ShowTime()));
+            showDateAndTime.AddItem(new FunctionItem("Show Date", new ShowDate()));
+
+            mainMenu.AddItem((accessAndInfo));
+            mainMenu.AddItem(showDateAndTime);
             
             mainMenu.onClick();
 		}
