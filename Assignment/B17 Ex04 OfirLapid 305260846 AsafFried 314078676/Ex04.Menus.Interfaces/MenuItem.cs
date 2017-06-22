@@ -4,10 +4,15 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    abstract class MenuItem
+    public abstract class MenuItem
     {
         protected string m_Title;
         protected int m_Index;
+
+        public MenuItem(string i_Title)
+        {
+            m_Title = i_Title;
+        }
 
         public string Title
         {
