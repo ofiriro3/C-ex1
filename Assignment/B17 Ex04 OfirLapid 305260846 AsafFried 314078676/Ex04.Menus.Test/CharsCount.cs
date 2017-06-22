@@ -1,3 +1,4 @@
+﻿using Ex04.Menus.Interfaces;
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
@@ -5,9 +6,9 @@ using System.Text;
 
 namespace Ex04.Menus.Test
 {
-    class CharsCount : IFunction
+    public class CharsCount : IFunction
     {
-        public void run()
+        public void Run()
         {
             Console.WriteLine("Please enter a sentence");
             string sentenceFromUser = Console.ReadLine();
