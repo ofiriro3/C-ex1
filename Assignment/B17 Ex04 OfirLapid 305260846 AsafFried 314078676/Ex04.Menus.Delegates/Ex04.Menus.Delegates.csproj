@@ -33,5 +33,12 @@
   <PropertyGroup>
     <StartupObject />
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="FinishedOperation.cs" />
+    <Compile Include="FunctionItem.cs" />
+    <Compile Include="MainMenuItem.cs" />
+    <Compile Include="MenuItem.cs" />
+    <Compile Include="SubMenuItem.cs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

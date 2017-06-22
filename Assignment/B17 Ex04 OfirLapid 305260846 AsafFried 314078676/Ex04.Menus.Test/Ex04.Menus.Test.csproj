@@ -33,6 +33,7 @@
   <ItemGroup>
     <Compile Include="CharsCount.cs" />
     <Compile Include="CountSpace.cs" />
+    <Compile Include="TestDelegate.cs" />
     <Compile Include="TestInterface.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DisplayVersion.cs" />

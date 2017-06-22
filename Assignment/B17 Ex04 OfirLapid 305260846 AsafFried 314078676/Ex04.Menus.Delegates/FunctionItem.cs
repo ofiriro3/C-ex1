@@ -13,10 +13,19 @@ namespace Ex04.Menus.Delegates
         public FunctionItem(string i_Title) : base(i_Title)
         {}
 
+        public FunctionItem(string i_Title, ClickDelegate function) : base(i_Title)
+        {
+            ClickOccured += function;
+        }
+
         public override void onClick()
         {
-            ClickOccured.Invoke();
-            throw new FinishedOperation(this);
+            if (ClickOccured != null)
+            {
+                ClickOccured.Invoke();
+                throw new FinishedOperation(this);
+            }
+            
         }
     }
 }
