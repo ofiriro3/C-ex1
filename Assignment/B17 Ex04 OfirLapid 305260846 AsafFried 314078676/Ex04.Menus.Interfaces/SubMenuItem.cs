@@ -12,9 +12,74 @@ namespace Ex04.Menus.Interfaces
         {
             m_MenuItems = new List<MenuItem>();
         }
-        protected override void onClick()
+
+        public bool AddItem(MenuItem i_Item)
         {
-            throw new NotImplementedException();
+            return false;
+        }
+
+        public bool RemoveItem(MenuItem i_Item)
+        {
+            return false;
+        }
+
+        internal override void onClick()
+        {
+            bool stillRunning = true;
+            
+            while(stillRunning)
+            {
+                Console.Clear();
+                this.Show();
+                Console.WriteLine("=========================");
+                int counter = 1;
+
+                foreach(MenuItem item in m_MenuItems)
+                {
+                    item.Index = counter;
+                    item.Show();
+                    counter++;
+                }
+
+                int choice;
+                getValidAnswerToMultyplyChoiceAnswer(out choice);
+                if( choice == 0)
+                {
+                    stillRunning = false;
+                    continue;
+                }
+
+                m_MenuItems[choice].onClick();
+                
+            }
+            
+        }
+        
+        protected void getValidAnswerToMultyplyChoiceAnswer(out int o_ValidAnswer)
+        {
+            int minValidValueToChoose = 1;
+            int maxValidValueToChoose = m_MenuItems.Count;
+            bool validCommandFromUser = false;
+            string inputFromUser;
+            o_ValidAnswer = -1;
+
+            while (!validCommandFromUser)
+            {
+                Console.WriteLine(string.Format("Please enter your choice({0}-{1} or 0 to exit", minValidValueToChoose, maxValidValueToChoose));
+                inputFromUser = Console.ReadLine();
+                validCommandFromUser = int.TryParse(inputFromUser, out o_ValidAnswer);
+                if (validCommandFromUser == false)
+                {
+                    Console.WriteLine("Wrong input format please type again");
+                }
+
+                else if (o_ValidAnswer < minValidValueToChoose || o_ValidAnswer > maxValidValueToChoose || o_ValidAnswer != 0)
+                {
+                    Console.WriteLine("Value is not in range");
+                    validCommandFromUser = false;
+                }
+
+            }
         }
     }
 }
