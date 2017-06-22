@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Ex04.Menus.Interfaces
 {
-    class SubMenuItem : MenuItem
+    public class SubMenuItem : MenuItem
     {
         protected List<MenuItem> m_MenuItems;
 
@@ -57,7 +57,7 @@ namespace Ex04.Menus.Interfaces
             return m_MenuItems.Remove(i_Item);
         }
 
-        internal override void onClick()
+        public override void onClick()
         {
             bool stillRunning = true;
             
