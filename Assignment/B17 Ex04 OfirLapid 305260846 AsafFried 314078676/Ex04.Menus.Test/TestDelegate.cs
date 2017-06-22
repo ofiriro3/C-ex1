@@ -12,7 +12,8 @@ namespace Ex04.Menus.Test
             SubMenuItem showDateAndTime = new SubMenuItem("Show Date/Time");
 
             SubMenuItem Actions = new SubMenuItem("Actions");
-            Actions.AddItem((new FunctionItem("Count Spaces")).ClickOccured+= new CountSpace());
+            Actions.AddItem(new MenuItem("show"));
+
             
             Actions.AddItem(new FunctionItem("Chars Count", new CharsCount()));
             accessAndInfo.AddItem(new FunctionItem("Display Version", new DisplayVersion()));
