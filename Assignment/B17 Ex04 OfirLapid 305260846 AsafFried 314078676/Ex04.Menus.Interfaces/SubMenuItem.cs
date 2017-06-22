@@ -41,6 +41,15 @@ namespace Ex04.Menus.Interfaces
                     counter++;
                 }
 
+                if(this.GetType().Equals(typeof(MainMenuItem)))
+                {
+                    Console.WriteLine("0. Exit");
+                }
+                else
+                {
+                    Console.WriteLine("0. Back");
+                }
+
                 int choice;
                 getValidAnswerToMultyplyChoiceAnswer(out choice);
                 if( choice == 0)
